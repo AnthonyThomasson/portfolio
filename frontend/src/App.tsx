@@ -1,7 +1,7 @@
 import "./App.css";
 import Editor from "./editor/Editor";
 import Footer from './footer/Footer';
-import SideBar from './side-bar/SideBar';
+import SideBar from "./side-bar/SideBar";
 
 function App() {
   return (

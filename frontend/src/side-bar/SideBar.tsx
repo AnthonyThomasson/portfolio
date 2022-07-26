@@ -7,7 +7,18 @@ function Explorer() {
       <Modules />
       <div className="file-explorer">
         <div className="heading"></div>
-        <div className="sub-heading"></div>
+        <div className="section section-open">
+          <div className="section-heading">
+          </div>
+          <div className="section-content">
+          </div>
+        </div>
+        <div className="section">
+          <div className="section-heading">
+          </div>
+          <div className="section-content">
+          </div>
+        </div>
       </div>
     </div>
   );
