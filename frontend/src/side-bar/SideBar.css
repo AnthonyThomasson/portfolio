@@ -1,0 +1,24 @@
+.side-bar {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+.modules {
+  background-color: #2f333d;
+  width: 50px;
+  height: 100vh  
+}
+.file-explorer {
+  flex-grow: 1;
+}
+
+.heading {
+  background-color: #21252b;
+  height: 40px;
+}
+
+.sub-heading {
+  background-color: #282c34;
+  height: 20px;
+}

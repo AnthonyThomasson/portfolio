@@ -1,0 +1,8 @@
+body {
+  background-color: #282c34;
+}
+.tabs {
+  background-color: #21252b;
+  display: flex;
+  height: 40px;
+}

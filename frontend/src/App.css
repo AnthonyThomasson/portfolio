@@ -1,0 +1,33 @@
+html,body {
+	padding: 0;
+	margin: 0;
+ }
+.app {
+	display: flex;
+ }
+
+.editor-content {
+	
+}
+
+.side-bar {
+	display: flex;
+	flex-direction: column;
+	background-color: #21252b;
+	flex-grow: 1;
+	height: 100vh;
+}
+.editor {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 5;
+	align-items: stretch;
+	background-color: #282c34;
+	height: 100vh;
+	float: left;
+}
+
+.footer {
+	height: 15px;
+	flex-grow: 1;
+}
