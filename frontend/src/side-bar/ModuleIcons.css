@@ -1,0 +1,198 @@
+.files-icon {
+	background-image: url("../assets/modules/files-icon.png");
+	display: block;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	height: 25px;
+}
+
+.active > .files-icon, .files-icon:hover {
+	background-image: url("../assets/modules/files-icon-active.png");
+	display: block;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	height: 25px;
+}
+
+.search-icon {
+	background-image: url("../assets/modules/search-icon.png");
+	display: block;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	height: 25px;
+}
+
+.active > .search-icon, .search-icon:hover {
+	background-image: url("../assets/modules/search-icon-active.png");
+	display: block;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	height: 25px;
+}
+
+.git-icon {
+	background-image: url("../assets/modules/git-icon.png");
+	display: block;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	height: 25px;
+}
+
+.active > .git-icon, .git-icon:hover {
+	background-image: url("../assets/modules/git-icon-active.png");
+	display: block;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	height: 25px;
+}
+
+.docker-icon {
+	background-image: url("../assets/modules/docker-icon.png");
+	display: block;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	height: 25px;
+}
+
+.active > .docker-icon, .docker-icon:hover {
+	background-image: url("../assets/modules/docker-icon-active.png");
+	display: block;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	height: 25px;
+}
+
+.test-icon {
+	background-image: url("../assets/modules/test-icon.png");
+	display: block;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	height: 25px;
+}
+
+.active > .test-icon, .test-icon:hover {
+	background-image: url("../assets/modules/test-icon-active.png");
+	display: block;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	height: 25px;
+}
+
+.debugger-icon {
+	background-image: url("../assets/modules/debugger-icon.png");
+	display: block;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	height: 25px;
+}
+
+.active > .debugger-icon, .debugger-icon:hover {
+	background-image: url("../assets/modules/debugger-icon-active.png");
+	display: block;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	height: 25px;
+}
+
+.databases-icon {
+	background-image: url("../assets/modules/databases-icon.png");
+	display: block;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	height: 25px;
+}
+
+/* .active > .database-icon, > .database-icon:hover {
+	background-image: url("../assets/modules/databases-icon-active.png");
+	display: block;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	height: 25px;
+} */
+
+.live-share-icon {
+	background-image: url("../assets/modules/live-share-icon.png");
+	display: block;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	height: 25px;
+}
+
+/* .active > .live-share-icon, > .live-share-icon:hover {
+	background-image: url("");
+	display: block;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	height: 25px;
+} */
+
+.settings-icon {
+	background-image: url("../assets/modules/settings-icon.png");
+	display: block;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	height: 25px;
+}
+
+/* .active > .settings-icon, > .settings-icon:hover {
+	background-image: url("");
+	display: block;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	height: 25px;
+} */
+
+.modules-icon {
+	background-image: url("../assets/modules/modules-icon.png");
+	display: block;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	height: 25px;
+}
+
+/* .active > .modules-icon, > .modules-icon:hover {
+	background-image: url("");
+	display: block;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	height: 25px;
+} */
+
+.profile-icon {
+	background-image: url("../assets/modules/profile-icon.png");
+	display: block;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	height: 25px;
+	margin-top: 15px;
+}
+
+/* .active > .profile-icon, > .profile-icon:hover {
+	background-image: url("");
+	display: block;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	height: 25px;
+} */

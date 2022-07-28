@@ -3,10 +3,6 @@
   flex-direction: row;
 }
 
-.modules {
-  background-color: #2f333d;
-  width: 50px; 
-}
 .file-explorer {
   display: flex;
   flex-direction: column;
@@ -30,4 +26,29 @@
 .section-heading {
   background-color: #282c34;
   height: 20px;
+}
+.modules {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #2f333d;
+  width: 50px; 
+}
+.top-modules {
+  display: flex;
+  flex-direction: column;
+}
+.bottom-modules {
+  display: flex;
+  flex-direction: column;
+}
+.module {
+  height: 50px;
+  cursor: pointer;
+}
+.module {
+  cursor: pointer;
+}
+.module.active {
+  border-left: 2px solid white;
 }

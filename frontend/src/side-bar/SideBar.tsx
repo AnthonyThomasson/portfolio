@@ -1,3 +1,4 @@
+import "./ModuleIcons.css";
 import Modules from "./Modules";
 import "./SideBar.css";
 
