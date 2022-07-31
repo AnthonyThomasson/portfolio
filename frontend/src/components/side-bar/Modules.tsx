@@ -16,18 +16,6 @@ function Modules() {
           <span className="debugger-icon" />
         </button>
         <button className="module">
-          <span className="docker-icon" />
-        </button>
-        <button className="module">
-          <span className="test-icon" />
-        </button>
-        <button className="module">
-          <span className="databases-icon" />
-        </button>
-        <button className="module">
-          <span className="live-share-icon" />
-        </button>
-        <button className="module">
           <span className="modules-icon" />
         </button>
       </div>
