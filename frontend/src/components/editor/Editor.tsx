@@ -1,4 +1,3 @@
-import "./Editor.css";
 import Tabs from "./Tabs";
 
 

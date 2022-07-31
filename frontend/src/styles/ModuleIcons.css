@@ -7,7 +7,7 @@
 	height: 25px;
 }
 
-.active > .files-icon, .files-icon:hover {
+.active > .files-icon, .module:hover > .files-icon {
 	background-image: url("../assets/modules/files-icon-active.png");
 	display: block;
 	background-repeat: no-repeat;
@@ -25,7 +25,7 @@
 	height: 25px;
 }
 
-.active > .search-icon, .search-icon:hover {
+.active > .search-icon, .module:hover > .search-icon {
 	background-image: url("../assets/modules/search-icon-active.png");
 	display: block;
 	background-repeat: no-repeat;
@@ -43,7 +43,7 @@
 	height: 25px;
 }
 
-.active > .git-icon, .git-icon:hover {
+.active > .git-icon, .module:hover > .git-icon {
 	background-image: url("../assets/modules/git-icon-active.png");
 	display: block;
 	background-repeat: no-repeat;
@@ -61,7 +61,7 @@
 	height: 25px;
 }
 
-.active > .docker-icon, .docker-icon:hover {
+.active > .docker-icon, .module:hover > .docker-icon {
 	background-image: url("../assets/modules/docker-icon-active.png");
 	display: block;
 	background-repeat: no-repeat;
@@ -79,7 +79,7 @@
 	height: 25px;
 }
 
-.active > .test-icon, .test-icon:hover {
+.active > .test-icon, .module:hover > .test-icon {
 	background-image: url("../assets/modules/test-icon-active.png");
 	display: block;
 	background-repeat: no-repeat;
@@ -97,7 +97,7 @@
 	height: 25px;
 }
 
-.active > .debugger-icon, .debugger-icon:hover {
+.active > .debugger-icon, .module:hover > .debugger-icon {
 	background-image: url("../assets/modules/debugger-icon-active.png");
 	display: block;
 	background-repeat: no-repeat;
@@ -115,7 +115,7 @@
 	height: 25px;
 }
 
-/* .active > .database-icon, > .database-icon:hover {
+/* .active > .database-icon, > .module:hover > .database-icon {
 	background-image: url("../assets/modules/databases-icon-active.png");
 	display: block;
 	background-repeat: no-repeat;
@@ -133,7 +133,7 @@
 	height: 25px;
 }
 
-/* .active > .live-share-icon, > .live-share-icon:hover {
+/* .active > .live-share-icon, > .live.module:hover > -share-icon {
 	background-image: url("");
 	display: block;
 	background-repeat: no-repeat;
@@ -151,7 +151,7 @@
 	height: 25px;
 }
 
-/* .active > .settings-icon, > .settings-icon:hover {
+/* .active > .settings-icon, > .module:hover > .settings-icon {
 	background-image: url("");
 	display: block;
 	background-repeat: no-repeat;
@@ -169,7 +169,7 @@
 	height: 25px;
 }
 
-/* .active > .modules-icon, > .modules-icon:hover {
+/* .active > .modules-icon, > .module:hover > .modules-icon {
 	background-image: url("");
 	display: block;
 	background-repeat: no-repeat;
@@ -188,7 +188,7 @@
 	margin-top: 15px;
 }
 
-/* .active > .profile-icon, > .profile-icon:hover {
+/* .active > .profile-icon, > .module:hover > .profile-icon {
 	background-image: url("");
 	display: block;
 	background-repeat: no-repeat;

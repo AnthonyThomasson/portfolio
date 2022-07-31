@@ -1,0 +1,112 @@
+input,
+button,
+submit {
+  background: none;
+  border: none;
+}
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+body {
+  background-color: #282c34;
+}
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.main {
+  display: flex;
+  flex: 1;
+  background-color: #282c34;
+}
+
+.side-bar {
+  display: flex;
+  flex-direction: column;
+  background-color: #21252b;
+  width: 350px;
+}
+.editor {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.footer {
+  display: flex;
+  background-color: #21252b;
+  height: 20px;
+}
+.tabs {
+  background-color: #21252b;
+  display: flex;
+  height: 40px;
+}
+
+.tab {
+  width: 125px;
+  border-right: 1px solid #2f333d;
+}
+
+.tab-active {
+  background-color: #383e4a;
+}
+
+.side-bar {
+  display: flex;
+  flex-direction: row;
+}
+
+.file-explorer {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.heading {
+  background-color: #21252b;
+  height: 40px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+}
+
+.section.section-open {
+  flex: 1;
+}
+
+.section-heading {
+  background-color: #282c34;
+  height: 20px;
+}
+.modules {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #2f333d;
+  width: 50px;
+}
+.top-modules {
+  display: flex;
+  flex-direction: column;
+}
+.bottom-modules {
+  display: flex;
+  flex-direction: column;
+}
+.module {
+  height: 50px;
+  cursor: pointer;
+}
+.module {
+  cursor: pointer;
+}
+.module.active {
+  border-left: 2px solid white;
+}
