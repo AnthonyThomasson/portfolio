@@ -26,6 +26,7 @@
 
 .chevron {
   padding-right: 8px;
+  width: 10px;
 }
 
 .file-explorer-buttons {
@@ -38,6 +39,7 @@
 	margin: 0 2px 0 2px;
 	border-radius: 5px;
 	height: 100%;
+	cursor: pointer;
 }
 
 .file-explorer-button:hover {
@@ -46,4 +48,14 @@
 
 .file-explorer:hover .file-explorer-buttons {
 	display: flex;
+}
+
+.file-explorer-content {
+  display: none;
+}
+
+.file-explorer-content-active {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
