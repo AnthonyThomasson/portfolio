@@ -1,0 +1,28 @@
+version: "3.9"
+services:
+  app:
+    build: backend/.
+    ports:
+      - "3000:3000"
+    depends_on:
+      - "db"
+    environment:
+      NODE_ENV: development
+      JWT_SECRET: 4ZDp#JMfnERLUuVdd05t
+      DB_USER: user
+      DB_PASSWORD: password
+      DB_NAME: portfolio
+      DB_HOST: db
+    volumes:
+      - ./backend:/app/backend
+      - ./frontend:/app/frontend
+  db:
+    image: "postgres"
+    restart: "always"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: portfolio
+    ports:
+      - "5432:5432"
+
