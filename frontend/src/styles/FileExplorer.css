@@ -1,0 +1,49 @@
+.file-explorer {
+  display: flex;
+  flex-direction: column;
+}
+
+.file-explorer.file-explorer-open {
+  flex: 1;
+}
+
+.file-explorer-heading {
+  background-color: #282c34;
+  color: #d8d8d8;
+  font-size: x-small;
+  height: 20px;
+  padding-left: 10px;
+  font-weight: bold;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+}
+
+.file-explorer-title {
+	display: flex;
+	align-items: center;
+}
+
+.chevron {
+  padding-right: 8px;
+}
+
+.file-explorer-buttons {
+	display: none;
+	list-style-type: none;
+}
+
+.file-explorer-button {
+	width: 20px;
+	margin: 0 2px 0 2px;
+	border-radius: 5px;
+	height: 100%;
+}
+
+.file-explorer-button:hover {
+	background-color: #67676739;
+}
+
+.file-explorer:hover .file-explorer-buttons {
+	display: flex;
+}
