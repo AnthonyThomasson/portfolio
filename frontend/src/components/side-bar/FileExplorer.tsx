@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "./../../styles/FileExplorer.css";
+import "./../../styles/SystemNodeIcons.css";
 import FileTree from "./FileTree";
 
 

@@ -2,17 +2,17 @@
   "file-structure": [
     {
       "id": 1,
-      "icon": "default",
+      "icon": "folder-icon",
       "name": "Projects",
       "children": [
         {
           "id": 2,
-          "icon": "default",
+          "icon": "folder-icon",
           "name": "project-one",
           "children": [
             {
               "id": 3,
-              "icon": "default",
+              "icon": "file-react-icon",
               "name": "file.txt"
             }
           ]
@@ -21,22 +21,22 @@
     },
     {
       "id": 4,
-      "icon": "default",
+      "icon": "folder-icon",
       "name": "Projects",
       "children": [
         {
           "id": 5,
-          "icon": "default",
+          "icon": "folder-icon",
           "name": "project-two",
           "children": [
             {
               "id": 6,
-              "icon": "default",
+              "icon": "file-react-icon",
               "name": "file-one.ts"
             },
             {
               "id": 7,
-              "icon": "default",
+              "icon": "file-react-icon",
               "name": "file-two.js"
             }
           ]
