@@ -1,5 +1,5 @@
-.files-icon {
-	background-image: url("../assets/modules/files-icon.png");
+.file-explorer-icon {
+	background-image: url("../assets/modules/file-explorer-icon.png");
 	display: block;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -7,8 +7,8 @@
 	height: 25px;
 }
 
-.active > .files-icon, .module:hover > .files-icon {
-	background-image: url("../assets/modules/files-icon-active.png");
+.active > .file-explorer-icon, .module:hover > .file-explorer-icon {
+	background-image: url("../assets/modules/file-explorer-icon-active.png");
 	display: block;
 	background-repeat: no-repeat;
 	background-position: center;

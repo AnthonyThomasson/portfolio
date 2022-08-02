@@ -13,7 +13,7 @@ function Modules(props: {activeButton:string, onModuleClick: (moduleName: string
       <div className="top-modules">
         <button className={`module ${props.activeButton === SIDEBAR_PAGE.FILE_EXPLORER ? 'active' : ''}`} 
           onClick={() => props.onModuleClick(SIDEBAR_PAGE.FILE_EXPLORER)}>
-            <span className="files-icon" />
+            <span className="file-explorer-icon" />
         </button>
         <button className={`module ${props.activeButton === SIDEBAR_PAGE.SEARCH ? 'active' : ''}`}
           onClick={() => props.onModuleClick(SIDEBAR_PAGE.SEARCH)}>

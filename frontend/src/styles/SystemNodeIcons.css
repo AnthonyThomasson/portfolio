@@ -1,0 +1,17 @@
+.file-explorer-icon {
+	background-image: url("../assets/modules/file-explorer-icon.png");
+	display: block;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	height: 25px;
+}
+
+.active > .file-explorer-icon, .module:hover > .file-explorer-icon {
+	background-image: url("../assets/modules/file-explorer-icon-active.png");
+	display: block;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	height: 25px;
+}

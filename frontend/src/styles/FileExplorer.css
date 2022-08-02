@@ -31,7 +31,6 @@
 
 .file-explorer-buttons {
 	display: none;
-	list-style-type: none;
 }
 
 .file-explorer-button {
@@ -52,6 +51,10 @@
 
 .file-explorer-content {
   display: none;
+  font-size: small;
+}
+.file-explorer-content li {
+  margin-top: 10px;
 }
 
 .file-explorer-content-active {
