@@ -7,6 +7,7 @@ services:
     depends_on:
       - "db"
     environment:
+      DOMAIN: "localhost"
       NODE_ENV: development
       JWT_SECRET: 4ZDp#JMfnERLUuVdd05t
       DB_USER: user

@@ -1,0 +1,47 @@
+{
+  "file-structure": [
+    {
+      "id": 1,
+      "icon": "default",
+      "folderName": "Projects",
+      "children": [
+        {
+          "id": 2,
+          "icon": "default",
+          "folderName": "project-one",
+          "children": [
+            {
+              "id": 3,
+              "icon": "default",
+              "fileName": "file.txt"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "icon": "default",
+      "folderName": "Projects",
+      "children": [
+        {
+          "id": 5,
+          "icon": "default",
+          "folderName": "project-two",
+          "children": [
+            {
+              "id": 6,
+              "icon": "default",
+              "fileName": "file-one.ts"
+            },
+            {
+              "id": 7,
+              "icon": "default",
+              "fileName": "file-two.js"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
