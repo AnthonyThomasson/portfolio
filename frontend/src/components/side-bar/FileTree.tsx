@@ -1,13 +1,16 @@
-import File from "./File";
-import Folder from "./Folder";
+import { File, Folder, IFile, IFolder } from "./SystemNode";
 
-function FileTree(props:{structure:any}) {
+
+
+function FileTree(props:{structure:IFolder[]|IFile[]}) {
+
+  const rootNodeItems = props.structure.map((node: IFolder|IFile) => (
+    <li key={node.id}>{'children' in node ? <Folder node={node} /> : <File node={node} />}</li>
+  ));
 
   return (
     <ul>
-      <li><Folder /></li>
-      <li><Folder /></li>
-      <li><File /></li>
+      {rootNodeItems}
     </ul>
   )
 }

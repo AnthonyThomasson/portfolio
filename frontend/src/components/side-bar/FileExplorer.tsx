@@ -6,7 +6,7 @@ import FileTree from "./FileTree";
 
 function FileExplorer() {
   const [isOpen, setIsOpen] = useState(true);
-  const [fileStructure, setFileStructure] = useState({});
+  const [fileStructure, setFileStructure] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
