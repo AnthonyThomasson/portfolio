@@ -52,10 +52,6 @@
 .file-explorer-content {
   display: none;
   font-size: small;
-  padding-left: 20px;
-}
-.file-explorer-content li {
-  margin-top: 10px;
 }
 
 .file-explorer-content-active {
@@ -66,9 +62,27 @@
 
 .system-node{
   display: flex;
+}
+
+.system-node-content{
+  display: flex;
   flex-direction: column;
+  flex: 1;
+}
+
+.folder-guide {
+  display: flex;
+  width: 1px;
+  background-color: #67676739;
 }
 
 .system-node-name {
   display: flex;
+  padding: 5px 0px;
+  cursor: pointer;
+}
+
+.system-node-name:hover {
+  display: flex;
+  background-color: #67676739;;
 }
