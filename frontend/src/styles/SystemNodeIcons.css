@@ -1,17 +1,29 @@
 .file-react-icon {
 	background-image: url("../assets/system-nodes/file-react.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 18px;
 	display: block;
-	height: 15px;
+    width: 18px;
+    margin-right: 5px;
 }
 
 .folder-icon-closed {
 	background-image: url("../assets/system-nodes/folder-closed.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 15px;
 	display: block;
-	height: 15px;
+    width: 15px;
+    margin-right: 5px;
 }
 
 .folder-icon-open {
 	background-image: url("../assets/system-nodes/folder-open.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 15px;
 	display: block;
-	height: 15px;
+    width: 15px;
+    margin-right: 5px;
 }
