@@ -27,6 +27,7 @@
 .chevron {
   padding-right: 8px;
   width: 10px;
+  font-size: x-small;
 }
 
 .file-explorer-buttons {
@@ -62,6 +63,7 @@
 
 .system-node{
   display: flex;
+  overflow: hidden;
 }
 
 .system-node-content{
@@ -71,8 +73,15 @@
 }
 
 .folder-guide {
+  display: none;
+}
+
+ .file-explorer-open:hover .folder-guide {
   display: flex;
   width: 1px;
+  margin-right: -1px;
+  position: relative;
+  top: 26px;
   background-color: #67676739;
 }
 

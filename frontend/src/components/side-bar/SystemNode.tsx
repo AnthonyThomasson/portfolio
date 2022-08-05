@@ -21,8 +21,6 @@ function SystemNode(props: { node: IFolder|IFile, depth?: number, open?: boolean
   const type = 'children' in props.node ? 'folder' : 'file';
   let onClick = type === 'folder' ? () => setOpen(!open) : () => {};
 
-
-  let depthPadding = 20 +(depth * 10);
   let chevron = null
   let iconClass = props.node.icon
   let nodeItems = null
@@ -36,7 +34,9 @@ function SystemNode(props: { node: IFolder|IFile, depth?: number, open?: boolean
     nodeItems = <ul style={open === false ? { display: 'none '} : {}}>{nodeItems}</ul>
     chevron = <span className={`chevron fa-solid ${open ? 'fa-chevron-down' : 'fa-chevron-right'}`}></span>
     iconClass += open === true ? '-open' : '-closed'
-    folderGuide = <div className="folder-guide" style={open === false ? { display: 'none '} : {}} />
+    folderGuide = <div className="folder-guide" style={open === false ? { display: 'none '} : {
+      left: (depth * 7) + 23 + 'px',
+    }} />
   }
 
   return (
@@ -44,7 +44,7 @@ function SystemNode(props: { node: IFolder|IFile, depth?: number, open?: boolean
       {folderGuide}
       <div className="system-node-content" >
         <div className="system-node-name" style={{
-            paddingLeft: `${depthPadding}px`
+            paddingLeft: type === 'folder' ? `${(depth * 9) + 20}px` :  `${(depth * 15) + 20}px`
           }}
           onClick={() => onClick()}>
           {chevron}
