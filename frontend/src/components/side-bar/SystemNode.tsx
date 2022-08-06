@@ -13,10 +13,9 @@ export interface IFile extends ISystemNode {
   link: string;
 }
 
-
 function file(node: IFile, depth: number) {
 
-  const filePadding = (depth * 9) + 20;
+  const filePadding = (depth * 17) + 20;
 
   return (
     <div className="system-node">

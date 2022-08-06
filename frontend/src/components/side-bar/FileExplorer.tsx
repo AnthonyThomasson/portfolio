@@ -6,20 +6,21 @@ import FileTree from "./FileTree";
 
 
 function FileExplorer() {
+  
   const [isOpen, setIsOpen] = useState(true);
-  const [fileStructure, setFileStructure] = useState([]);
+  const [structure, setStructure] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
       try{
         const response = await axios.get("http://localhost:3001/file-structure")
-        setFileStructure(response.data);
+        setStructure(response.data);
       }catch(error){
         console.log(error)
       }
     }
     fetchData();
-  },[fileStructure]);
+  },[structure]);
 
   return (
     <div className="file-explorer">
@@ -53,7 +54,7 @@ function FileExplorer() {
             isOpen === true ? "file-explorer-content-active" : ""
           }`}>
             
-          <FileTree structure={fileStructure} />
+          <FileTree structure={structure} />
         </div>
       </div>
     </div>
