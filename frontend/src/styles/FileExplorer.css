@@ -25,6 +25,9 @@
 }
 
 .chevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding-right: 8px;
   width: 10px;
   font-size: x-small;
