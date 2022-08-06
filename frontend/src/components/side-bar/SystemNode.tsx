@@ -21,7 +21,7 @@ function file(node: IFile, depth: number) {
   return (
     <div className="system-node">
       <div className="system-node-content" >
-        <div className="system-node-name" style={{
+        <div className={`system-node-name ${node.selected === true ? 'system-node-name-selected' : ''}`} style={{
             paddingLeft: `${filePadding}px`
           }}
           onClick={() => {}}>
