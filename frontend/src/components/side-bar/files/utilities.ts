@@ -20,21 +20,22 @@ export async function getSystemNodes() {
 
 export function getFileStructures(nodes:ISystemNode[]) {
 
-  let ref:ISystemNode[] = []
+  let refList:ISystemNode[] = []
   nodes.forEach(node => {
-    ref[node.id] = node
+    let nodeCopy = {...node}
+    refList[node.id] = nodeCopy
     if(node.type === NodeType.Folder){
-      let folder = node as IFolder
+      let folder = nodeCopy as IFolder
       folder.children = []
     }
   });
 
   let structure:ISystemNode[] = []
-  nodes.forEach(node => {
+  refList.forEach(node => {
     if (node.parent === 0) {
       structure.push(node)
     } else {
-      let parentFolder = ref[node.parent] as IFolder
+      let parentFolder = refList[node.parent] as IFolder
       parentFolder.children.push(node)
     }
   });
