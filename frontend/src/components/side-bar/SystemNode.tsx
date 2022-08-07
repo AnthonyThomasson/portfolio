@@ -36,6 +36,7 @@ function file(node: IFile, depth: number,onFileSelected: OnFileSelected) {
       </div>
     </div>
   );
+}
 
 function folder(node: IFolder, depth: number,onFileSelected: OnFileSelected,open:boolean, setOpen: (open: boolean) => void) {
   
