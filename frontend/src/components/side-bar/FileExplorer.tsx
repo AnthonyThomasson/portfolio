@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import "./../../styles/FileExplorer.css";
 import "./../../styles/SystemNodeIcons.css";
-import { IFolder } from "./files/api";
+import { IFile, IFolder } from "./files/api";
 import { collapseFolders, expandFolders, getFileStructures, getSystemNodes } from "./files/utilities";
 import FileTree from "./FileTree";
 
@@ -9,6 +9,7 @@ function FileExplorer() {
   
   const [isOpen, setIsOpen] = useState(true);
   const [systemNodes, setSystemNodes] = useState([]);
+  const [selectedFileId, setSelectedFileId] = useState(0);
   const structure = useMemo(() => { 
     return getFileStructures(systemNodes)
   }, [systemNodes]);
@@ -29,7 +30,15 @@ function FileExplorer() {
   }
 
   const onFileSelected = (fileId:number) => {
-    console.log(fileId);
+    let newSystemNodes = systemNodes.slice()
+    if(selectedFileId > 0){
+      let prevSelectedNode = newSystemNodes[selectedFileId] as IFile;
+      prevSelectedNode.selected = false;
+    }
+    let selectedNode = newSystemNodes[fileId] as IFile;
+    selectedNode.selected = true;
+    setSelectedFileId(fileId)
+    setSystemNodes(newSystemNodes)
   }
 
   const onExpandAll = () =>{
@@ -43,7 +52,6 @@ function FileExplorer() {
     collapseFolders(newSystemNodes)
     setSystemNodes(newSystemNodes)
   }
-
 
   return (
     <div className="file-explorer">

@@ -77,14 +77,14 @@
 
 .folder-guide {
   display: none;
-}
-
- .file-explorer-open:hover .folder-guide {
-  display: flex;
   width: 1px;
   margin-right: -1px;
   position: relative;
   top: 26px;
+}
+
+ .file-explorer-open:hover .folder-guide {
+  display: flex;
   background-color: #67676739;
 }
 
@@ -97,6 +97,11 @@
 .system-node-name-selected {
   display: flex;
   background-color: #67676739;;
+}
+
+.folder-guide-contains-selected {
+  display: flex;
+  background-color: #d1d1d154 !important;
 }
 
 .system-node-name:hover {

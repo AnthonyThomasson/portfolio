@@ -36,10 +36,19 @@ function folder(props:Props) {
   const folderPadding = (props.depth * 9) + 20;
   const folderGuideLeftPosition = (props.depth * 7) + 23;
   
+  const hasSelectedChild:boolean = node.children.some(child => {
+    if(child.type === NodeType.File){
+      let file = child as IFile;
+      if(file.selected === true){
+        return true;
+      }
+    }
+    return false;
+  });
 
   return (
     <div className="system-node">
-      <div className="folder-guide" style={node.open === false ? { display: 'none '} : {
+      <div className={`folder-guide ${hasSelectedChild === true ? 'folder-guide-contains-selected' : ''}`} style={node.open === false ? { display: 'none '} : {
         left: `${folderGuideLeftPosition}px`,
       }} />
       <div className="system-node-content" >
