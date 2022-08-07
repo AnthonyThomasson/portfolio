@@ -3,14 +3,14 @@
     {
       "id": 1,
       "icon": "folder-icon",
-      "name": "Projects One",
+      "name": "Project One",
       "type": "folder",
       "parent": 0
     },
     {
       "id": 2,
       "icon": "folder-icon",
-      "name": "Projects Two",
+      "name": "Project Two",
       "type": "folder",
       "parent": 0
     },
