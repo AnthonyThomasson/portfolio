@@ -1,49 +1,64 @@
-import { fetchFiles, SystemNode } from "./api";
+import { fetchFiles, IFile, IFolder, ISystemNode, NodeType } from "./api";
 
+export async function getSystemNodes() {
 
-function createStructure(list: SystemNode[]) {
-  
-  let listRef:SystemNode[] = []
-  list.forEach(file => {
-    listRef[file.id] = file
-    file.children = []
-    file.open = false
-    file.selected = false
+    const response = await fetchFiles();
+
+    let files:ISystemNode[] = []
+    response.data.forEach((node:ISystemNode) => {
+      files[node.id] = node
+      if(node.type === NodeType.Folder){
+        let folder = node as IFolder
+        folder.children = []
+        folder.open = false
+      }else if(node.type === NodeType.File){
+        let file = node as IFile
+        file.selected = false
+      }
+    });
+  return files;
+}
+
+export function getFileStructures(files:ISystemNode[]) {
+  let ref:ISystemNode[] = []
+  files.forEach(file => {
+    ref[file.id] = file
   });
 
-
-  let structure:SystemNode[] = []
-  list.forEach(file => {
+  let structure:ISystemNode[] = []
+  files.forEach(file => {
     if (file.parent === 0) {
       structure.push(file)
     } else {
-      listRef[file.parent].children.push(file)
+      let parentFolder = ref[file.parent] as IFolder
+      parentFolder.children.push(file)
     }
   });
   return structure;
 }
 
-export async function getFileStructures() {
-  const response = await fetchFiles();
-  return createStructure(response.data);
-}
-
-export function collapseStructure(list: SystemNode[]){
-  list.map(file => {  
-    file.open = false
-    if (file.children.length > 0) {
-      collapseStructure(file.children)
+export function collapseFiles(list: ISystemNode[]){
+  list.map(node => {  
+    if(node.type === NodeType.Folder){
+      let folder = node as IFolder
+      folder.open = false
+      if (folder.children.length > 0) {
+        collapseFiles(folder.children)
+      }
     }
-    return file
+    return node
   })
 }
 
-export function openStructure(list: SystemNode[]){
-  list.map(file => {  
-    file.open = true
-    if (file.children.length > 0) {
-      collapseStructure(file.children)
+export function openFiles(list: ISystemNode[]){
+  list.map(node => {  
+    if(node.type === NodeType.Folder){
+      let folder = node as IFolder
+      folder.open = true
+      if (folder.children.length > 0) {
+        openFiles(folder.children)
+      }
     }
-    return file
+    return node
   })
 }

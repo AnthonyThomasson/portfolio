@@ -1,22 +1,20 @@
 import { useEffect, useState } from "react";
 import "./../../styles/FileExplorer.css";
 import "./../../styles/SystemNodeIcons.css";
-import { collapseStructure, getFileStructures, openStructure } from "./files/utilities";
+import { IFolder } from "./files/api";
+import { collapseFiles, getFileStructures, getSystemNodes, openFiles } from "./files/utilities";
 import FileTree from "./FileTree";
-import { IFile } from "./SystemNode";
-
-function fileSelected(file: IFile) {
-  console.log(file);
-}
 
 function FileExplorer() {
   
   const [isOpen, setIsOpen] = useState(true);
-  const [structure, setStructure] = useState([]);
+  const [systemNodes, setSystemNodes] = useState([]);
+  const [structure, setStructure] = useState(getFileStructures(systemNodes));
 
   useEffect(() => {
-    getFileStructures().then((structure:any) => {
-      setStructure(structure)
+    getSystemNodes().then((systemNodes:any) => {
+      setSystemNodes(systemNodes)
+      setStructure(getFileStructures(systemNodes));
     }).catch(err => {
       console.log(err);
     })
@@ -25,11 +23,8 @@ function FileExplorer() {
   return (
     <div className="file-explorer">
       <div className="file-explorer-open">
-        <div
-          className="file-explorer-heading"
-          onClick={() => {}/* setIsOpen(!isOpen) */}
-        >
-          <div className="file-explorer-title">
+        <div className="file-explorer-heading">
+          <div className="file-explorer-title" onClick={() => setIsOpen(!isOpen) }>
             <span
               className={`chevron fa-solid ${
                 isOpen === true ? "fa-chevron-down" : "fa-chevron-right"
@@ -40,16 +35,16 @@ function FileExplorer() {
           <ul className="file-explorer-buttons">
             <li>
               <button className="file-explorer-button" onClick={() =>{
-                let newOpenStructure = structure
-                openStructure(newOpenStructure)
-                setStructure(newOpenStructure)
+                let newOpenStructure = systemNodes
+                openFiles(newOpenStructure)
+                setSystemNodes(newOpenStructure)
               }}>+</button>
             </li>
             <li>
               <button className="file-explorer-button" onClick={() => {
-                let newCollapsedStructure = structure
-                collapseStructure(newCollapsedStructure)
-                setStructure(newCollapsedStructure)
+                let newCollapsedFiles = systemNodes
+                collapseFiles(newCollapsedFiles)
+                setSystemNodes(newCollapsedFiles)
               }}>-</button>
             </li>
             <li>
@@ -62,7 +57,17 @@ function FileExplorer() {
             isOpen === true ? "file-explorer-content-active" : ""
           }`}>
 
-            <FileTree structure={structure} onFileSelected={fileSelected}/>
+            <FileTree structure={structure} 
+              onFolderSelected={(folderId) => {
+                debugger;
+                let newSystemNodes = systemNodes
+                let selectedNode = newSystemNodes[folderId] as IFolder;
+                selectedNode.open = !selectedNode.open
+                setStructure(getFileStructures(newSystemNodes))
+              }} 
+              onFileSelected={(fileId:number) => {
+                console.log(fileId);
+              }}/>
         </div>
       </div>
     </div>

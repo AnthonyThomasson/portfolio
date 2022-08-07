@@ -1,27 +1,18 @@
-import { useState } from "react";
+import { IFile, IFolder, ISystemNode, NodeType } from "./files/api";
 import FileTree from "./FileTree";
 
-export interface ISystemNode {
-  id: number;
-  icon: string;
-  name: string;
-  type: string
+type Props = {
+  node: ISystemNode,
+  depth: number,
+  onFolderSelected: OnFolderSelected,
+  onFileSelected: OnFileSelected
 }
 
-export type OnFileSelected = (file: IFile) => void;
+function file(props:Props) {
 
-export interface IFolder extends ISystemNode {
-  children: IFolder[]|IFile[];
-  open: boolean;
-}
-export interface IFile extends ISystemNode {
-  link: string;
-  selected: boolean;
-}
+  const node = props.node as IFile;
 
-function file(node: IFile, depth: number,onFileSelected: OnFileSelected) {
-
-  const filePadding = (depth * 17) + 20;
+  const filePadding = (props.depth * 17) + 20;
 
   return (
     <div className="system-node">
@@ -29,7 +20,7 @@ function file(node: IFile, depth: number,onFileSelected: OnFileSelected) {
         <div className={`system-node-name ${node.selected === true ? 'system-node-name-selected' : ''}`} style={{
             paddingLeft: `${filePadding}px`
           }}
-          onClick={() => onFileSelected(node)}>
+          onClick={() => props.onFileSelected(node.id)}>
           <span className={node.icon}></span>
           <span className='folder-name'>{node.name}</span>
         </div>
@@ -38,11 +29,14 @@ function file(node: IFile, depth: number,onFileSelected: OnFileSelected) {
   );
 }
 
-function folder(node: IFolder, depth: number,onFileSelected: OnFileSelected,open:boolean, setOpen: (open: boolean) => void) {
+function folder(props:Props) {
   
-  const folderPadding = (depth * 9) + 20;
-  const folderGuideLeftPosition = (depth * 7) + 23;
+  const node = props.node as IFolder;
+
+  const folderPadding = (props.depth * 9) + 20;
+  const folderGuideLeftPosition = (props.depth * 7) + 23;
   
+
   return (
     <div className="system-node">
       <div className="folder-guide" style={node.open === false ? { display: 'none '} : {
@@ -52,25 +46,27 @@ function folder(node: IFolder, depth: number,onFileSelected: OnFileSelected,open
         <div className="system-node-name" style={{
             paddingLeft: `${folderPadding}px`
           }}
-          onClick={() => { node.open = !node.open; setOpen(node.open) }}>
+          onClick={() => props.onFolderSelected(node.id)}>
           <span className={`chevron fa-solid ${node.open ? 'fa-chevron-down' : 'fa-chevron-right'}`}></span>
           <span className={`${node.icon}${node.open === true ? '-open' : '-closed'}`}></span>
           <span className='folder-name'>{node.name}</span>
         </div>
-        {node.open === true ? <FileTree structure={node.children} depth={depth+1} onFileSelected={onFileSelected}/> : ''}
+        {node.open === true ? <FileTree structure={node.children} depth={props.depth+1} onFolderSelected={props.onFolderSelected} onFileSelected={props.onFileSelected}/> : ''}
       </div>
     </div>
   );
 }
 
-function SystemNode(props: { node: IFolder|IFile, depth: number, onFileSelected: OnFileSelected }) {
+function SystemNode(props: { node: ISystemNode, depth: number, onFolderSelected: OnFolderSelected, onFileSelected: OnFileSelected }) {
 
-  const [open,setOpen] = useState("open" in props.node ? props.node.open : false);
-  
-  if (props.node.type === "folder") {
-    return folder(props.node as IFolder, props.depth,props.onFileSelected, open,setOpen);
+  if (props.node.type === NodeType.Folder) {
+    return folder(props);
   }
-  return file(props.node as IFile, props.depth,props.onFileSelected);
+  return file(props);
 }
+
+
+export type OnFileSelected = (fileId:number) => void;
+export type OnFolderSelected = (folderId:number) => void;
 
 export default SystemNode;

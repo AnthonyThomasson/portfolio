@@ -1,13 +1,23 @@
 import axios from "axios";
 
-export type SystemNode = {
+export enum NodeType {
+  Folder = "folder",
+  File = "file"
+}
+export interface ISystemNode {
   id:number,
   icon:string
-  children:SystemNode[]
+  name:string
   parent:number
-  open:boolean
-  link:string
-  selected:boolean
+  type:string
+}
+export interface IFolder extends ISystemNode {
+  children: ISystemNode[];
+  open: boolean;
+}
+export interface IFile extends ISystemNode {
+  link: string;
+  selected: boolean;
 }
 
 export function fetchFiles(){
