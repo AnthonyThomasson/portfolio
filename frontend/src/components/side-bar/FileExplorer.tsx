@@ -1,24 +1,49 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "./../../styles/FileExplorer.css";
 import "./../../styles/SystemNodeIcons.css";
 import { IFolder } from "./files/api";
-import { collapseFiles, getFileStructures, getSystemNodes, openFiles } from "./files/utilities";
+import { collapseFolders, expandFolders, getFileStructures, getSystemNodes } from "./files/utilities";
 import FileTree from "./FileTree";
 
 function FileExplorer() {
   
   const [isOpen, setIsOpen] = useState(true);
   const [systemNodes, setSystemNodes] = useState([]);
-  const [structure, setStructure] = useState(getFileStructures(systemNodes));
+  const structure = useMemo(() => { 
+    return getFileStructures(systemNodes)
+  }, [systemNodes]);
 
   useEffect(() => {
     getSystemNodes().then((systemNodes:any) => {
       setSystemNodes(systemNodes)
-      setStructure(getFileStructures(systemNodes));
     }).catch(err => {
       console.log(err);
     })
   },[]);
+
+  const onFolderSelected = (folderId:number) => {
+    let newSystemNodes = systemNodes.slice()
+    let selectedNode = newSystemNodes[folderId] as IFolder;
+    selectedNode.open = !selectedNode.open
+    setSystemNodes(newSystemNodes)
+  }
+
+  const onFileSelected = (fileId:number) => {
+    console.log(fileId);
+  }
+
+  const onExpandAll = () =>{
+    let newSystemNodes = systemNodes.slice()
+    expandFolders(newSystemNodes)
+    setSystemNodes(newSystemNodes)
+  }
+
+  const onCollapseAll = () => {
+    let newSystemNodes = systemNodes.slice()
+    collapseFolders(newSystemNodes)
+    setSystemNodes(newSystemNodes)
+  }
+
 
   return (
     <div className="file-explorer">
@@ -34,18 +59,10 @@ function FileExplorer() {
           </div>
           <ul className="file-explorer-buttons">
             <li>
-              <button className="file-explorer-button" onClick={() =>{
-                let newOpenStructure = systemNodes
-                openFiles(newOpenStructure)
-                setSystemNodes(newOpenStructure)
-              }}>+</button>
+              <button className="file-explorer-button" onClick={onExpandAll}>+</button>
             </li>
             <li>
-              <button className="file-explorer-button" onClick={() => {
-                let newCollapsedFiles = systemNodes
-                collapseFiles(newCollapsedFiles)
-                setSystemNodes(newCollapsedFiles)
-              }}>-</button>
+              <button className="file-explorer-button" onClick={onCollapseAll}>-</button>
             </li>
             <li>
               <button className="file-explorer-button">0</button>
@@ -58,16 +75,8 @@ function FileExplorer() {
           }`}>
 
             <FileTree structure={structure} 
-              onFolderSelected={(folderId) => {
-                debugger;
-                let newSystemNodes = systemNodes
-                let selectedNode = newSystemNodes[folderId] as IFolder;
-                selectedNode.open = !selectedNode.open
-                setStructure(getFileStructures(newSystemNodes))
-              }} 
-              onFileSelected={(fileId:number) => {
-                console.log(fileId);
-              }}/>
+              onFolderSelected={onFolderSelected} 
+              onFileSelected={onFileSelected}/>
         </div>
       </div>
     </div>
