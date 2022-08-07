@@ -40,7 +40,6 @@ function FileExplorer() {
           <ul className="file-explorer-buttons">
             <li>
               <button className="file-explorer-button" onClick={() =>{
-                debugger
                 let newOpenStructure = structure
                 openStructure(newOpenStructure)
                 setStructure(newOpenStructure)

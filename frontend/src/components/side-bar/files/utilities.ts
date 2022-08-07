@@ -1,13 +1,5 @@
-import { fetchFiles } from "./api";
+import { fetchFiles, SystemNode } from "./api";
 
-export type SystemNode = {
-  id:number,
-  icon:string
-  children:SystemNode[]
-  parent:number
-  open:boolean
-  link:string
-}
 
 function createStructure(list: SystemNode[]) {
   
@@ -16,6 +8,7 @@ function createStructure(list: SystemNode[]) {
     listRef[file.id] = file
     file.children = []
     file.open = false
+    file.selected = false
   });
 
 
