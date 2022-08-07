@@ -3,7 +3,12 @@ import { useEffect, useState } from "react";
 import "./../../styles/FileExplorer.css";
 import "./../../styles/SystemNodeIcons.css";
 import FileTree from "./FileTree";
+import { IFile } from "./SystemNode";
 
+
+function fileSelected(file: IFile) {
+  console.log(file);
+}
 
 function FileExplorer() {
   
@@ -20,7 +25,7 @@ function FileExplorer() {
       }
     }
     fetchData();
-  },[structure]);
+  },[]);
 
   return (
     <div className="file-explorer">
@@ -53,8 +58,8 @@ function FileExplorer() {
           className={`file-explorer-content ${
             isOpen === true ? "file-explorer-content-active" : ""
           }`}>
-            
-          <FileTree structure={structure} />
+
+            <FileTree structure={structure} onFileSelected={fileSelected}/>
         </div>
       </div>
     </div>

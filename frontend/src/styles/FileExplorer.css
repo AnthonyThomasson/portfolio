@@ -94,6 +94,11 @@
   cursor: pointer;
 }
 
+.system-node-name-selected {
+  display: flex;
+  background-color: #67676739;;
+}
+
 .system-node-name:hover {
   display: flex;
   background-color: #67676739;;
