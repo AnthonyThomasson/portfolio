@@ -1,9 +1,5 @@
 import axios from "axios";
 
-function fetchFiles(){
-    return axios.get("http://localhost:3001/files")
-}
-
 type File = {
   id:number,
   icon:string
@@ -29,6 +25,10 @@ function createStructure(list: File[]) {
     }
   });
   return structure;
+}
+
+function fetchFiles(){
+  return axios.get("http://localhost:3001/files")
 }
 
 export async function getFileStructures() {
