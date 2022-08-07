@@ -12,23 +12,23 @@ type File = {
 }
 
 function createStructure(list: File[]) {
-  let map = [], node, roots = [], i;
   
-  for (i = 0; i < list.length; i += 1) {
-    map[list[i].id] = i; // initialize the map
-    list[i].children = []; // initialize the children
-  }
-  
-  for (i = 0; i < list.length; i += 1) {
-    node = list[i];
-    if (node.parent !== 0) {
-      // if you have dangling branches check that map[node.parentId] exists
-      list[map[node.parent]].children.push(node);
+  let listRef:File[] = []
+  list.forEach(file => {
+    listRef[file.id] = file
+    file.children = []
+  });
+
+
+  let structure:File[] = []
+  list.forEach(file => {
+    if (file.parent === 0) {
+      structure.push(file)
     } else {
-      roots.push(node);
+      listRef[file.parent].children.push(file)
     }
-  }
-  return roots;
+  });
+  return structure;
 }
 
 export async function getFileStructures() {
