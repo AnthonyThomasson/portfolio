@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import "./../../styles/FileExplorer.css";
 import "./../../styles/SystemNodeIcons.css";
-import { getFileStructures } from "./FilesAPI";
+import { collapseStructure, getFileStructures, openStructure } from "./files/utilities";
 import FileTree from "./FileTree";
 import { IFile } from "./SystemNode";
-
 
 function fileSelected(file: IFile) {
   console.log(file);
@@ -28,7 +27,7 @@ function FileExplorer() {
       <div className="file-explorer-open">
         <div
           className="file-explorer-heading"
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => {}/* setIsOpen(!isOpen) */}
         >
           <div className="file-explorer-title">
             <span
@@ -40,10 +39,19 @@ function FileExplorer() {
           </div>
           <ul className="file-explorer-buttons">
             <li>
-              <button className="file-explorer-button">+</button>
+              <button className="file-explorer-button" onClick={() =>{
+                debugger
+                let newOpenStructure = structure
+                openStructure(newOpenStructure)
+                setStructure(newOpenStructure)
+              }}>+</button>
             </li>
             <li>
-              <button className="file-explorer-button">-</button>
+              <button className="file-explorer-button" onClick={() => {
+                let newCollapsedStructure = structure
+                collapseStructure(newCollapsedStructure)
+                setStructure(newCollapsedStructure)
+              }}>-</button>
             </li>
             <li>
               <button className="file-explorer-button">0</button>
