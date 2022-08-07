@@ -1,47 +1,65 @@
 {
-  "file-structure": [
+  "files": [
     {
       "id": 1,
       "icon": "folder-icon",
-      "name": "Projects",
-      "children": [
-        {
-          "id": 2,
-          "icon": "folder-icon",
-          "name": "project-one",
-          "children": [
-            {
-              "id": 3,
-              "icon": "file-react-icon",
-              "name": "file.txt"
-            }
-          ]
-        }
-      ]
+      "name": "Projects One",
+      "type": "folder",
+      "parent": 0
+    },
+    {
+      "id": 2,
+      "icon": "folder-icon",
+      "name": "Projects Two",
+      "type": "folder",
+      "parent": 0
+    },
+    {
+      "id": 3,
+      "icon": "folder-icon",
+      "name": "assets",
+      "type": "folder",
+      "parent": 1
     },
     {
       "id": 4,
-      "icon": "folder-icon",
-      "name": "Projects",
-      "children": [
-        {
-          "id": 5,
-          "icon": "folder-icon",
-          "name": "project-two",
-          "children": [
-            {
-              "id": 6,
-              "icon": "file-react-icon",
-              "name": "file-one.ts"
-            },
-            {
-              "id": 7,
-              "icon": "file-react-icon",
-              "name": "file-two.js"
-            }
-          ]
-        }
-      ]
+      "icon": "file-react-icon",
+      "name": "file-one.ts",
+      "type": "file",
+      "parent": 2,
+      "link": "some-link"
+    },
+    {
+      "id": 5,
+      "icon": "file-react-icon",
+      "name": "file-two.ts",
+      "type": "file",
+      "parent": 2,
+      "link": "some-link"
+    },
+    {
+      "id": 6,
+      "icon": "file-react-icon",
+      "name": "file-one.ts",
+      "type": "file",
+      "parent": 1,
+      "link": "some-link"
+    },
+    {
+      "id": 7,
+      "icon": "file-react-icon",
+      "name": "asset-one.ts",
+      "type": "file",
+      "parent": 3,
+      "link": "some-link"
+    },
+    {
+      "id": 8,
+      "icon": "file-react-icon",
+      "name": "asset-two.ts",
+      "type": "file",
+      "parent": 3,
+      "link": "some-link"
     }
   ]
 }

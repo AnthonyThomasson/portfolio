@@ -1,10 +1,11 @@
 import { useState } from "react";
 import FileTree from "./FileTree";
 
-interface ISystemNode {
+export interface ISystemNode {
   id: number;
   icon: string;
   name: string;
+  type: string
 }
 
 export type OnFileSelected = (file: IFile) => void;
@@ -65,11 +66,11 @@ function folder(node: IFolder, depth: number,onFileSelected: OnFileSelected,open
 function SystemNode(props: { node: IFolder|IFile, depth: number, onFileSelected: OnFileSelected }) {
 
   const [open,setOpen] = useState("open" in props.node ? props.node.open : false);
-
-  if ("children" in props.node) {
-    return folder(props.node, props.depth,props.onFileSelected, open,setOpen);
+  
+  if (props.node.type === "folder") {
+    return folder(props.node as IFolder, props.depth,props.onFileSelected, open,setOpen);
   }
-  return file(props.node, props.depth,props.onFileSelected);
+  return file(props.node as IFile, props.depth,props.onFileSelected);
 }
 
 export default SystemNode;

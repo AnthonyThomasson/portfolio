@@ -1,7 +1,7 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import "./../../styles/FileExplorer.css";
 import "./../../styles/SystemNodeIcons.css";
+import { getFileStructures } from "./FilesAPI";
 import FileTree from "./FileTree";
 import { IFile } from "./SystemNode";
 
@@ -16,15 +16,11 @@ function FileExplorer() {
   const [structure, setStructure] = useState([]);
 
   useEffect(() => {
-    async function fetchData() {
-      try{
-        const response = await axios.get("http://localhost:3001/file-structure")
-        setStructure(response.data);
-      }catch(error){
-        console.log(error)
-      }
-    }
-    fetchData();
+    getFileStructures().then((structure:any) => {
+      setStructure(structure)
+    }).catch(err => {
+      console.log(err);
+    })
   },[]);
 
   return (
