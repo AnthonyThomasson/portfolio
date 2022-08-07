@@ -43,27 +43,39 @@ export function getFileStructures(nodes:ISystemNode[]) {
 }
 
 export function collapseFolders(list: ISystemNode[]){
-  list.map(node => {  
-    if(node.type === NodeType.Folder){
-      let folder = node as IFolder
+
+  let newList = list.slice()
+
+  newList.map(node => {  
+    let nodeCopy = {...node}
+    if(nodeCopy.type === NodeType.Folder){
+      let folder = nodeCopy as IFolder
       folder.open = false
       if (folder.children.length > 0) {
         collapseFolders(folder.children)
       }
     }
-    return node
+    return nodeCopy
   })
+
+  return newList
 }
 
 export function expandFolders(list: ISystemNode[]){
-  list.map(node => {  
-    if(node.type === NodeType.Folder){
-      let folder = node as IFolder
+
+  let newList = list.slice()
+
+  newList.map(node => {  
+    let nodeCopy = {...node}
+    if(nodeCopy.type === NodeType.Folder){
+      let folder = nodeCopy as IFolder
       folder.open = true
       if (folder.children.length > 0) {
         expandFolders(folder.children)
       }
     }
-    return node
+    return nodeCopy
   })
+  
+  return newList;
 }
