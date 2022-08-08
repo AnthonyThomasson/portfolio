@@ -4,7 +4,7 @@ import { IFileNode, ISystemNode, NodeType } from "../../utilities/files/api";
 import { getSystemNode } from "../../utilities/files/utilities";
 import "./../../styles/Editor.css";
 import FourOhFour from "./FourOhFour";
-import Main from "./Main";
+import Home from "./Home";
 import SelectedFile from "./SelectedFile";
 import Tabs from "./Tabs";
 
@@ -54,7 +54,7 @@ function Editor(props:{unknownPath?:boolean}) {
     return (
       <div className="editor">
         <Tabs />
-        <Main />
+        <Home />
       </div>
     )
   }
@@ -62,7 +62,7 @@ function Editor(props:{unknownPath?:boolean}) {
   return (
     <div className="editor">
       <Tabs />
-      {params.fileId ? <SelectedFile file={tabs[selectedFileId]} /> : <Main />}
+      {params.fileId ? <SelectedFile file={tabs[selectedFileId]} /> : <Home />}
     </div>
   );
 }

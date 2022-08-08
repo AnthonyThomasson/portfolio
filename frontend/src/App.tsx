@@ -1,23 +1,19 @@
 import Footer from './components/footer/Footer';
-import SideBar from "./components/side-bar/SideBar";
 import "./styles/App.css";
 import "./styles/ModuleIcons.css";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Editor from './components/editor/Editor';
+import Main from './Main';
 
 function App() {
   return (
     <Router>
       <div className="app">
-        <div className="main">
-          <SideBar />
-          <Routes>
-            <Route path="/" element={<Editor />} />
-            <Route path="file/:fileId" element={<Editor />} />
-            <Route path="*" element={<Editor unknownPath/>} />
-          </Routes>
-        </div>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="file/:fileId" element={<Main />} />
+          <Route path="*" element={<Main unknownPath/>} />
+        </Routes>
         <Footer />
       </div>
     </Router>
