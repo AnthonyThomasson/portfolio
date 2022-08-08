@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router";
-import { IFileNode, IFolderNode, ISystemNode } from "../../utilities/files/api";
-import { collapseFolders, expandFolders, getFileStructures, getSystemNodes } from "../../utilities/files/utilities";
+import { useNavigate, useParams } from "react-router";
+import { IFolderNode, ISystemNode } from "../../utilities/files/api";
+import { collapseFolders, expandFolders, findAndSelect, getFileStructures, getSystemNodes } from "../../utilities/files/utilities";
 import "./../../styles/FileExplorer.css";
 import "./../../styles/SystemNodeIcons.css";
 import FileTree from "./FileTree";
@@ -9,12 +9,19 @@ import FileTree from "./FileTree";
 function FileExplorer() {
   
   const navigate = useNavigate()
+  const params = useParams()
+
   const [isOpen, setIsOpen] = useState(true);
   const [systemNodes, setSystemNodes] = useState<ISystemNode[]>([]);
-  const [selectedFileId, setSelectedFileId] = useState(0);
+  const [, setSelectedFileId] = useState(0);
+
   const structure = useMemo(() => { 
-    return getFileStructures(systemNodes)
-  }, [systemNodes]);
+    const structure = getFileStructures(systemNodes)
+    if(params.fileId !== undefined && +params.fileId > 0) {
+      findAndSelect(systemNodes,structure, +params.fileId)
+    }
+    return structure
+  }, [systemNodes,params.fileId]);
 
   useEffect(() => {
     getSystemNodes().then((systemNodes:any) => {
@@ -32,13 +39,7 @@ function FileExplorer() {
   }
 
   const onFileSelected = (fileId:number) => {
-    let newSystemNodes = systemNodes.slice()
-    if(selectedFileId > 0){
-      let prevSelectedNode = newSystemNodes[selectedFileId] as IFileNode;
-      prevSelectedNode.selected = false;
-    }
-    let selectedNode = newSystemNodes[fileId] as IFileNode;
-    selectedNode.selected = true;
+    const newSystemNodes = findAndSelect(systemNodes,structure, fileId)
     setSelectedFileId(fileId)
     setSystemNodes(newSystemNodes)
     navigate(`/file/${fileId}`)
