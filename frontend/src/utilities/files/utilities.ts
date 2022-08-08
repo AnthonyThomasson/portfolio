@@ -1,4 +1,4 @@
-import { fetchFiles, IFile, IFolder, ISystemNode, NodeType } from "./api";
+import { fetchFiles, IFileNode, IFolderNode, ISystemNode, NodeType } from "./api";
 
 export async function getSystemNodes() {
 
@@ -8,10 +8,10 @@ export async function getSystemNodes() {
     response.data.forEach((node:ISystemNode) => {
       files[node.id] = node
       if(node.type === NodeType.Folder){
-        let folder = node as IFolder
+        let folder = node as IFolderNode
         folder.open = false
       }else if(node.type === NodeType.File){
-        let file = node as IFile
+        let file = node as IFileNode
         file.selected = false
       }
     });
@@ -25,7 +25,7 @@ export function getFileStructures(nodes:ISystemNode[]) {
     let nodeCopy = {...node}
     refList[node.id] = nodeCopy
     if(node.type === NodeType.Folder){
-      let folder = nodeCopy as IFolder
+      let folder = nodeCopy as IFolderNode
       folder.children = []
     }
   });
@@ -35,7 +35,7 @@ export function getFileStructures(nodes:ISystemNode[]) {
     if (node.parent === 0) {
       structure.push(node)
     } else {
-      let parentFolder = refList[node.parent] as IFolder
+      let parentFolder = refList[node.parent] as IFolderNode
       parentFolder.children.push(node)
     }
   });
@@ -49,7 +49,7 @@ export function collapseFolders(list: ISystemNode[]){
   newList.map(node => {  
     let nodeCopy = {...node}
     if(nodeCopy.type === NodeType.Folder){
-      let folder = nodeCopy as IFolder
+      let folder = nodeCopy as IFolderNode
       folder.open = false
       if (folder.children.length > 0) {
         collapseFolders(folder.children)
@@ -68,7 +68,7 @@ export function expandFolders(list: ISystemNode[]){
   newList.map(node => {  
     let nodeCopy = {...node}
     if(nodeCopy.type === NodeType.Folder){
-      let folder = nodeCopy as IFolder
+      let folder = nodeCopy as IFolderNode
       folder.open = true
       if (folder.children.length > 0) {
         expandFolders(folder.children)

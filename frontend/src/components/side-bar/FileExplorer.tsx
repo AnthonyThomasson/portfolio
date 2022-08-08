@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
+import { IFileNode, IFolderNode, ISystemNode } from "../../utilities/files/api";
+import { collapseFolders, expandFolders, getFileStructures, getSystemNodes } from "../../utilities/files/utilities";
 import "./../../styles/FileExplorer.css";
 import "./../../styles/SystemNodeIcons.css";
-import { IFile, IFolder, ISystemNode } from "./files/api";
-import { collapseFolders, expandFolders, getFileStructures, getSystemNodes } from "./files/utilities";
 import FileTree from "./FileTree";
 
 function FileExplorer() {
@@ -24,7 +24,7 @@ function FileExplorer() {
 
   const onFolderSelected = (folderId:number) => {
     let newSystemNodes = systemNodes.slice()
-    let selectedNode = newSystemNodes[folderId] as IFolder;
+    let selectedNode = newSystemNodes[folderId] as IFolderNode;
     selectedNode.open = !selectedNode.open
     setSystemNodes(newSystemNodes)
   }
@@ -32,10 +32,10 @@ function FileExplorer() {
   const onFileSelected = (fileId:number) => {
     let newSystemNodes = systemNodes.slice()
     if(selectedFileId > 0){
-      let prevSelectedNode = newSystemNodes[selectedFileId] as IFile;
+      let prevSelectedNode = newSystemNodes[selectedFileId] as IFileNode;
       prevSelectedNode.selected = false;
     }
-    let selectedNode = newSystemNodes[fileId] as IFile;
+    let selectedNode = newSystemNodes[fileId] as IFileNode;
     selectedNode.selected = true;
     setSelectedFileId(fileId)
     setSystemNodes(newSystemNodes)

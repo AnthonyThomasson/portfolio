@@ -1,4 +1,4 @@
-import { IFile, IFolder, ISystemNode, NodeType } from "./files/api";
+import { IFileNode, IFolderNode, ISystemNode, NodeType } from "../../utilities/files/api";
 import FileTree from "./FileTree";
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
 
 function file(props:Props) {
 
-  const node = props.node as IFile;
+  const node = props.node as IFileNode;
 
   const filePadding = (props.depth * 17) + 20;
 
@@ -31,14 +31,14 @@ function file(props:Props) {
 
 function folder(props:Props) {
   
-  const node = props.node as IFolder;
+  const node = props.node as IFolderNode;
 
   const folderPadding = (props.depth * 9) + 20;
   const folderGuideLeftPosition = (props.depth * 7) + 23;
   
   const hasSelectedChild:boolean = node.children.some(child => {
     if(child.type === NodeType.File){
-      let file = child as IFile;
+      let file = child as IFileNode;
       if(file.selected === true){
         return true;
       }

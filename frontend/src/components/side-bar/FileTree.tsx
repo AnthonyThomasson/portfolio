@@ -1,4 +1,4 @@
-import { ISystemNode } from "./files/api";
+import { ISystemNode } from "../../utilities/files/api";
 import SystemNode, { OnFileSelected, OnFolderSelected } from "./SystemNode";
 
 function FileTree(props:{structure:ISystemNode[], onFolderSelected:OnFolderSelected, onFileSelected:OnFileSelected, depth?:number}) {
