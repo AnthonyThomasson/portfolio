@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { IFileNode, ISystemNode, NodeType } from "../../utilities/files/api";
 import { getSystemNode } from "../../utilities/files/utilities";
+import "./../../styles/Editor.css";
 import FourOhFour from "./FourOhFour";
 import Main from "./Main";
 import SelectedFile from "./SelectedFile";
 import Tabs from "./Tabs";
+
 
 function Editor(props:{unknownPath?:boolean}) {
   
