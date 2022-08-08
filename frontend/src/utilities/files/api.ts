@@ -16,20 +16,14 @@ export interface IFolderNode extends ISystemNode {
   open: boolean;
 }
 export interface IFileNode extends ISystemNode {
-  link: string;
   selected: boolean;
-}
-
-export interface IFile {
-  id: number;
-  name: string;
   content: string;
 }
 
-export function fetchFiles(){
+export function fetchSystemNodes(){
   return axios.get("http://localhost:3001/files")
 }
 
-export function fetchFile(fileId:number){
-  return axios.get(`http://localhost:3001/file/${fileId}`)
+export function fetchSystemNode(fileId:number){
+  return axios.get(`http://localhost:3001/files/${fileId}`)
 }

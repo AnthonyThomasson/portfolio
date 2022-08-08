@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router";
 import { IFileNode, IFolderNode, ISystemNode } from "../../utilities/files/api";
 import { collapseFolders, expandFolders, getFileStructures, getSystemNodes } from "../../utilities/files/utilities";
 import "./../../styles/FileExplorer.css";
@@ -7,6 +8,7 @@ import FileTree from "./FileTree";
 
 function FileExplorer() {
   
+  const navigate = useNavigate()
   const [isOpen, setIsOpen] = useState(true);
   const [systemNodes, setSystemNodes] = useState<ISystemNode[]>([]);
   const [selectedFileId, setSelectedFileId] = useState(0);
@@ -39,6 +41,7 @@ function FileExplorer() {
     selectedNode.selected = true;
     setSelectedFileId(fileId)
     setSystemNodes(newSystemNodes)
+    navigate(`/file/${fileId}`)
   }
 
   const onExpandAll = () =>{

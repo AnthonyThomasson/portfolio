@@ -1,8 +1,8 @@
-import { fetchFiles, IFileNode, IFolderNode, ISystemNode, NodeType } from "./api";
+import { fetchSystemNode, fetchSystemNodes, IFileNode, IFolderNode, ISystemNode, NodeType } from "./api";
 
 export async function getSystemNodes() {
 
-    const response = await fetchFiles();
+    const response = await fetchSystemNodes();
 
     let files:ISystemNode[] = []
     response.data.forEach((node:ISystemNode) => {
@@ -16,6 +16,13 @@ export async function getSystemNodes() {
       }
     });
   return files;
+}
+
+export async function getSystemNode(nodeId:number) {
+
+  const response = await fetchSystemNode(nodeId);
+  const node:ISystemNode = response.data; 
+  return node;
 }
 
 export function getFileStructures(nodes:ISystemNode[]) {

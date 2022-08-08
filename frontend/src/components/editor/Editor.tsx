@@ -1,27 +1,43 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { IFile } from "../../utilities/files/api";
+import { IFileNode, ISystemNode, NodeType } from "../../utilities/files/api";
+import { getSystemNode } from "../../utilities/files/utilities";
 import FourOhFour from "./FourOhFour";
 import Main from "./Main";
 import SelectedFile from "./SelectedFile";
 import Tabs from "./Tabs";
 
 function Editor(props:{unknownPath?:boolean}) {
-
+  
   let params = useParams()
-  const [tabs,setTabs] = useState<IFile[]>([])
+  const [tabs,setTabs] = useState<IFileNode[]>([])
   const [selectedFileId,setSelectedFileId] = useState(0)
   
   useEffect(() => {
-    let tabs = []
-    let file:IFile = {
-      id: 0,
-      name: "index.html",
-      content: "<h1>Hello World</h1>"
+    if(params.fileId === undefined){
+      return
     }
-    tabs[file.id] = file
-    setTabs(tabs)
-  },[]);
+    
+    getSystemNode(+params.fileId).then((systemNode:ISystemNode) => {
+      
+      if(systemNode.type === NodeType.Folder){
+        console.log("Trying to select a folder")
+        return
+      }
+
+      let file = systemNode as IFileNode
+      if(tabs[file.id] === undefined){
+        let newTabs = tabs.slice()
+        newTabs[file.id] = file
+        setTabs(newTabs)
+        return
+      }
+      setSelectedFileId(file.id)
+    }).catch(err => {
+      console.log(err);
+    })
+    
+  });
 
   if(props.unknownPath === true){
     return (
@@ -32,7 +48,7 @@ function Editor(props:{unknownPath?:boolean}) {
     );
   }
 
-  if(params.fileId === undefined){
+  if(params.fileId === undefined || tabs[selectedFileId] === undefined){
     return (
       <div className="editor">
         <Tabs />
