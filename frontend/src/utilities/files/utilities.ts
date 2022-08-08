@@ -114,16 +114,19 @@ export function findAndSelect(list: ISystemNode[],structure:ISystemNode[] ,selec
   let [newList,newStructure] = removeSelection(list,structure) as [ISystemNode[],ISystemNode[]]
 
   const recurseAndSelect = (newStructure:ISystemNode[],foundSelection:boolean) => {
-    newStructure.forEach(node => {
+    
+    let newStructureCopy = newStructure.slice()
+    
+    newStructureCopy.forEach(node => {
       let nodeCopy = {...node}
       if(nodeCopy.type === NodeType.Folder){
         let folder = nodeCopy as IFolderNode
         if (folder.children.length > 0) {
-          if(foundSelection){
-            let listNode = newList[folder.id] as IFolderNode
-            listNode.open = true
-          }
-          recurseAndSelect(folder.children,foundSelection)
+          [folder.children,foundSelection] = recurseAndSelect(folder.children,foundSelection)  as [ISystemNode[],boolean]
+        }
+        if(foundSelection){
+          let listNode = newList[folder.id] as IFolderNode
+          listNode.open = true
         }
       }else if(nodeCopy.type === NodeType.File){
         let file = nodeCopy as IFileNode
@@ -134,8 +137,9 @@ export function findAndSelect(list: ISystemNode[],structure:ISystemNode[] ,selec
         }
       }
     })
-    return newList
+    return [newList,foundSelection]
   }
   
-  return recurseAndSelect(newStructure,false);
+  [newStructure,] = recurseAndSelect(newStructure,false) as [ISystemNode[],boolean];
+  return newStructure
 }

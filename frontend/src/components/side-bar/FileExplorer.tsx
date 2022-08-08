@@ -17,15 +17,18 @@ function FileExplorer() {
 
   const structure = useMemo(() => { 
     const structure = getFileStructures(systemNodes)
-    if(params.fileId !== undefined && +params.fileId > 0) {
-      findAndSelect(systemNodes,structure, +params.fileId)
-    }
     return structure
-  }, [systemNodes,params.fileId]);
+  }, [systemNodes]);
 
   useEffect(() => {
     getSystemNodes().then((systemNodes:any) => {
       setSystemNodes(systemNodes)
+
+      if(params.fileId !== undefined && +params.fileId > 0) {
+        const structure = getFileStructures(systemNodes)
+        findAndSelect(systemNodes,structure, +params.fileId)
+      }
+      
     }).catch(err => {
       console.log(err);
     })
