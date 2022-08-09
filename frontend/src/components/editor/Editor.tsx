@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { IFileNode, ISystemNode, NodeType } from "../../utilities/files/api";
 import { getSystemNode } from "../../utilities/files/utilities";
 import "./../../styles/Editor.css";
@@ -8,15 +8,44 @@ import Home from "./Home";
 import SelectedFile from "./SelectedFile";
 import Tabs from "./Tabs";
 
-
 function Editor(props:{unknownPath?:boolean}) {
   
+  let navigate = useNavigate()
   let params = useParams()
   const [tabs,setTabs] = useState<IFileNode[]>([])
   const [selectedFileId,setSelectedFileId] = useState(0)
+  const [selectedHistory,setSelectedHistory] = useState<number[]>([])
   
+  const onTabRemove = (id:number) => {
+    
+    let newTabs = tabs.filter(tab => tab.id !== id)
+    
+
+    let newSelectedFileId = 0
+    if(id === selectedFileId) {
+      if(selectedHistory.length === 0 || newTabs.length > 0) {
+        let firstTab = newTabs.values().next().value as IFileNode
+        newSelectedFileId = firstTab.id
+      }else if(selectedHistory.length > 0) {
+        let lastSelectedId = selectedHistory.pop() as number
+        newSelectedFileId = lastSelectedId
+        setSelectedHistory([...selectedHistory])
+      }
+      setSelectedFileId(newSelectedFileId)
+    }
+    
+    
+    setTabs((prev) => prev.filter(tab => tab.id !== id))
+
+    if(selectedFileId > 0) {
+      navigate(`/file/${selectedFileId}`)
+    }else{
+      navigate(`/`)
+    }
+  }
+
   useEffect(() => {
-    if(params.fileId === undefined){
+    if(params.fileId === undefined || +params.fileId === 0){
       return
     }
     
@@ -34,6 +63,9 @@ function Editor(props:{unknownPath?:boolean}) {
         setTabs(newTabs)
         return
       }
+      
+      setSelectedHistory([...selectedHistory,selectedFileId])
+
       setSelectedFileId(file.id)
     }).catch(err => {
       console.log(err);
@@ -44,7 +76,7 @@ function Editor(props:{unknownPath?:boolean}) {
   if(props.unknownPath === true){
     return (
       <div className="editor">
-        <Tabs />
+        <Tabs onTabRemove={onTabRemove} />
         <FourOhFour />
       </div>
     );
@@ -53,7 +85,7 @@ function Editor(props:{unknownPath?:boolean}) {
   if(params.fileId === undefined || tabs[selectedFileId] === undefined){
     return (
       <div className="editor">
-        <Tabs />
+        <Tabs onTabRemove={onTabRemove} />
         <Home />
       </div>
     )
@@ -61,7 +93,7 @@ function Editor(props:{unknownPath?:boolean}) {
 
   return (
     <div className="editor">
-      <Tabs />
+      <Tabs onTabRemove={onTabRemove} selectedFileId={selectedFileId} tabs={tabs} />
       {params.fileId ? <SelectedFile file={tabs[selectedFileId]} /> : <Home />}
     </div>
   );

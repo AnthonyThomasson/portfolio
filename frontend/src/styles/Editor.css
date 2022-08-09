@@ -40,3 +40,36 @@ table tbody tr.active-row {
     font-weight: bold;
     color: #009879;
 }
+
+.tabs {
+    background-color: #21252b;
+    display: flex;
+    height: 40px;
+}
+
+.tab {
+    display: flex;
+    padding-left: 10px;
+    border-right: 1px solid #2f333d; 
+}
+
+.tab-active {
+    background-color: #383e4a;
+}
+
+.tab-name, .tab-close {
+    display: flex;
+    align-items: center;
+}
+
+.tab-close {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 2px;
+    color: rgba(154, 154, 154, 0.657)
+}
+
+.tab-close:hover {
+    color: rgba(211, 211, 211, 0.657);
+    cursor: pointer;
+}

@@ -47,20 +47,6 @@ body {
   background-color: #21252b;
   height: 20px;
 }
-.tabs {
-  background-color: #21252b;
-  display: flex;
-  height: 40px;
-}
-
-.tab {
-  width: 125px;
-  border-right: 1px solid #2f333d;
-}
-
-.tab-active {
-  background-color: #383e4a;
-}
 
 .side-bar {
   display: flex;
