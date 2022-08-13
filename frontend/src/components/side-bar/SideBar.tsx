@@ -1,6 +1,7 @@
 import { useState } from "react";
 import FileExplorer from "./FileExplorer";
 import Modules, { SIDEBAR_PAGE } from "./Modules";
+import Search from "./Search";
 
 function Explorer() {
 
@@ -16,9 +17,7 @@ function Explorer() {
         </li>
         <li className={`side-bar-item ${activeContent === SIDEBAR_PAGE.SEARCH ? `side-bar-item-active` : ``}`}>
           <div className="side-bar-heading">SEARCH</div>
-          <div>
-            <p style={{padding: '20px'}}>This is SEARCH content</p>
-          </div>
+          <Search />
         </li>
         <li className={`side-bar-item ${activeContent === SIDEBAR_PAGE.CONTACT_ME ? `side-bar-item-active` : ``}`}>
           <div className="side-bar-heading">SOURCE CONTROL</div>

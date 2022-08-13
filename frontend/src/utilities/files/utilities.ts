@@ -1,6 +1,6 @@
 import { fetchSystemNode, fetchSystemNodes, IFileNode, IFolderNode, ISystemNode, NodeType } from "./api";
 
-function removeSelection(list: ISystemNode[],structure:ISystemNode[] ){
+export function removeSelection(list: ISystemNode[],structure:ISystemNode[] ){
 
   let newList = list.slice()
   let newStructure = structure.slice()

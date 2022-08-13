@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { IFolderNode, ISystemNode } from "../../utilities/files/api";
-import { collapseFolders, expandFolders, findAndSelect, getFileStructures, getSystemNodes } from "../../utilities/files/utilities";
+import { collapseFolders, expandFolders, findAndSelect, getFileStructures, getSystemNodes, removeSelection } from "../../utilities/files/utilities";
 import "./../../styles/FileExplorer.css";
 import "./../../styles/SystemNodeIcons.css";
 import FileTree from "./FileTree";
@@ -23,6 +23,9 @@ function FileExplorer() {
     if(params.fileId !== undefined && +params.fileId > 0) {
       let newSystemNodes = findAndSelect(systemNodes,structure, +params.fileId)
       setSystemNodes(newSystemNodes)
+    }else{
+      let [newNodes,] = (removeSelection(systemNodes,structure))
+      setSystemNodes(newNodes)
     }
   }, [params.fileId]);
 
