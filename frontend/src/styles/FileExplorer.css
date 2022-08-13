@@ -67,10 +67,6 @@
 .system-node{
   display: flex;
   overflow: hidden;
-}
-
-.system-node-content{
-  display: flex;
   flex-direction: column;
   flex: 1;
 }

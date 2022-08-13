@@ -16,14 +16,12 @@ function file(props:Props) {
 
   return (
     <div className="system-node">
-      <div className="system-node-content" >
-        <div className={`system-node-name ${node.selected === true ? 'system-node-name-selected' : ''}`} style={{
-            paddingLeft: `${filePadding}px`
-          }}
-          onClick={() => props.onFileSelected(node.id)}>
-          <span className={node.icon}></span>
-          <span className='folder-name'>{node.name}</span>
-        </div>
+      <div className={`system-node-name ${node.selected === true ? 'system-node-name-selected' : ''}`} style={{
+          paddingLeft: `${filePadding}px`
+        }}
+        onClick={() => props.onFileSelected(node.id)}>
+        <span className={node.icon}></span>
+        <span className='folder-name'>{node.name}</span>
       </div>
     </div>
   );
