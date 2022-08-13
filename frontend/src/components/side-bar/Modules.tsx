@@ -1,13 +1,13 @@
-export const SIDEBAR_PAGE = {
-  FILE_EXPLORER: "file-explorer",
-  SEARCH: "search",
-  CONTACT_ME: "contact-me",
-  TECHNOLOGIES: "technologies",
-  LOGIN: "login",
-  SITE_INFO: "site-info",
+export enum SIDEBAR_PAGE {
+  FILE_EXPLORER = "file-explorer",
+  SEARCH = "search",
+  CONTACT_ME = "contact-me",
+  TECHNOLOGIES = "technologies",
+  LOGIN = "login",
+  SITE_INFO = "site-info",
 }
 
-function Modules(props: {activeButton:string, onModuleClick: (moduleName: string) => void}) {
+function Modules(props: {activeButton:string, onModuleClick: (moduleName: SIDEBAR_PAGE) => void}) {
   return (
     <div className="modules">
       <div className="top-modules">
