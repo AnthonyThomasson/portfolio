@@ -1,6 +1,11 @@
 import { IFileNode } from "../../utilities/files/api";
 
-function Tabs(props:{ onTabRemove:OnTabRemove, selectedFileId?:number,tabs?:{[id:number]: IFileNode}}) {
+function Tabs(props:{ 
+  onTabRemove:OnTabSelected,
+  onTabSelected:OnTabSelected,
+  selectedFileId?:number,
+  tabs?:{[id:number]: IFileNode}
+}) {
 
   const selectedFileId = props.selectedFileId ?? 0 
   const tabs = props.tabs ?? []
@@ -10,10 +15,11 @@ function Tabs(props:{ onTabRemove:OnTabRemove, selectedFileId?:number,tabs?:{[id
     let file = tab[1] as IFileNode
   
     return (
-      <li key={selectedFileId === file.id ? -file.id :file.id} className={`tab ${selectedFileId === file.id ? 'tab-active' : ''}`}>
+      <li key={selectedFileId === file.id ? -file.id :file.id} className={`tab ${selectedFileId === file.id ? 'tab-active' : ''}`}
+        onClick={() => props.onTabSelected(selectedFileId)}>
         <span className={`${file.icon}`} />
         <span className="tab-name">{file.name}</span>
-        <button className="tab-close" onClick={() => props.onTabRemove(file.id)}>X</button>
+        <button className="tab-close" onClick={(e) => {e.stopPropagation(); props.onTabRemove(file.id)}}>X</button>
       </li>
     )
   })
@@ -23,7 +29,7 @@ function Tabs(props:{ onTabRemove:OnTabRemove, selectedFileId?:number,tabs?:{[id
   );
 }
 
-export type OnTabRemove = (id:number) => void
-export type OnTabSelected = (id:number) => void
+type OnTabRemove = (id:number) => void
+type OnTabSelected = (id:number) => void
 
 export default Tabs;

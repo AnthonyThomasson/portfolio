@@ -28,10 +28,6 @@ table tbody tr {
 	border-right: 2px solid #647de3;
 }
 
-/* table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
-} */
-
 table tbody tr:last-of-type {
     border-bottom: 2px solid #647de3;
 }
@@ -51,6 +47,10 @@ table tbody tr.active-row {
     display: flex;
     padding-left: 10px;
     border-right: 1px solid #2f333d; 
+}
+
+.tab:hover {
+    cursor: pointer;
 }
 
 .tab-active {

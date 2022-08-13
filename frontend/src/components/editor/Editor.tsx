@@ -16,10 +16,8 @@ function Editor(props:{unknownPath?:boolean}) {
   const [selectedFileId,setSelectedFileId] = useState(fileId)
   const [selectedHistory,setSelectedHistory] = useState<number[]>([])
   
-  console.log("tab rendered")
-  
   useEffect(() => {
-    console.log("use effect")
+
     if (fileId > 0){
       getSystemNode(fileId).then((node:ISystemNode) => {
         if(node.type === NodeType.File){
@@ -46,7 +44,12 @@ function Editor(props:{unknownPath?:boolean}) {
 
   return (
     <div className="editor">
-      <Tabs onTabRemove={() => {}} selectedFileId={selectedFileId} tabs={tabs} />
+      <Tabs 
+        tabs={tabs}
+        selectedFileId={selectedFileId}
+        onTabRemove={(id:number) => {console.log("Removing: ",id)}} 
+        onTabSelected={(id:number) => {console.log("Adding: ",id)}} 
+      />
       {contentHTML}
     </div>
   );
