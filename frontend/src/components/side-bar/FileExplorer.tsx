@@ -32,7 +32,7 @@ function FileExplorer() {
     }).catch(err => {
       console.log(err);
     })
-  },[]);
+  }, [params.fileId]);
 
   const onFolderSelected = (folderId:number) => {
     let newSystemNodes = systemNodes.slice()
