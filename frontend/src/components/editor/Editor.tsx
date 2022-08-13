@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { IFileNode, ISystemNode, NodeType } from "../../utilities/files/api";
 import { getSystemNode } from "../../utilities/files/utilities";
 import "./../../styles/Editor.css";
@@ -9,6 +9,7 @@ import Tabs from "./Tabs";
 
 function Editor(props:{unknownPath?:boolean}) {
   
+  let navigator = useNavigate()
   let params = useParams()
   const fileId = params.fileId !== undefined ? +params.fileId : 0
 
@@ -48,7 +49,7 @@ function Editor(props:{unknownPath?:boolean}) {
         tabs={tabs}
         selectedFileId={selectedFileId}
         onTabRemove={(id:number) => {console.log("Removing: ",id)}} 
-        onTabSelected={(id:number) => {console.log("Adding: ",id)}} 
+        onTabSelected={(id:number) => { console.log("Moving: ",id); navigator(`/file/${id}`); }}
       />
       {contentHTML}
     </div>

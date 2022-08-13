@@ -16,7 +16,7 @@ function Tabs(props:{
   
     return (
       <li key={selectedFileId === file.id ? -file.id :file.id} className={`tab ${selectedFileId === file.id ? 'tab-active' : ''}`}
-        onClick={() => props.onTabSelected(selectedFileId)}>
+        onClick={() => props.onTabSelected(file.id)}>
         <span className={`${file.icon}`} />
         <span className="tab-name">{file.name}</span>
         <button className="tab-close" onClick={(e) => {e.stopPropagation(); props.onTabRemove(file.id)}}>X</button>
