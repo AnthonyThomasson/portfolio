@@ -13,7 +13,6 @@ function FileExplorer() {
 
   const [isOpen, setIsOpen] = useState(true);
   const [systemNodes, setSystemNodes] = useState<ISystemNode[]>([]);
-  const [, setSelectedFileId] = useState(0);
 
   const structure = useMemo(() => { 
     const structure = getFileStructures(systemNodes)
@@ -21,18 +20,26 @@ function FileExplorer() {
   }, [systemNodes]);
 
   useEffect(() => {
-    getSystemNodes().then((systemNodes:any) => {
-      setSystemNodes(systemNodes)
+    if(params.fileId !== undefined && +params.fileId > 0) {
+      let newSystemNodes = findAndSelect(systemNodes,structure, +params.fileId)
+      setSystemNodes(newSystemNodes)
+    }
+  }, [params.fileId]);
 
+  if(systemNodes.length === 0) {
+    getSystemNodes().then((systemNodes:any) => {
       if(params.fileId !== undefined && +params.fileId > 0) {
         const structure = getFileStructures(systemNodes)
-        findAndSelect(systemNodes,structure, +params.fileId)
+        let newSystemNodes = findAndSelect(systemNodes,structure, +params.fileId)
+        setSystemNodes(newSystemNodes)
+      }else{
+        setSystemNodes(systemNodes)
       }
       
     }).catch(err => {
       console.log(err);
     })
-  }, [params.fileId]);
+  }
 
   const onFolderSelected = (folderId:number) => {
     let newSystemNodes = systemNodes.slice()
@@ -42,9 +49,6 @@ function FileExplorer() {
   }
 
   const onFileSelected = (fileId:number) => {
-    const newSystemNodes = findAndSelect(systemNodes,structure, fileId)
-    setSelectedFileId(fileId)
-    setSystemNodes(newSystemNodes)
     navigate(`/file/${fileId}`)
   }
 
