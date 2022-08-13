@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { IFileNode, NodeType } from "../../utilities/files/api";
 import { getSystemNodes } from "../../utilities/files/utilities";
 import "./../../styles/Search.css";
@@ -6,8 +7,11 @@ import "./../../styles/Search.css";
 
 function Search() {
 
+  const navigate = useNavigate();
   const [systemNodes,setSystemNodes] = useState<IFileNode[]>([]);
   const [searchResults,setSearchResults] = useState<IFileNode[]>([]);
+
+  const searchBarContent = useRef(null)
 
   if(systemNodes.length === 0) {
     getSystemNodes().then((systemNodes:any) => {
@@ -28,18 +32,28 @@ function Search() {
     }
   }
 
+  const onSelection = (id:number) => {
+    if(searchBarContent.current === null){
+      return
+    }
+    let searchInput = searchBarContent.current as HTMLInputElement;
+    searchInput.value = ""
+    onSearch("")
+    navigate(`/file/${id}`)
+  }
+
   const searchResultsHTML = searchResults.map((node:IFileNode) => {
     return (<li key={node.id}>
-        <div className={`system-node-name ${node.selected === true ? 'system-node-name-selected' : ''}`}
-              onClick={() => {}} />
+        <div className={`system-node-name`} onClick={() => onSelection(node.id)}>
           <span className={node.icon}></span>
           <span className='folder-name'>{node.name}</span>
+        </div>
     </li>)
   })
 
   return (
     <div className="search-content">
-      <input type="text" placeholder="Search" onChange={(e) => onSearch(e.target.value)}/>
+      <input type="text" placeholder="Search" ref={searchBarContent} onChange={(e) => onSearch(e.target.value)}/>
       <ul className="search-results">
         {searchResultsHTML}
       </ul>
