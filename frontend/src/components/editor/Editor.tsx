@@ -45,7 +45,7 @@ function Editor(props:{unknownPath?:boolean}) {
       <Tabs 
         tabs={tabs}
         selectedFileId={fileId}
-        onTabRemove={(id:number) => {console.log("Removing: ",id)}} 
+        onTabRemove={(id:number) => {console.log("Removing: ",id); let newTabs = {...tabs}; delete newTabs[id]; setTabs(newTabs)}} 
         onTabSelected={(id:number) => { console.log("Moving: ",id); navigator(`/file/${id}`); }}
       />
       {contentHTML}
