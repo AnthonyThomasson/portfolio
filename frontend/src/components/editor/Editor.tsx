@@ -14,7 +14,6 @@ function Editor(props:{unknownPath?:boolean}) {
   const fileId = params.fileId !== undefined ? +params.fileId : 0
 
   const [tabs,setTabs] = useState<{[id:number]: IFileNode}>({})
-  const [selectedFileId,setSelectedFileId] = useState(fileId)
   const [selectedHistory,setSelectedHistory] = useState<number[]>([])
   
   useEffect(() => {
@@ -24,16 +23,14 @@ function Editor(props:{unknownPath?:boolean}) {
         if(node.type === NodeType.File){
           
           let file = node as IFileNode
-          if(selectedFileId > 0){
-            const history = [selectedFileId,...selectedHistory]
+          if(file.id > 0){
+            const history = [file.id,...selectedHistory]
             setSelectedHistory(history)
           }
           
           if(tabs[file.id] === undefined){
             setTabs({...tabs, [file.id]: file})
           }
-          
-          setSelectedFileId(file.id)
         }      
       })
     }
@@ -41,13 +38,13 @@ function Editor(props:{unknownPath?:boolean}) {
 
   console.log(tabs)
 
-  const contentHTML = tabs[selectedFileId] !== undefined ? <SelectedFile file={tabs[selectedFileId]} /> : <Home />
+  const contentHTML = tabs[fileId] !== undefined ? <SelectedFile file={tabs[fileId]} /> : <Home />
 
   return (
     <div className="editor">
       <Tabs 
         tabs={tabs}
-        selectedFileId={selectedFileId}
+        selectedFileId={fileId}
         onTabRemove={(id:number) => {console.log("Removing: ",id)}} 
         onTabSelected={(id:number) => { console.log("Moving: ",id); navigator(`/file/${id}`); }}
       />

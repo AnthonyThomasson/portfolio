@@ -1,7 +1,7 @@
 import { IFileNode } from "../../utilities/files/api";
 
 function Tabs(props:{ 
-  onTabRemove:OnTabSelected,
+  onTabRemove:OnTabRemove,
   onTabSelected:OnTabSelected,
   selectedFileId?:number,
   tabs?:{[id:number]: IFileNode}
