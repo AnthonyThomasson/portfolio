@@ -37,7 +37,7 @@ function Explorer() {
         <li className={`side-bar-item ${activeContent === SIDEBAR_PAGE.SITE_INFO ? `side-bar-item-active` : ``}`}>
           <div className="side-bar-heading">SETTINGS</div>
           <div>
-            <p style={{padding: '20px'}}>This is SETTINGS content</p>
+          <Login />
           </div>
         </li>
       </ul>

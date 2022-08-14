@@ -3,6 +3,7 @@
 # dependencies
 backend/node_modules
 backend/dist
+backend/database/data
 frontend/node_modules
 frontend/build
 /.pnp
