@@ -3,6 +3,7 @@ import ContactMe from "./ContactMe";
 import FileExplorer from "./FileExplorer";
 import Modules, { SIDEBAR_PAGE } from "./Modules";
 import Search from "./Search";
+import Technologies from "./Technologies";
 
 function Explorer() {
 
@@ -26,9 +27,7 @@ function Explorer() {
         </li>
         <li className={`side-bar-item ${activeContent === SIDEBAR_PAGE.TECHNOLOGIES ? `side-bar-item-active` : ``}`}>
           <div className="side-bar-heading">MODULES</div>
-          <div>
-            <p style={{padding: '20px'}}>This is TECHNOLOGIES content</p>
-          </div>
+          <Technologies />
         </li>
         <li className={`side-bar-item ${activeContent === SIDEBAR_PAGE.LOGIN ? `side-bar-item-active` : ``}`}>
           <div className="side-bar-heading">LOGIN</div>
