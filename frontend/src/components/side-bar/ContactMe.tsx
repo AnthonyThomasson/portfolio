@@ -9,9 +9,8 @@ function ContactMe() {
   return (
     <div className="contact-me-content">
       <input placeholder="Email" ref={emailInput}/>
-      <button><span className="fa-solid fa-check" /> Commit</button>
+      <button onClick={() => {alert("This feature is not yet working")}}><span className="fa-solid fa-check"/> Commit</button>
       <textarea placeholder="Message" ref={messageInput}/>
-      
     </div>
   );
 }
