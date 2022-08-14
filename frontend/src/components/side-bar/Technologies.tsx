@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { Technology } from "../../utilities/technologies/api";
 import { getTechnologies } from "../../utilities/technologies/utilities";
-import "./../../styles/Search.css";
+import "./../../styles/Technologies.css";
 
 function Technologies() {
 
@@ -30,7 +30,7 @@ function Technologies() {
   const technologiesHTML = technologyResults.map((technology:Technology) => {
     return (
       <li key={technology.name}>
-        <img className="technology-icon" src={`"./../../assets/technologies/${technology.icon}"`} alt={technology.name}/>
+        <span className="technology-icon"/>
         <div className={`technology-description`}>
           <h1>{technology.name}</h1>
           <p>{technology.experience}</p>

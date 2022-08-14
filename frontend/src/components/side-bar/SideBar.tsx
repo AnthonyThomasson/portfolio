@@ -26,7 +26,7 @@ function Explorer() {
           <ContactMe />
         </li>
         <li className={`side-bar-item ${activeContent === SIDEBAR_PAGE.TECHNOLOGIES ? `side-bar-item-active` : ``}`}>
-          <div className="side-bar-heading">MODULES</div>
+          <div className="side-bar-heading">TECHNOLOGIES</div>
           <Technologies />
         </li>
         <li className={`side-bar-item ${activeContent === SIDEBAR_PAGE.LOGIN ? `side-bar-item-active` : ``}`}>

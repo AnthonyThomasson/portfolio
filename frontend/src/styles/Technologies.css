@@ -1,0 +1,53 @@
+.technologies-content {
+	display: flex;
+	flex-direction: column;
+}
+
+.technologies-content input {
+	background-color: #1b1e23;
+	color: #d8d8d8;
+	padding: 5px;
+	flex: 1;
+	margin-left: 20px;
+	margin-right: 10px
+}
+
+.technologies-content .search-results {
+	/* overflow-y: auto; */
+}
+
+.technologies-content li {
+	display: flex;
+	padding: 0 20px;
+}
+
+.technologies-content li:hover {
+	display: flex;
+	background-color: #1b1e2353;
+	cursor: pointer;
+}
+
+.technologies-content li span {
+	background-image: url("../assets/technologies/golang.png");
+	background-size: 80px;
+	background-repeat: no-repeat;
+	width: 80px;
+}
+
+.technologies-content li h1 {
+	font-size: medium;
+	margin: 0;
+	padding: 5px 0 10px 5px;
+}
+
+.technologies-content li p {
+	font-size: small;
+	margin: 0;
+	padding-left: 5px;
+	padding-bottom: 10px;
+}
+
+.technologies-content li div {
+	display: flex;
+	flex-direction: column;
+}
