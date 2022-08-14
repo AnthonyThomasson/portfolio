@@ -1,0 +1,36 @@
+.contact-me-content {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	margin-left: 20px;
+	margin-right: 20px
+}
+
+.contact-me-content input {
+	background-color: #1b1e23;
+	color: #d8d8d8;
+	padding: 5px;
+
+}
+
+.contact-me-content button {
+	background-color: #5285dd;
+	color: #d8d8d8;
+	padding: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	cursor: pointer;
+}
+
+.contact-me-content button:hover {
+	background-color: #8ba9de;
+}
+
+.contact-me-content textarea {
+	background-color: #1b1e23;
+	color: #d8d8d8;
+	padding: 5px;
+	height: 300px;
+	resize: vertical;
+
+}

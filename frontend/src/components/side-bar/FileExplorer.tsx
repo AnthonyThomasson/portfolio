@@ -56,11 +56,13 @@ function FileExplorer() {
   }
 
   const onExpandAll = () =>{
-    setSystemNodes(expandFolders(systemNodes))
+    const [expandedNodes,] = expandFolders(systemNodes,structure);
+    setSystemNodes(expandedNodes)
   }
 
   const onCollapseAll = () => {
-    setSystemNodes(collapseFolders(systemNodes))
+    const [collapsedFolders,] = collapseFolders(systemNodes,structure);
+    setSystemNodes(collapsedFolders)
   }
 
   return (

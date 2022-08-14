@@ -71,42 +71,50 @@ export function getFileStructures(nodes:ISystemNode[]) {
   return structure;
 }
 
-export function collapseFolders(list: ISystemNode[]){
+export function collapseFolders(list: ISystemNode[],structure: ISystemNode[]){
 
   let newList = list.slice()
+  let newStructure = structure.slice()
 
-  newList.map(node => {  
+  newStructure.map(node => {  
     let nodeCopy = {...node}
     if(nodeCopy.type === NodeType.Folder){
-      let folder = nodeCopy as IFolderNode
-      folder.open = false
-      if (folder.children.length > 0) {
-        collapseFolders(folder.children)
-      }
-    }
-    return nodeCopy
-  })
-
-  return newList
-}
-
-export function expandFolders(list: ISystemNode[]){
-
-  let newList = list.slice()
-
-  newList.map(node => {  
-    let nodeCopy = {...node}
-    if(nodeCopy.type === NodeType.Folder){
-      let folder = nodeCopy as IFolderNode
-      folder.open = true
-      if (folder.children.length > 0) {
-        expandFolders(folder.children)
+      let structureFolder = nodeCopy as IFolderNode
+      let rootFolder = newList[nodeCopy.id] as IFolderNode
+      rootFolder.open = false
+      if (structureFolder.children.length > 0) {
+        let [subList,subStructure] = expandFolders(newList,structureFolder.children)
+        structureFolder.children = subStructure
+        newList = subList
       }
     }
     return nodeCopy
   })
   
-  return newList;
+  return [newList,newStructure];
+}
+
+export function expandFolders(list: ISystemNode[],structure: ISystemNode[]){
+
+  let newList = list.slice()
+  let newStructure = structure.slice()
+
+  newStructure.map(node => {  
+    let nodeCopy = {...node}
+    if(nodeCopy.type === NodeType.Folder){
+      let structureFolder = nodeCopy as IFolderNode
+      let rootFolder = newList[nodeCopy.id] as IFolderNode
+      rootFolder.open = true
+      if (structureFolder.children.length > 0) {
+        let [subList,subStructure] = expandFolders(newList,structureFolder.children)
+        structureFolder.children = subStructure
+        newList = subList
+      }
+    }
+    return nodeCopy
+  })
+  
+  return [newList,newStructure];
 }
 
 export function findAndSelect(list: ISystemNode[],structure:ISystemNode[] ,selectedFileId:number) {
