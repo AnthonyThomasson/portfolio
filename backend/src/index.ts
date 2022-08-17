@@ -6,18 +6,18 @@ dotenv.config();
 const app: Express = express();
 const port = process.env.PORT ?? 3000;
 
-  const { Client } = require('pg')
-  const client = new Client({
-    user: 'user',
-    host: 'db',
-    database: 'portfolio',
-    password: 'password',
-    port: 5432,
-  })
-  client.connect(function(err:any) {
-    if (err) throw err;
-    console.log("Connected!");
-  });
+const { Client } = require('pg')
+const client = new Client({
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT ?? 5432,
+})
+client.connect(function(err:any) {
+  if (err) throw err;
+  console.log("Connected to Postgres!");
+});
 
 
 

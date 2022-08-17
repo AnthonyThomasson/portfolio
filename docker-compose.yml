@@ -9,11 +9,12 @@ services:
     environment:
       DOMAIN: "localhost"
       NODE_ENV: development
-      JWT_SECRET: 4ZDp#JMfnERLUuVdd05t
+      PORT: 3000
       DB_USER: user
       DB_PASSWORD: password
       DB_NAME: portfolio
       DB_HOST: db
+      DB_PORT: 5432
     volumes:
       - ./backend:/app/backend
       - ./frontend:/app/frontend
