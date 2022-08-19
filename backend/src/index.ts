@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import express, { Express, Request, Response } from 'express';
+const path = require('path')
 
 dotenv.config();
 
@@ -19,8 +20,6 @@ client.connect(function(err:any) {
   console.log("Connected to Postgres!");
 });
 
-
-
 app.get('/api/files', async (req: Request, res: Response) => {
   let response = await client.query('SELECT * FROM system_nodes')
   res.send(response.rows);
@@ -30,13 +29,27 @@ app.get('/api/files/:id', (req: Request, res: Response) => {
   res.send('Express + TypeScript Server');
 });
 
-app.get('/api/technologies', (req: Request, res: Response) => {
-  res.send('Express + TypeScript Server');
+app.get('/api/technologies', async (req: Request, res: Response) => {
+  let response = await client.query('SELECT * FROM technologies')
+  res.send(response.rows);
 });
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Express + TypeScript Server');
+app.get('/api/', (req: Request, res: Response) => {
+  res.status(400).send('Unknown route');
 });
+
+app.get('/static/*', (req: Request, res: Response) => {
+  console.log(req.originalUrl)
+  let uriPath = req.originalUrl.replace('/static', '')
+  res.sendFile(path.join(__dirname, '/public/static', uriPath))
+})
+
+// app.use('/static/*', express.static(path.join(__dirname, 'public')))
+
+app.get('/*', (req: Request, res: Response) => {
+  console.log("ROOTATOOT")
+  res.sendFile(path.join(__dirname, '/public', 'index.html'))
+})
 
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
