@@ -32,7 +32,7 @@ function folder(props:Props) {
   const node = props.node as IFolderNode;
 
   const folderPadding = (props.depth * 9) + 20;
-  const folderGuideLeftPosition = (props.depth * 7) + 23;
+  const folderGuideLeftPosition = (props.depth * 7) + 26;
   
   const hasSelectedChild:boolean = node.children.some(child => {
     if(child.type === NodeType.File){

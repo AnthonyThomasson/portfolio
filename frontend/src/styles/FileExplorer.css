@@ -67,7 +67,6 @@
 .system-node{
   display: flex;
   overflow: hidden;
-  flex-direction: column;
   flex: 1;
 }
 
@@ -84,10 +83,17 @@
   background-color: #67676739;
 }
 
+.system-node-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
 .system-node-name {
   display: flex;
   padding: 5px 0px;
   cursor: pointer;
+  flex: 1;
 }
 
 .system-node-name-selected {
