@@ -9,7 +9,7 @@ FROM node:latest as frontend-build
 COPY frontend/package.json frontend/package-lock.json frontend/tsconfig.json ./
 COPY frontend/public public
 COPY frontend/src src
-RUN npm install && npm run build:dev
+RUN npm install && npm run build
 
 FROM node:alpine
 

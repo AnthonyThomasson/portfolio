@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import express, { Express, Request, Response } from 'express';
 const path = require('path')
+const fs = require('fs')
 
 dotenv.config();
 
@@ -21,13 +22,13 @@ client.connect(function(err:any) {
 });
 
 app.get('/api/files', async (req: Request, res: Response) => {
-  console.log("Getting files 2");
   let response = await client.query('SELECT * FROM system_nodes')
   res.send(response.rows);
 });
 
-app.get('/api/files/:id', (req: Request, res: Response) => {
-  res.send('Express + TypeScript Server');
+app.get('/api/files/:id',async (req: Request, res: Response) => {
+  let response = await client.query("SELECT * FROM system_nodes WHERE id = $1", [req.params.id])
+  res.send(response.rows[0]);
 });
 
 app.get('/api/technologies', async (req: Request, res: Response) => {
@@ -35,22 +36,27 @@ app.get('/api/technologies', async (req: Request, res: Response) => {
   res.send(response.rows);
 });
 
-app.get('/api/', (req: Request, res: Response) => {
-  res.status(400).send('Unknown route');
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('/*', function(req,res) {
+  console.log("we here")
+		res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.get('/static/*', (req: Request, res: Response) => {
-  console.log(req.originalUrl)
-  let uriPath = req.originalUrl.replace('/static', '')
-  res.sendFile(path.join(__dirname, '/public/static', uriPath))
-})
 
-// app.use('/static/*', express.static(path.join(__dirname, 'public')))
+// app.use(express.static('public'))
 
-app.get('/*', (req: Request, res: Response) => {
-  console.log("not that")
-  res.sendFile(path.join(__dirname, '/public', 'index.html'))
-})
+// app.get('/static/*', (req: Request, res: Response) => {
+//   console.log(req.originalUrl)
+//   let uriPath = req.originalUrl.replace('/static', '')
+//   res.sendFile(path.join(__dirname, '/public/static', uriPath))
+// })
+
+
+// app.get('/*', (req: Request, res: Response) => {
+//   res.sendFile(path.join(__dirname, '/public', 'index.html'))
+// })
 
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at https://localhost:${port}`);

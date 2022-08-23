@@ -4,7 +4,8 @@ CREATE TABLE IF NOT EXISTS system_nodes (
    icon VARCHAR(50) NOT NULL,
    name VARCHAR(50) NOT NULL,
    type node_type NOT NULL,
-   parent serial NOT NULL
+   parent serial NOT NULL,
+   content TEXT
 );
 
 CREATE TABLE IF NOT EXISTS technologies (

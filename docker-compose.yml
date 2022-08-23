@@ -27,6 +27,6 @@ services:
       POSTGRES_DB: portfolio
     volumes:
       - ./backend/database/seeds:/docker-entrypoint-initdb.d
-      - ./backend/database/data:/var/lib/postgresql/data
+      - ./backend/database/postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"

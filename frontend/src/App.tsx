@@ -11,7 +11,7 @@ function App() {
       <div className="app">
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="file/:fileId" element={<Main />} />
+          <Route path="/file/:fileId" element={<Main />} />
           <Route path="*" element={<Main unknownPath/>} />
         </Routes>
         <Footer />

@@ -23,15 +23,14 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "dotenv -e .env.${REACT_APP_ENVIRONMENT} react-scripts build",
-    "build:dev": "dotenv -e .env.development react-scripts build",
+    "build": "react-scripts build",
     "watch": "npm-watch",
     "test": "react-scripts test",
     "mock-db": "npx json-server -p 3001 --watch mock-server/db.json",
     "eject": "react-scripts eject"
   },
   "watch": {
-    "build:dev": {
+    "build": {
       "patterns": [
         "src"
       ],
