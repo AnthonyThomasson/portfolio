@@ -13,6 +13,7 @@
     "axios": "^0.27.2",
     "dompurify": "^2.3.10",
     "marked": "^4.0.18",
+    "npm-watch": "^0.11.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",
@@ -22,10 +23,20 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "dotenv -e .env.${REACT_APP_ENVIRONMENT} react-scripts build",
+    "build:dev": "dotenv -e .env.development react-scripts build",
+    "watch": "npm-watch",
     "test": "react-scripts test",
     "mock-db": "npx json-server -p 3001 --watch mock-server/db.json",
     "eject": "react-scripts eject"
+  },
+  "watch": {
+    "build:dev": {
+      "patterns": [
+        "src"
+      ],
+      "extensions": "tsx,ts,css"
+    }
   },
   "eslintConfig": {
     "extends": [
@@ -48,6 +59,7 @@
   "devDependencies": {
     "@types/dompurify": "^2.3.3",
     "@types/marked": "^4.0.3",
+    "dotenv-cli": "^6.0.0",
     "json-server": "^0.17.0"
   }
 }

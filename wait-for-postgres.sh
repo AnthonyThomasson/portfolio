@@ -7,4 +7,5 @@ until PGPASSWORD=$DB_PASSWORD psql -h "$DB_HOST" -U "$DB_USER" -d "$DB_NAME" -c 
 done
   
 >&2 echo "Postgres is up - executing command"
+>&2 echo "Trying to run $@"
 exec "$@"

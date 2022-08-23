@@ -21,6 +21,7 @@ client.connect(function(err:any) {
 });
 
 app.get('/api/files', async (req: Request, res: Response) => {
+  console.log("Getting files 2");
   let response = await client.query('SELECT * FROM system_nodes')
   res.send(response.rows);
 });
@@ -47,7 +48,7 @@ app.get('/static/*', (req: Request, res: Response) => {
 // app.use('/static/*', express.static(path.join(__dirname, 'public')))
 
 app.get('/*', (req: Request, res: Response) => {
-  console.log("ROOTATOOT")
+  console.log("not that")
   res.sendFile(path.join(__dirname, '/public', 'index.html'))
 })
 
