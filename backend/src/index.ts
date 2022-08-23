@@ -30,7 +30,7 @@ app.get('/api/files/:id',async (req: Request, res: Response) => {
   let response = await client.query("SELECT * FROM system_nodes WHERE id = $1", [req.params.id])
   res.send(response.rows[0]);
 });
-
+// 
 app.get('/api/technologies', async (req: Request, res: Response) => {
   let response = await client.query('SELECT * FROM technologies')
   res.send(response.rows);
@@ -38,25 +38,9 @@ app.get('/api/technologies', async (req: Request, res: Response) => {
 
 
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.get('/*', function(req,res) {
-  console.log("we here")
 		res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
-
-
-// app.use(express.static('public'))
-
-// app.get('/static/*', (req: Request, res: Response) => {
-//   console.log(req.originalUrl)
-//   let uriPath = req.originalUrl.replace('/static', '')
-//   res.sendFile(path.join(__dirname, '/public/static', uriPath))
-// })
-
-
-// app.get('/*', (req: Request, res: Response) => {
-//   res.sendFile(path.join(__dirname, '/public', 'index.html'))
-// })
 
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
