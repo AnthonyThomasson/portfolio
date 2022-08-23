@@ -17,7 +17,7 @@ services:
       DB_PORT: 5432
     volumes:
       - ./backend/src:/app/src
-      - ./frontend/build:/app/dist/public`
+      - ./frontend/build:/app/dist/public
   db:
     image: "postgres"
     restart: "always"

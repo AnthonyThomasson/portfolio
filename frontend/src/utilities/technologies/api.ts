@@ -7,5 +7,5 @@ export type Technology = {
 }
 
 export function fetchTechnologies(){
-  return axios.get("http://localhost:3001/technologies")
+  return axios.get("http://localhost:3000/api/technologies")
 }
