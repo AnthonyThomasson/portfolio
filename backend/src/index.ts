@@ -30,7 +30,7 @@ app.get('/api/files/:id',async (req: Request, res: Response) => {
   let response = await client.query("SELECT * FROM system_nodes WHERE id = $1", [req.params.id])
   res.send(response.rows[0]);
 });
-// 
+
 app.get('/api/technologies', async (req: Request, res: Response) => {
   let response = await client.query('SELECT * FROM technologies')
   res.send(response.rows);
