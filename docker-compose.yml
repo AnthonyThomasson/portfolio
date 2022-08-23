@@ -9,7 +9,7 @@ services:
     environment:
       DOMAIN: "localhost"
       NODE_ENV: development
-      c: 3000
+      PORT: 3000
       DB_USER: user
       DB_PASSWORD: password
       DB_NAME: portfolio
