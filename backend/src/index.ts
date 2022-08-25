@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import express, { Express, Request, Response } from 'express';
+const { Client } = require('pg')
 const path = require('path')
 const fs = require('fs')
 
@@ -8,13 +9,9 @@ dotenv.config();
 const app: Express = express();
 const port = process.env.PORT ?? 3000;
 
-const { Client } = require('pg')
+const connectionString = process.env.DATABASE_URL
 const client = new Client({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT ?? 5432,
+  connectionString
 })
 client.connect(function(err:any) {
   if (err) throw err;
