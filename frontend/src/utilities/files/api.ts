@@ -21,9 +21,9 @@ export interface IFileNode extends ISystemNode {
 }
 
 export function fetchSystemNodes(){
-  return axios.get("http://localhost:3000/api/files")
+  return axios.get("/api/files")
 }
 
 export function fetchSystemNode(fileId:number){
-  return axios.get(`http://localhost:3000/api/files/${fileId}`)
+  return axios.get(`/api/files/${fileId}`)
 }

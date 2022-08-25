@@ -10,11 +10,8 @@ services:
       DOMAIN: "localhost"
       NODE_ENV: development
       PORT: 3000
-      DB_USER: user
-      DB_PASSWORD: password
-      DB_NAME: portfolio
-      DATABASE_URL: db
-      DB_PORT: 5432
+      DATABASE_URL: "postgres://user:password@db:5432/portfolio"
+      ENVIRONMENT: "development"
     volumes:
       - ./backend/src:/app/src
       - ./frontend/build:/app/dist/public
