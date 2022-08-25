@@ -13,7 +13,7 @@ services:
       DB_USER: user
       DB_PASSWORD: password
       DB_NAME: portfolio
-      DB_HOST: db
+      DATABASE_HOST: db
       DB_PORT: 5432
     volumes:
       - ./backend/src:/app/src
