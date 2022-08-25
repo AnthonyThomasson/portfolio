@@ -9,6 +9,8 @@ dotenv.config();
 const app: Express = express();
 const port = process.env.PORT ?? 3000;
 
+console.log(process.env)
+
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
   ssl: {
