@@ -9,10 +9,13 @@ dotenv.config();
 const app: Express = express();
 const port = process.env.PORT ?? 3000;
 
-const connectionString = process.env.DATABASE_URL
 const client = new Client({
-  connectionString
-})
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
+
 client.connect(function(err:any) {
   if (err) throw err;
   console.log("Connected to Postgres!");
