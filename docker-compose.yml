@@ -14,7 +14,7 @@ services:
       ENVIRONMENT: "development"
     volumes:
       - ./backend/src:/app/src
-      - ./frontend/build:/app/dist/public
+      - ./frontend/dist:/app/dist/public
   db:
     image: "postgres"
     restart: "always"

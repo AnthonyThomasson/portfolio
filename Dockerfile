@@ -6,15 +6,15 @@ WORKDIR /out
 RUN npm install && npm run build
 
 FROM node:latest as frontend-build
-COPY frontend/package.json frontend/package-lock.json frontend/tsconfig.json ./
-COPY frontend/public public
+COPY frontend/index.html frontend/package.json frontend/yarn.lock frontend/tsconfig.json frontend/tsconfig.node.json ./
 COPY frontend/src src
-RUN npm install && npm run build
+RUN yarn
+RUN yarn build
 
 FROM node:alpine
 
 COPY --from=backend-build ./out  ./app
-COPY --from=frontend-build ./build  ./app/dist/public
+COPY --from=frontend-build ./dist  ./app/dist/public
 
 COPY wait-for-postgres.sh ./app
 RUN chmod +x ./app/wait-for-postgres.sh

@@ -1,13 +1,9 @@
-import Editor from "./components/editor/Editor";
-import SideBar from "./components/side-bar/SideBar";
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
 
-function App(props:{unknownPath?:boolean}) {
-  return (
-	<div className="main">
-		<SideBar />
-		{props.unknownPath === true ? <Editor unknownPath />  : <Editor />}
-	</div>
-  );
-}
-
-export default App;
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+)

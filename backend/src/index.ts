@@ -5,7 +5,6 @@ const path = require('path')
 const fs = require('fs')
 
 dotenv.config();
-
 const app: Express = express();
 const port = process.env.PORT ?? 3000;
 
@@ -43,5 +42,7 @@ app.get('/*', function(req,res) {
 });
 
 app.listen(port, () => {
-  console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
+  if(process.env.ENVIRONMENT === 'development'){
+    console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
+  }
 });
