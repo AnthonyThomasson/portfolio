@@ -1,7 +1,9 @@
 version: "3.9"
 services:
   app:
-    build: ./build/dev/.
+    build:
+      context: .
+      dockerfile: build/prod.Dockerfile
     ports:
       - "3000:3000"
     depends_on:
