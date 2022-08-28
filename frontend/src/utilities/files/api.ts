@@ -1,15 +1,15 @@
-import axios from "axios";
+import axios from 'axios';
 
 export enum NodeType {
-  Folder = "folder",
-  File = "file"
+  Folder = 'folder',
+  File = 'file'
 }
 export interface ISystemNode {
-  id:number,
-  icon:string
-  name:string
-  parent:number
-  type:string
+  id: number;
+  icon: string;
+  name: string;
+  parent: number;
+  type: string;
 }
 export interface IFolderNode extends ISystemNode {
   children: ISystemNode[];
@@ -20,10 +20,10 @@ export interface IFileNode extends ISystemNode {
   content: string;
 }
 
-export function fetchSystemNodes(){
-  return axios.get("/api/files")
+export function fetchSystemNodes() {
+  return axios.get('/api/files');
 }
 
-export function fetchSystemNode(fileId:number){
-  return axios.get(`/api/files/${fileId}`)
+export function fetchSystemNode(fileId: number) {
+  return axios.get(`/api/files/${fileId}`);
 }

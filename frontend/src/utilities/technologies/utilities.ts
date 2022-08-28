@@ -1,4 +1,4 @@
-import { fetchTechnologies } from "./api";
+import { fetchTechnologies } from './api';
 
 export async function getTechnologies() {
   const response = await fetchTechnologies();

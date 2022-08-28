@@ -1,118 +1,124 @@
 .file-explorer-icon {
-	background-image: url("../assets/modules/file-explorer-icon.png");
-	display: block;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: contain;
-	height: 25px;
+  background-image: url('../assets/modules/file-explorer-icon.png');
+  display: block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  height: 25px;
 }
 
-.active > .file-explorer-icon, .module:hover > .file-explorer-icon {
-	background-image: url("../assets/modules/file-explorer-icon-active.png");
-	display: block;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: contain;
-	height: 25px;
+.active > .file-explorer-icon,
+.module:hover > .file-explorer-icon {
+  background-image: url('../assets/modules/file-explorer-icon-active.png');
+  display: block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  height: 25px;
 }
 
 .search-icon {
-	background-image: url("../assets/modules/search-icon.png");
-	display: block;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: contain;
-	height: 25px;
+  background-image: url('../assets/modules/search-icon.png');
+  display: block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  height: 25px;
 }
 
-.active > .search-icon, .module:hover > .search-icon {
-	background-image: url("../assets/modules/search-icon-active.png");
-	display: block;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: contain;
-	height: 25px;
+.active > .search-icon,
+.module:hover > .search-icon {
+  background-image: url('../assets/modules/search-icon-active.png');
+  display: block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  height: 25px;
 }
 
 .git-icon {
-	background-image: url("../assets/modules/git-icon.png");
-	display: block;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: contain;
-	height: 25px;
+  background-image: url('../assets/modules/git-icon.png');
+  display: block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  height: 25px;
 }
 
-.active > .git-icon, .module:hover > .git-icon {
-	background-image: url("../assets/modules/git-icon-active.png");
-	display: block;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: contain;
-	height: 25px;
+.active > .git-icon,
+.module:hover > .git-icon {
+  background-image: url('../assets/modules/git-icon-active.png');
+  display: block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  height: 25px;
 }
 
 .docker-icon {
-	background-image: url("../assets/modules/docker-icon.png");
-	display: block;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: contain;
-	height: 25px;
+  background-image: url('../assets/modules/docker-icon.png');
+  display: block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  height: 25px;
 }
 
-.active > .docker-icon, .module:hover > .docker-icon {
-	background-image: url("../assets/modules/docker-icon-active.png");
-	display: block;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: contain;
-	height: 25px;
+.active > .docker-icon,
+.module:hover > .docker-icon {
+  background-image: url('../assets/modules/docker-icon-active.png');
+  display: block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  height: 25px;
 }
 
 .test-icon {
-	background-image: url("../assets/modules/test-icon.png");
-	display: block;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: contain;
-	height: 25px;
+  background-image: url('../assets/modules/test-icon.png');
+  display: block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  height: 25px;
 }
 
-.active > .test-icon, .module:hover > .test-icon {
-	background-image: url("../assets/modules/test-icon-active.png");
-	display: block;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: contain;
-	height: 25px;
+.active > .test-icon,
+.module:hover > .test-icon {
+  background-image: url('../assets/modules/test-icon-active.png');
+  display: block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  height: 25px;
 }
 
 .debugger-icon {
-	background-image: url("../assets/modules/debugger-icon.png");
-	display: block;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: contain;
-	height: 25px;
+  background-image: url('../assets/modules/debugger-icon.png');
+  display: block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  height: 25px;
 }
 
-.active > .debugger-icon, .module:hover > .debugger-icon {
-	background-image: url("../assets/modules/debugger-icon-active.png");
-	display: block;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: contain;
-	height: 25px;
+.active > .debugger-icon,
+.module:hover > .debugger-icon {
+  background-image: url('../assets/modules/debugger-icon-active.png');
+  display: block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  height: 25px;
 }
 
 .databases-icon {
-	background-image: url("../assets/modules/databases-icon.png");
-	display: block;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: contain;
-	height: 25px;
+  background-image: url('../assets/modules/databases-icon.png');
+  display: block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  height: 25px;
 }
 
 /* .active > .database-icon, > .module:hover > .database-icon {
@@ -125,12 +131,12 @@
 } */
 
 .live-share-icon {
-	background-image: url("../assets/modules/live-share-icon.png");
-	display: block;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: contain;
-	height: 25px;
+  background-image: url('../assets/modules/live-share-icon.png');
+  display: block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  height: 25px;
 }
 
 /* .active > .live-share-icon, > .live.module:hover > -share-icon {
@@ -143,12 +149,12 @@
 } */
 
 .settings-icon {
-	background-image: url("../assets/modules/settings-icon.png");
-	display: block;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: contain;
-	height: 25px;
+  background-image: url('../assets/modules/settings-icon.png');
+  display: block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  height: 25px;
 }
 
 /* .active > .settings-icon, > .module:hover > .settings-icon {
@@ -161,12 +167,12 @@
 } */
 
 .modules-icon {
-	background-image: url("../assets/modules/modules-icon.png");
-	display: block;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: contain;
-	height: 25px;
+  background-image: url('../assets/modules/modules-icon.png');
+  display: block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  height: 25px;
 }
 
 /* .active > .modules-icon, > .module:hover > .modules-icon {
@@ -179,13 +185,13 @@
 } */
 
 .profile-icon {
-	background-image: url("../assets/modules/profile-icon.png");
-	display: block;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: contain;
-	height: 25px;
-	margin-top: 15px;
+  background-image: url('../assets/modules/profile-icon.png');
+  display: block;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  height: 25px;
+  margin-top: 15px;
 }
 
 /* .active > .profile-icon, > .module:hover > .profile-icon {

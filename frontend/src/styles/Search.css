@@ -1,25 +1,25 @@
 .search-content {
-	display: flex;
-	flex-direction: column;;
+  display: flex;
+  flex-direction: column;
 }
 
 .search-content input {
-	background-color: #1b1e23;
-	color: #d8d8d8;
-	padding: 5px;
-	flex: 1;
-	margin-left: 20px;
-	margin-right: 10px
+  background-color: #1b1e23;
+  color: #d8d8d8;
+  padding: 5px;
+  flex: 1;
+  margin-left: 20px;
+  margin-right: 10px;
 }
 
 .search-results {
-	display: flex;
-	flex-direction: column;
-	flex: 1;
-	margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin-top: 20px;
 }
 
 .search-results .system-node-name {
-	display: flex;
-	padding: 5px 10px;
+  display: flex;
+  padding: 5px 10px;
 }

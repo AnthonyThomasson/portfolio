@@ -20,8 +20,8 @@
 }
 
 .file-explorer-title {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .chevron {
@@ -34,23 +34,23 @@
 }
 
 .file-explorer-buttons {
-	display: none;
+  display: none;
 }
 
 .file-explorer-button {
-	width: 20px;
-	margin: 0 2px 0 2px;
-	border-radius: 5px;
-	height: 100%;
-	cursor: pointer;
+  width: 20px;
+  margin: 0 2px 0 2px;
+  border-radius: 5px;
+  height: 100%;
+  cursor: pointer;
 }
 
 .file-explorer-button:hover {
-	background-color: #67676739;
+  background-color: #67676739;
 }
 
 .file-explorer:hover .file-explorer-buttons {
-	display: flex;
+  display: flex;
 }
 
 .file-explorer-content {
@@ -64,7 +64,7 @@
   flex: 1;
 }
 
-.system-node{
+.system-node {
   display: flex;
   overflow: hidden;
   flex: 1;
@@ -78,7 +78,7 @@
   top: 26px;
 }
 
- .file-explorer-open:hover .folder-guide {
+.file-explorer-open:hover .folder-guide {
   display: flex;
   background-color: #67676739;
 }
@@ -98,7 +98,7 @@
 
 .system-node-name-selected {
   display: flex;
-  background-color: #67676739;;
+  background-color: #67676739;
 }
 
 .folder-guide-contains-selected {
@@ -108,5 +108,5 @@
 
 .system-node-name:hover {
   display: flex;
-  background-color: #67676739;;
+  background-color: #67676739;
 }

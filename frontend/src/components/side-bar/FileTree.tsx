@@ -1,16 +1,23 @@
-import { ISystemNode } from "../../utilities/files/api";
-import SystemNode, { OnFileSelected, OnFolderSelected } from "./SystemNode";
+import { ISystemNode } from '../../utilities/files/api';
+import SystemNode, { OnFileSelected, OnFolderSelected } from './SystemNode';
 
-function FileTree(props:{structure:ISystemNode[], onFolderSelected:OnFolderSelected, onFileSelected:OnFileSelected, depth?:number}) {
-
+function FileTree(props: {
+  structure: ISystemNode[];
+  onFolderSelected: OnFolderSelected;
+  onFileSelected: OnFileSelected;
+  depth?: number;
+}) {
   const rootNodeItems = props.structure.map((node: ISystemNode) => (
-    <li key={node.id}><SystemNode node={node} depth={ props.depth ?? 1} onFolderSelected={props.onFolderSelected} onFileSelected={props.onFileSelected}/></li>
+    <li key={node.id}>
+      <SystemNode
+        node={node}
+        depth={props.depth ?? 1}
+        onFolderSelected={props.onFolderSelected}
+        onFileSelected={props.onFileSelected}
+      />
+    </li>
   ));
 
-  return (
-    <ul>
-      {rootNodeItems}
-    </ul>
-  )
+  return <ul>{rootNodeItems}</ul>;
 }
 export default FileTree;
