@@ -1,8 +1,10 @@
 FROM node:latest as server-build
-COPY server/tsconfig.json ./
-COPY server/package.json server/yarn.lock server/.yarnrc.yml server/.yarnrc ./
-COPY server/.yarn .yarn
-COPY server/src src
+COPY server/tsconfig.json ./build
+COPY server/package.json server/yarn.lock server/.yarnrc.yml server/.yarnrc ./build/
+COPY server/.yarn build/
+COPY server/src build
+
+WORKDIR /build
 RUN yarn && yarn build
 
 FROM node:latest as client-build
@@ -13,8 +15,8 @@ RUN npm install && npm run build
 
 
 FROM node:alpine
-COPY --from=server-build ./dist  ./app
-COPY --from=server-build ./node_modules  ./app/node_modules
+COPY --from=server-build ./build/dist  ./app
+COPY --from=server-build ./build/node_modules  ./app/node_modules
 COPY --from=client-build ./build  ./app/public
 COPY wait-for-postgres.sh .
 RUN chmod +x wait-for-postgres.sh

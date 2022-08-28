@@ -25,4 +25,4 @@ EXPOSE $PORT
 
 WORKDIR /app
 
-ENTRYPOINT ["npm","run", "dev" ]
+ENTRYPOINT ["yarn", "dev" ]
