@@ -1,11 +1,5 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-server/node_modules
-server/dist
-db/data
-client/node_modules
-client/build
 /.pnp
 .pnp.js
 /.vscode/

@@ -9,7 +9,7 @@
         "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
         "lint": "eslint . --ext .ts",
         "lint:fix": "eslint . --ext .ts --fix",
-        "format": "prettier --write . '!./dist/**/*.'"
+        "format": "prettier --write . '!./.yarn/**/*' '!./dist/**/*'"
     },
     "author": "Anthony Thomasson",
     "license": "ISC",
@@ -28,5 +28,6 @@
         "eslint-config-prettier": "^8.5.0",
         "prettier": "^2.7.1",
         "typescript": "^3.9.10"
-    }
+    },
+    "packageManager": "yarn@3.2.3"
 }
