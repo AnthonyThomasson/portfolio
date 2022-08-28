@@ -1,11 +1,11 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-backend/node_modules
-backend/dist
-backend/database/postgres_data
-frontend/node_modules
-frontend/build
+server/node_modules
+server/dist
+server/database/postgres_data
+client/node_modules
+client/build
 /.pnp
 .pnp.js
 /.vscode/
