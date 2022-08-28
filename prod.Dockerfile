@@ -1,18 +1,18 @@
-FROM node:latest as backend-build
-COPY backend/package.json backend/package-lock.json backend/tsconfig.json ./
-COPY backend/src src
+FROM node:latest as server-build
+COPY server/package.json server/package-lock.json server/tsconfig.json ./
+COPY server/src src
 RUN npm install && npm run build
 
-FROM node:latest as frontend-build
-COPY frontend/package.json frontend/package-lock.json frontend/tsconfig.json ./
-COPY frontend/public public
-COPY frontend/src src
+FROM node:latest as client-build
+COPY client/package.json client/package-lock.json client/tsconfig.json ./
+COPY client/public public
+COPY client/src src
 RUN npm install && npm run build
 
 FROM node:alpine
-COPY --from=backend-build ./dist  ./app
-COPY --from=backend-build ./node_modules  ./app/node_modules
-COPY --from=frontend-build ./build  ./app/public
+COPY --from=server-build ./dist  ./app
+COPY --from=server-build ./node_modules  ./app/node_modules
+COPY --from=client-build ./build  ./app/public
 COPY wait-for-postgres.sh .
 RUN chmod +x wait-for-postgres.sh
 

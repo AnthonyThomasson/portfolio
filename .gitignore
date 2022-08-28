@@ -3,7 +3,7 @@
 # dependencies
 server/node_modules
 server/dist
-server/database/postgres_data
+db/data
 client/node_modules
 client/build
 /.pnp

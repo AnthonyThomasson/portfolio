@@ -13,8 +13,8 @@ services:
       DATABASE_URL: "postgres://user:password@db:5432/portfolio"
       ENVIRONMENT: "development"
     volumes:
-      - ./backend/src:/app/src
-      - ./frontend/dist:/app/dist/public
+      - ./server/src:/app/src
+      - ./client/dist:/app/dist/public
   db:
     image: "postgres"
     restart: "always"
@@ -23,7 +23,7 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: portfolio
     volumes:
-      - ./backend/database/seeds:/docker-entrypoint-initdb.d
-      - ./backend/database/postgres_data:/var/lib/postgresql/data
+      - ./db/seeds:/docker-entrypoint-initdb.d
+      - ./db/data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
