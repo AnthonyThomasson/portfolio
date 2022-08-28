@@ -1,5 +1,5 @@
-import Editor from './editor/Editor';
-import SideBar from './side-bar/SideBar';
+import Editor from './editor/Editor'
+import SideBar from './side-bar/SideBar'
 
 function App(props: { unknownPath?: boolean }) {
   return (
@@ -7,7 +7,7 @@ function App(props: { unknownPath?: boolean }) {
       <SideBar />
       {props.unknownPath === true ? <Editor unknownPath /> : <Editor />}
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

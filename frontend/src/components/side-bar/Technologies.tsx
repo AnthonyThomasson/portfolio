@@ -1,34 +1,34 @@
-import { useRef, useState } from 'react';
-import { Technology } from '../../utilities/technologies/api';
-import { getTechnologies } from '../../utilities/technologies/utilities';
-import './../../styles/Technologies.css';
+import { useRef, useState } from 'react'
+import { Technology } from '../../utilities/technologies/api'
+import { getTechnologies } from '../../utilities/technologies/utilities'
+import './../../styles/Technologies.css'
 
 function Technologies() {
-  const searchInput = useRef(null);
-  const [technologies, setTechnologies] = useState<Technology[]>([]);
-  const [technologyResults, setTechnologyResults] = useState<Technology[]>(technologies);
+  const searchInput = useRef(null)
+  const [technologies, setTechnologies] = useState<Technology[]>([])
+  const [technologyResults, setTechnologyResults] = useState<Technology[]>(technologies)
 
   if (technologies.length === 0) {
     getTechnologies()
       .then((technologies: any) => {
-        setTechnologies(technologies);
-        setTechnologyResults(technologies);
+        setTechnologies(technologies)
+        setTechnologyResults(technologies)
       })
       .catch((err) => {
-        console.log(err);
-      });
+        console.log(err)
+      })
   }
 
   const onSearch = (searchTerm: string) => {
     if (searchTerm === '') {
-      setTechnologyResults(technologies);
+      setTechnologyResults(technologies)
     } else {
       const newTechnologies = technologies.filter((technology: Technology) =>
         technology.name.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      setTechnologyResults(newTechnologies);
+      )
+      setTechnologyResults(newTechnologies)
     }
-  };
+  }
 
   const technologiesHTML = technologyResults.map((technology: Technology) => {
     return (
@@ -39,8 +39,8 @@ function Technologies() {
           <p>{technology.experience}</p>
         </div>
       </li>
-    );
-  });
+    )
+  })
 
   return (
     <div className="technologies-content">
@@ -52,7 +52,7 @@ function Technologies() {
       />
       <ul className="search-results">{technologiesHTML}</ul>
     </div>
-  );
+  )
 }
 
-export default Technologies;
+export default Technologies

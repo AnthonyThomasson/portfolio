@@ -1,9 +1,9 @@
-import Footer from './components/footer/Footer';
-import './styles/App.css';
-import './styles/ModuleIcons.css';
+import Footer from './components/footer/Footer'
+import './styles/App.css'
+import './styles/ModuleIcons.css'
 
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Main from './components/Main';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import Main from './components/Main'
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
         <Footer />
       </div>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App

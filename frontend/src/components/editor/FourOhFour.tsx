@@ -3,7 +3,7 @@ function FourOhFour() {
     <div className="404">
       <h1>This is the 404 page content</h1>
     </div>
-  );
+  )
 }
 
-export default FourOhFour;
+export default FourOhFour

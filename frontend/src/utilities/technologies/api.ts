@@ -1,11 +1,11 @@
-import axios from 'axios';
+import axios from 'axios'
 
 export type Technology = {
-  name: string;
-  icon: string;
-  experience: string;
-};
+  name: string
+  icon: string
+  experience: string
+}
 
 export function fetchTechnologies() {
-  return axios.get('/api/technologies');
+  return axios.get('/api/technologies')
 }

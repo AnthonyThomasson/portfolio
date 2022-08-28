@@ -5,117 +5,117 @@ import {
   IFolderNode,
   ISystemNode,
   NodeType
-} from './api';
+} from './api'
 
 export function removeSelection(list: ISystemNode[], structure: ISystemNode[]) {
-  let newList = list.slice();
-  let newStructure = structure.slice();
+  let newList = list.slice()
+  let newStructure = structure.slice()
 
   newStructure.map((node) => {
-    let nodeCopy = { ...node };
+    let nodeCopy = { ...node }
     if (nodeCopy.type === NodeType.File) {
-      let file = newList[nodeCopy.id] as IFileNode;
-      file.selected = false;
+      let file = newList[nodeCopy.id] as IFileNode
+      file.selected = false
     } else if (nodeCopy.type === NodeType.Folder) {
-      let folder = nodeCopy as IFolderNode;
+      let folder = nodeCopy as IFolderNode
       if (folder.children.length > 0) {
-        [newList, folder.children] = removeSelection(newList, folder.children);
+        ;[newList, folder.children] = removeSelection(newList, folder.children)
       }
     }
-    return nodeCopy;
-  });
+    return nodeCopy
+  })
 
-  return [newList, newStructure];
+  return [newList, newStructure]
 }
 
 export async function getSystemNodes() {
-  const response = await fetchSystemNodes();
+  const response = await fetchSystemNodes()
 
-  let files: ISystemNode[] = [];
+  let files: ISystemNode[] = []
   response.data.forEach((node: ISystemNode) => {
-    files[node.id] = node;
+    files[node.id] = node
     if (node.type === NodeType.Folder) {
-      let folder = node as IFolderNode;
-      folder.open = false;
+      let folder = node as IFolderNode
+      folder.open = false
     } else if (node.type === NodeType.File) {
-      let file = node as IFileNode;
-      file.selected = false;
+      let file = node as IFileNode
+      file.selected = false
     }
-  });
-  return files;
+  })
+  return files
 }
 
 export async function getSystemNode(nodeId: number) {
-  const response = await fetchSystemNode(nodeId);
-  const node: ISystemNode = response.data;
-  return node;
+  const response = await fetchSystemNode(nodeId)
+  const node: ISystemNode = response.data
+  return node
 }
 
 export function getFileStructures(nodes: ISystemNode[]) {
-  let refList: ISystemNode[] = [];
+  let refList: ISystemNode[] = []
   nodes.forEach((node) => {
-    let nodeCopy = { ...node };
-    refList[node.id] = nodeCopy;
+    let nodeCopy = { ...node }
+    refList[node.id] = nodeCopy
     if (node.type === NodeType.Folder) {
-      let folder = nodeCopy as IFolderNode;
-      folder.children = [];
+      let folder = nodeCopy as IFolderNode
+      folder.children = []
     }
-  });
+  })
 
-  let structure: ISystemNode[] = [];
+  let structure: ISystemNode[] = []
   refList.forEach((node) => {
     if (node.parent === 0) {
-      structure.push(node);
+      structure.push(node)
     } else {
-      let parentFolder = refList[node.parent] as IFolderNode;
-      parentFolder.children.push(node);
+      let parentFolder = refList[node.parent] as IFolderNode
+      parentFolder.children.push(node)
     }
-  });
-  return structure;
+  })
+  return structure
 }
 
 export function collapseFolders(list: ISystemNode[], structure: ISystemNode[]) {
-  let newList = list.slice();
-  let newStructure = structure.slice();
+  let newList = list.slice()
+  let newStructure = structure.slice()
 
   newStructure.map((node) => {
-    let nodeCopy = { ...node };
+    let nodeCopy = { ...node }
     if (nodeCopy.type === NodeType.Folder) {
-      let structureFolder = nodeCopy as IFolderNode;
-      let rootFolder = newList[nodeCopy.id] as IFolderNode;
-      rootFolder.open = false;
+      let structureFolder = nodeCopy as IFolderNode
+      let rootFolder = newList[nodeCopy.id] as IFolderNode
+      rootFolder.open = false
       if (structureFolder.children.length > 0) {
-        let [subList, subStructure] = expandFolders(newList, structureFolder.children);
-        structureFolder.children = subStructure;
-        newList = subList;
+        let [subList, subStructure] = expandFolders(newList, structureFolder.children)
+        structureFolder.children = subStructure
+        newList = subList
       }
     }
-    return nodeCopy;
-  });
+    return nodeCopy
+  })
 
-  return [newList, newStructure];
+  return [newList, newStructure]
 }
 
 export function expandFolders(list: ISystemNode[], structure: ISystemNode[]) {
-  let newList = list.slice();
-  let newStructure = structure.slice();
+  let newList = list.slice()
+  let newStructure = structure.slice()
 
   newStructure.map((node) => {
-    let nodeCopy = { ...node };
+    let nodeCopy = { ...node }
     if (nodeCopy.type === NodeType.Folder) {
-      let structureFolder = nodeCopy as IFolderNode;
-      let rootFolder = newList[nodeCopy.id] as IFolderNode;
-      rootFolder.open = true;
+      let structureFolder = nodeCopy as IFolderNode
+      let rootFolder = newList[nodeCopy.id] as IFolderNode
+      rootFolder.open = true
       if (structureFolder.children.length > 0) {
-        let [subList, subStructure] = expandFolders(newList, structureFolder.children);
-        structureFolder.children = subStructure;
-        newList = subList;
+        let [subList, subStructure] = expandFolders(newList, structureFolder.children)
+        structureFolder.children = subStructure
+        newList = subList
       }
     }
-    return nodeCopy;
-  });
+    return nodeCopy
+  })
 
-  return [newList, newStructure];
+  return [newList, newStructure]
 }
 
 export function findAndSelect(
@@ -123,45 +123,45 @@ export function findAndSelect(
   structure: ISystemNode[],
   selectedFileId: number
 ) {
-  let [newList, newStructure] = removeSelection(list, structure) as [ISystemNode[], ISystemNode[]];
+  let [newList, newStructure] = removeSelection(list, structure) as [ISystemNode[], ISystemNode[]]
 
   const recurseAndSelect = (
     newStructure: ISystemNode[],
     foundSelection: boolean,
     isRoot: boolean
   ) => {
-    let newStructureCopy = newStructure.slice();
+    let newStructureCopy = newStructure.slice()
 
     newStructureCopy.forEach((node) => {
-      let nodeCopy = { ...node };
+      let nodeCopy = { ...node }
       if (nodeCopy.type === NodeType.Folder) {
-        let folder = nodeCopy as IFolderNode;
+        let folder = nodeCopy as IFolderNode
         if (folder.children.length > 0) {
-          [folder.children, foundSelection] = recurseAndSelect(
+          ;[folder.children, foundSelection] = recurseAndSelect(
             folder.children,
             foundSelection,
             false
-          ) as [ISystemNode[], boolean];
+          ) as [ISystemNode[], boolean]
         }
         if (foundSelection) {
-          let listNode = newList[folder.id] as IFolderNode;
-          listNode.open = true;
+          let listNode = newList[folder.id] as IFolderNode
+          listNode.open = true
           if (isRoot === true) {
-            foundSelection = false;
+            foundSelection = false
           }
         }
       } else if (nodeCopy.type === NodeType.File) {
-        let file = nodeCopy as IFileNode;
+        let file = nodeCopy as IFileNode
         if (file.id === selectedFileId) {
-          let listNode = newList[file.id] as IFileNode;
-          listNode.selected = true;
-          foundSelection = true;
+          let listNode = newList[file.id] as IFileNode
+          listNode.selected = true
+          foundSelection = true
         }
       }
-    });
-    return [newList, foundSelection];
-  };
+    })
+    return [newList, foundSelection]
+  }
 
-  [newStructure] = recurseAndSelect(newStructure, false, true) as [ISystemNode[], boolean];
-  return newStructure;
+  ;[newStructure] = recurseAndSelect(newStructure, false, true) as [ISystemNode[], boolean]
+  return newStructure
 }

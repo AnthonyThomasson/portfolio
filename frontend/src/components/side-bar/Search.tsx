@@ -1,47 +1,47 @@
-import { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { IFileNode, NodeType } from '../../utilities/files/api';
-import { getSystemNodes } from '../../utilities/files/utilities';
-import './../../styles/Search.css';
+import { useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { IFileNode, NodeType } from '../../utilities/files/api'
+import { getSystemNodes } from '../../utilities/files/utilities'
+import './../../styles/Search.css'
 
 function Search() {
-  const navigate = useNavigate();
-  const [systemNodes, setSystemNodes] = useState<IFileNode[]>([]);
-  const [searchResults, setSearchResults] = useState<IFileNode[]>([]);
+  const navigate = useNavigate()
+  const [systemNodes, setSystemNodes] = useState<IFileNode[]>([])
+  const [searchResults, setSearchResults] = useState<IFileNode[]>([])
 
-  const searchBarContent = useRef(null);
+  const searchBarContent = useRef(null)
 
   if (systemNodes.length === 0) {
     getSystemNodes()
       .then((systemNodes: any) => {
-        setSystemNodes(systemNodes);
+        setSystemNodes(systemNodes)
       })
       .catch((err) => {
-        console.log(err);
-      });
+        console.log(err)
+      })
   }
 
   const onSearch = (searchTerm: string) => {
     if (searchTerm === '') {
-      setSearchResults([]);
+      setSearchResults([])
     } else {
       const results = systemNodes.filter(
         (node) =>
           node.name.toLowerCase().includes(searchTerm.toLowerCase()) && node.type === NodeType.File
-      );
-      setSearchResults(results);
+      )
+      setSearchResults(results)
     }
-  };
+  }
 
   const onSelection = (id: number) => {
     if (searchBarContent.current === null) {
-      return;
+      return
     }
-    let searchInput = searchBarContent.current as HTMLInputElement;
-    searchInput.value = '';
-    onSearch('');
-    navigate(`/file/${id}`);
-  };
+    let searchInput = searchBarContent.current as HTMLInputElement
+    searchInput.value = ''
+    onSearch('')
+    navigate(`/file/${id}`)
+  }
 
   const searchResultsHTML = searchResults.map((node: IFileNode) => {
     return (
@@ -51,8 +51,8 @@ function Search() {
           <span className="folder-name">{node.name}</span>
         </div>
       </li>
-    );
-  });
+    )
+  })
 
   return (
     <div className="search-content">
@@ -64,7 +64,7 @@ function Search() {
       />
       <ul className="search-results">{searchResultsHTML}</ul>
     </div>
-  );
+  )
 }
 
-export default Search;
+export default Search
