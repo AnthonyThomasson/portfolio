@@ -1,8 +1,7 @@
 import dotenv from 'dotenv'
 import express, { Express, Request, Response } from 'express'
-const { Client } = require('pg')
-const path = require('path')
-const fs = require('fs')
+import path from 'path'
+import { Client } from 'pg'
 
 dotenv.config()
 const app: Express = express()
@@ -18,18 +17,18 @@ const client = new Client({
               },
 })
 
-client.connect(function (err: any) {
+client.connect(function (err: Error) {
     if (err) throw err
     console.log('Connected to Postgres!')
 })
 
 app.get('/api/files', async (req: Request, res: Response) => {
-    let response = await client.query('SELECT * FROM system_nodes')
+    const response = await client.query('SELECT * FROM system_nodes')
     res.send(response.rows)
 })
 
 app.get('/api/files/:id', async (req: Request, res: Response) => {
-    let response = await client.query(
+    const response = await client.query(
         'SELECT * FROM system_nodes WHERE id = $1',
         [req.params.id]
     )
@@ -37,7 +36,7 @@ app.get('/api/files/:id', async (req: Request, res: Response) => {
 })
 
 app.get('/api/technologies', async (req: Request, res: Response) => {
-    let response = await client.query('SELECT * FROM technologies')
+    const response = await client.query('SELECT * FROM technologies')
     res.send(response.rows)
 })
 
