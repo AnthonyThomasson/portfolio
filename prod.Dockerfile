@@ -11,6 +11,7 @@ COPY client/public public
 COPY client/src src
 RUN npm install && npm run build
 
+
 FROM node:alpine
 COPY --from=server-build ./dist  ./app
 COPY --from=server-build ./node_modules  ./app/node_modules
