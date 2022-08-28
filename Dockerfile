@@ -8,15 +8,15 @@ WORKDIR /build
 RUN yarn && yarn build
 
 FROM node:latest as client-build
-COPY client/package.json client/yarn.lock client/tsconfig.json client/tsconfig.node.json ./
-COPY client/index.html .
+COPY client/index.html client/package.json client/yarn.lock client/tsconfig.json client/tsconfig.node.json ./
 COPY client/src src
-RUN npm i && npm run build
+RUN yarn && yarn build
 
 FROM node:alpine
 COPY --from=server-build ./build/dist  ./app
 COPY --from=server-build ./build/node_modules  ./app/node_modules
 COPY --from=client-build ./dist  ./app/public
+
 COPY wait-for-postgres.sh .
 RUN chmod +x wait-for-postgres.sh
 
