@@ -1,15 +1,14 @@
 FROM node:latest as backend-build
-COPY backend/package.json backend/package-lock.json backend/tsconfig.json ./out/
+COPY backend/package.json backend/yarn.lock backend/tsconfig.json ./out/
 COPY backend/src out/src
 
 WORKDIR /out
-RUN npm install && npm run build
+RUN yarn && yarn build
 
 FROM node:latest as frontend-build
 COPY frontend/index.html frontend/package.json frontend/yarn.lock frontend/tsconfig.json frontend/tsconfig.node.json ./
 COPY frontend/src src
-RUN yarn
-RUN yarn build
+RUN yarn && yarn build
 
 FROM node:alpine
 
