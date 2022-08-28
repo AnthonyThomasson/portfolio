@@ -1,7 +1,9 @@
 FROM node:latest as server-build
-COPY server/package.json server/package-lock.json server/tsconfig.json ./
+COPY server/tsconfig.json ./
+COPY server/package.json server/yarn.lock server/.yarnrc.yml server/.yarnrc ./
+COPY server/.yarn .yarn
 COPY server/src src
-RUN npm install && npm run build
+RUN yarn && yarn build
 
 FROM node:latest as client-build
 COPY client/package.json client/package-lock.json client/tsconfig.json ./

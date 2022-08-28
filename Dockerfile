@@ -1,6 +1,8 @@
 FROM node:latest as server-build
-COPY server/package.json server/yarn.lock server/tsconfig.json ./out/
+COPY server/tsconfig.json out/
+COPY server/package.json server/yarn.lock server/.yarnrc.yml server/.yarnrc out/
 COPY server/src out/src
+COPY server/.yarn out/.yarn
 
 WORKDIR /out
 RUN yarn && yarn build
