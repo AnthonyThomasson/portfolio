@@ -11,7 +11,7 @@ FROM node:latest as client-build
 COPY client/package.json client/yarn.lock client/tsconfig.json client/tsconfig.node.json ./
 COPY client/index.html .
 COPY client/src src
-RUN yarn && yarn build
+RUN npm i && npm run build
 
 FROM node:alpine
 COPY --from=server-build ./build/dist  ./app
