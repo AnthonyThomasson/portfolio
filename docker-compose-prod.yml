@@ -14,9 +14,6 @@ services:
       PORT: 3000
       DATABASE_URL: "postgres://user:password@db:5432/portfolio"
       ENVIRONMENT: "development"
-    volumes:
-      - ./server/src:/app/src
-      - ./client/dist:/app/dist/public
   db:
     image: "postgres"
     restart: "always"
