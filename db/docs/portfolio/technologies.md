@@ -17,3 +17,11 @@ I was especially interested in Yarn Berry, which is a new version of Yarn that w
 #### Vite
 
 I have experimented a little bit with Vite in the past while working with vue, but I have never used it with React. I wanted to see how well it works, and if it would be a good replacement for Webpack.
+
+#### Postgres
+
+All the work I have done this far has been with mysql, so I wanted to try out Postgres. I have heard a lot of good things about it. I am excited to see how it compares to mysql.
+
+#### Express
+
+I have a little experience with express, but I have not done anything outside of experimenting with test applications. I really like the way express works syntactically and find it very easy to follow. I built a similar internal library in PHP I called Slurp which took a lot of inspiration from express.
