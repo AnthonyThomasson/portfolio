@@ -108,6 +108,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@prisma/client@npm:^4.3.1":
+  version: 4.3.1
+  resolution: "@prisma/client@npm:4.3.1"
+  dependencies:
+    "@prisma/engines-version": 4.3.0-32.c875e43600dfe042452e0b868f7a48b817b9640b
+  peerDependencies:
+    prisma: "*"
+  peerDependenciesMeta:
+    prisma:
+      optional: true
+  checksum: 2e3e6319bb0974f9ab67ab4620b775f82c54e00c4690db59bbd4736967c1afae7b4487ac54a78d221b7f898287b387422c7e8de026dfd66e97c1ca1e79eb06f7
+  languageName: node
+  linkType: hard
+
+"@prisma/engines-version@npm:4.3.0-32.c875e43600dfe042452e0b868f7a48b817b9640b":
+  version: 4.3.0-32.c875e43600dfe042452e0b868f7a48b817b9640b
+  resolution: "@prisma/engines-version@npm:4.3.0-32.c875e43600dfe042452e0b868f7a48b817b9640b"
+  checksum: 268eb72da6ef70f3e0ce9c43f1b1500af3df24adb0589972f2fbbb949e5f3847c0c2377998537ad425995f78ad59cd06e65e1b07040d0ea937cefe02e441a5d1
+  languageName: node
+  linkType: hard
+
 "@prisma/engines@npm:4.3.1":
   version: 4.3.1
   resolution: "@prisma/engines@npm:4.3.1"
@@ -482,6 +503,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "backend@workspace:."
   dependencies:
+    "@prisma/client": ^4.3.1
     "@types/express": ^4.17.13
     "@types/node": ^18.7.13
     "@types/pg": ^8.6.5
