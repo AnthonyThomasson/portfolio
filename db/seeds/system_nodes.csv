@@ -1,9 +1,0 @@
-id,icon,name,type,parent,content
-1,"folder-icon","Project One","folder",0,null
-2,"folder-icon","Project Two","folder",0,null
-3,"folder-icon","assets","folder",1,null
-4,"file-react-icon","file-one.tsx","file",2,"# File One"
-5,"file-react-icon","file-two.tsx","file",2,"# File Two"
-6,"file-react-icon","file-one.tsx","file",1,"# File Three"
-7,"file-react-icon","asset-one.tsx","file",3,"# File Four"
-8,"file-react-icon","asset-two.tsx","file",3,"# File Five"

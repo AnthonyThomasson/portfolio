@@ -14,18 +14,15 @@ RUN yarn && yarn build
 
 FROM node:alpine
 
-# COPY --from=server-build ./build  ./app/server
-# COPY --from=client-build ./build  ./app/client
-
 COPY --from=server-build ./build/dist/* ./app/
 COPY --from=server-build ./build/node_modules ./app/node_modules
 COPY --from=client-build ./build/dist  ./app/public
 
-COPY wait-for-postgres.sh ./app
-RUN chmod +x ./app/wait-for-postgres.sh
-
 RUN apk --update add postgresql-client
+COPY ./db/postgres-setup.sh ./app/db/postgres-setup.sh
+COPY ./db/seeds ./app/db/seeds
+RUN chmod +x ./app/db/postgres-setup.sh
 
 EXPOSE $PORT
 
-ENTRYPOINT ["./app/wait-for-postgres.sh", "node","./app/index.js" ]
+ENTRYPOINT ["./app/db/postgres-setup.sh", "node","./app/index.js" ]
