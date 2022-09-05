@@ -29,6 +29,7 @@
         "eslint-config-prettier": "^8.5.0",
         "nodemon": "^2.0.19",
         "prettier": "^2.7.1",
+        "prisma": "^4.3.1",
         "typescript": "^3.9.10"
     },
     "packageManager": "yarn@3.2.3"

@@ -1,0 +1,25 @@
+FROM node:latest as server-build
+COPY server/tsconfig.json build/
+COPY server/package.json server/yarn.lock server/.yarnrc.yml server/.yarnrc build/
+COPY server/src build/src
+COPY server/.yarn build/.yarn
+COPY server/prisma build/prisma
+WORKDIR /build
+RUN yarn && yarn build
+
+FROM node:latest as client-build
+COPY client/index.html client/package.json client/yarn.lock client/tsconfig.json client/tsconfig.node.json ./build/
+COPY client/src build/src
+WORKDIR /build
+RUN yarn && yarn build
+
+FROM node:alpine
+
+COPY --from=server-build ./build  ./app
+COPY --from=client-build ./build/dist  ./app/dist/public
+
+EXPOSE $PORT
+
+WORKDIR /app
+
+ENTRYPOINT ["yarn", "dev" ]

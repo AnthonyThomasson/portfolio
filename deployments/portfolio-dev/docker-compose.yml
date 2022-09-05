@@ -3,7 +3,7 @@ services:
   app:
     build:
       context: $PWD
-      dockerfile: Dockerfile
+      dockerfile: $PWD/deployments/portfolio-dev/Dockerfile
     ports:
       - "3000:3000"
     depends_on:
@@ -16,6 +16,7 @@ services:
       ENVIRONMENT: "development"
     volumes:
       - $PWD/server/src:/app/src
+      - $PWD/server/prisma:/app/prisma
       - $PWD/client/dist:/app/dist/public
   db:
     image: "postgres"
@@ -25,8 +26,8 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: portfolio
     volumes:
-      - $PWD/db/seeds:/docker-entrypoint-initdb.d
-      - $PWD/db/data:/var/lib/postgresql/data
+      - $PWD/server/db/seeds:/docker-entrypoint-initdb.d
+      - $PWD/server/db/data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     command: postgres -c stats_temp_directory=/tmp
