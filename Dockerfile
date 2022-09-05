@@ -14,7 +14,7 @@ RUN yarn && yarn build
 
 FROM node:alpine
 
-COPY --from=server-build ./build/dist/* ./app/
+COPY --from=server-build ./build/dist/src/* ./app/
 COPY --from=server-build ./build/node_modules ./app/node_modules
 COPY --from=client-build ./build/dist  ./app/public
 

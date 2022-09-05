@@ -1,15 +1,18 @@
 {
-    "name": "backend",
+    "name": "server",
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
     "scripts": {
         "build": "npx tsc",
         "start": "node dist/index.js",
-        "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
+        "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/src/index.js\"",
         "lint": "eslint . --ext .ts",
         "lint:fix": "eslint . --ext .ts --fix",
-        "format": "prettier --write . '!./.yarn/**/*' '!./dist/**/*'"
+        "format": "prettier --write . '!./.yarn/**/*' '!./db/**/*' '!./dist/**/*'"
+    },
+    "prisma": {
+        "seed": "ts-node prisma/seed.ts"
     },
     "author": "Anthony Thomasson",
     "license": "ISC",
@@ -31,7 +34,7 @@
         "nodemon": "^2.0.19",
         "prettier": "^2.7.1",
         "prisma": "^4.3.1",
-        "typescript": "^3.9.10"
+        "typescript": "<4.8.0"
     },
     "packageManager": "yarn@3.2.3"
 }
