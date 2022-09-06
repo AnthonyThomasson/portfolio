@@ -5,6 +5,7 @@ until psql $DATABASE_URL -c '\q'; do
 done
   
 >&2 echo "Postgres is up - seeding database"
-# yarn prisma migrate reset --force
+yarn prisma generate
+yarn prisma migrate reset --force
 >&2 echo "Database seeded - starting the app"
 exec "$@"

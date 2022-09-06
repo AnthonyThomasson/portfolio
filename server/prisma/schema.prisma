@@ -10,16 +10,23 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model system_nodes {
-  id      Int     @id @default(autoincrement())
-  icon    String
-  name    String
-  type    String
-  parent  Int
-  content String? @db.Text
+enum NodeType {
+  FILE
+  FOLDER
 }
 
-model technologies {
+model SystemNode {
+  id       Int          @id @default(autoincrement())
+  icon     String
+  name     String
+  type     NodeType     @default(FILE)
+  parentId Int
+  content  String?      @db.Text
+  parent   SystemNode?  @relation("ParentChild", fields: [parentId], references: [id])
+  children SystemNode[] @relation("ParentChild")
+}
+
+model Technology {
   id         Int    @id @default(autoincrement())
   name       String
   icon       String

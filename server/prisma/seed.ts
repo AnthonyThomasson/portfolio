@@ -1,14 +1,17 @@
 import { PrismaClient } from '@prisma/client'
+import { seedNodes } from './nodes'
+import { seedTechnologies } from './technologies'
 
 const prisma = new PrismaClient()
 
 async function main() {
-    console.log(`Pretending to seeds ...`)
-    // for (const node of nodes) {
-    //     await prisma.system_nodes.create({
-    //         data: node,
-    //     })
-    // }
+    console.log('Seeding technologies...')
+    const resTechnologies = await seedTechnologies(prisma)
+    console.log('Complete (technologies):', resTechnologies.count)
+    console.log('Seeding nodes...')
+    const resNodes = await seedNodes(prisma)
+    console.log('Complete (nodes):', resNodes.count)
+    console.log('Seeding complete.')
 }
 
 main()
