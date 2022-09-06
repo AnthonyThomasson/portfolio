@@ -1,3 +1,4 @@
+import { PrismaClient } from '@prisma/client'
 import dotenv from 'dotenv'
 import express, { Express, Request, Response } from 'express'
 import path from 'path'
@@ -7,6 +8,7 @@ dotenv.config()
 const app: Express = express()
 const port = process.env.PORT ?? 3000
 
+const prisma = new PrismaClient()
 const client = new Client({
     connectionString: process.env.DATABASE_URL,
     ssl:
@@ -23,20 +25,21 @@ client.connect(function (err: Error) {
 })
 
 app.get('/api/files', async (req: Request, res: Response) => {
-    const response = await client.query('SELECT * FROM system_nodes')
-    res.send(response.rows)
+    const files = prisma.systemNode.findMany({})
+    res.send(files)
 })
 
 app.get('/api/files/:id', async (req: Request, res: Response) => {
-    const response = await client.query(
-        'SELECT * FROM system_nodes WHERE id = $1',
-        [req.params.id]
-    )
-    res.send(response.rows[0])
+    const file = await prisma.systemNode.findUnique({
+        where: {
+            id: Number(req.params.id),
+        },
+    })
+    res.send(file)
 })
 
 app.get('/api/technologies', async (req: Request, res: Response) => {
-    const response = await client.query('SELECT * FROM technologies')
+    const response = await client.query('SELECT * FROM "Technology"')
     res.send(response.rows)
 })
 

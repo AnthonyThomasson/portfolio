@@ -6,11 +6,9 @@ const prisma = new PrismaClient()
 
 async function main() {
     console.log('Seeding technologies...')
-    const resTechnologies = await seedTechnologies(prisma)
-    console.log('Complete (technologies):', resTechnologies.count)
+    await seedTechnologies(prisma)
     console.log('Seeding nodes...')
-    const resNodes = await seedNodes(prisma)
-    console.log('Complete (nodes):', resNodes.count)
+    await seedNodes(prisma)
     console.log('Seeding complete.')
 }
 

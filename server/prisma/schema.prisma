@@ -20,9 +20,9 @@ model SystemNode {
   icon     String
   name     String
   type     NodeType     @default(FILE)
-  parentId Int
+  parentId Int?
   content  String?      @db.Text
-  parent   SystemNode?  @relation("ParentChild", fields: [parentId], references: [id])
+  parent   SystemNode?  @relation("ParentChild", fields: [parentId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   children SystemNode[] @relation("ParentChild")
 }
 

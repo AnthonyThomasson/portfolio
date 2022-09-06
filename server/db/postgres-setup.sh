@@ -6,6 +6,7 @@ done
   
 >&2 echo "Postgres is up - seeding database"
 yarn prisma generate
-yarn prisma migrate reset --force
+yarn prisma migrate deploy
+yarn prisma db seed
 >&2 echo "Database seeded - starting the app"
 exec "$@"

@@ -7,7 +7,7 @@ CREATE TABLE "SystemNode" (
     "icon" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "type" "NodeType" NOT NULL DEFAULT 'FILE',
-    "parentId" INTEGER NOT NULL,
+    "parentId" INTEGER,
     "content" TEXT,
 
     CONSTRAINT "SystemNode_pkey" PRIMARY KEY ("id")
@@ -24,4 +24,4 @@ CREATE TABLE "Technology" (
 );
 
 -- AddForeignKey
-ALTER TABLE "SystemNode" ADD CONSTRAINT "SystemNode_parentId_fkey" FOREIGN KEY ("parentId") REFERENCES "SystemNode"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "SystemNode" ADD CONSTRAINT "SystemNode_parentId_fkey" FOREIGN KEY ("parentId") REFERENCES "SystemNode"("id") ON DELETE CASCADE ON UPDATE CASCADE;
