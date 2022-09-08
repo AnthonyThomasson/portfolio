@@ -2,30 +2,15 @@ import { PrismaClient } from '@prisma/client'
 import dotenv from 'dotenv'
 import express, { Express, Request, Response } from 'express'
 import path from 'path'
-import { Client } from 'pg'
 
 dotenv.config()
 const app: Express = express()
 const port = process.env.PORT ?? 3000
 
 const prisma = new PrismaClient()
-const client = new Client({
-    connectionString: process.env.DATABASE_URL,
-    ssl:
-        process.env.ENVIRONMENT === 'development'
-            ? false
-            : {
-                  rejectUnauthorized: false,
-              },
-})
-
-client.connect(function (err: Error) {
-    if (err) throw err
-    console.log('Connected to Postgres!')
-})
 
 app.get('/api/files', async (req: Request, res: Response) => {
-    const files = prisma.systemNode.findMany({})
+    const files = await prisma.systemNode.findMany()
     res.send(files)
 })
 
@@ -39,8 +24,8 @@ app.get('/api/files/:id', async (req: Request, res: Response) => {
 })
 
 app.get('/api/technologies', async (req: Request, res: Response) => {
-    const response = await client.query('SELECT * FROM "Technology"')
-    res.send(response.rows)
+    const technologies = await prisma.technology.findMany()
+    res.send(technologies)
 })
 
 app.use(express.static(path.join(__dirname, 'public')))

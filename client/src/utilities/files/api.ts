@@ -1,29 +1,29 @@
-import axios from 'axios'
+import axios from "axios";
 
 export enum NodeType {
-  Folder = 'folder',
-  File = 'file'
+  Folder = "folder",
+  File = "file",
 }
 export interface ISystemNode {
-  id: number
-  icon: string
-  name: string
-  parent: number
-  type: string
+  id: number;
+  icon: string;
+  name: string;
+  parent: number;
+  type: string;
 }
 export interface IFolderNode extends ISystemNode {
-  children: ISystemNode[]
-  open: boolean
+  children: ISystemNode[];
+  open: boolean;
 }
 export interface IFileNode extends ISystemNode {
-  selected: boolean
-  content: string
+  selected: boolean;
+  content: string;
 }
 
 export function fetchSystemNodes() {
-  return axios.get('/api/files')
+  return axios.get("api/files");
 }
 
 export function fetchSystemNode(fileId: number) {
-  return axios.get(`/api/files/${fileId}`)
+  return axios.get(`api/files/${fileId}`);
 }
