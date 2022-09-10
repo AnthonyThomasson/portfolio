@@ -36,7 +36,6 @@ export function removeSelection(
 
 export async function getSystemNodes(): Promise<ISystemNode[]> {
     const response = await fetchSystemNodes()
-    console.log('DATA::: ', response.data)
 
     const files: ISystemNode[] = []
     response.data.forEach((node: ISystemNode) => {
@@ -50,7 +49,6 @@ export async function getSystemNodes(): Promise<ISystemNode[]> {
             file.selected = false
         }
     })
-    console.log('Files', files)
     return files
 }
 

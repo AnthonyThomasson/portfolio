@@ -49,7 +49,7 @@ function Editor(props: { unknownPath?: boolean }): JSX.Element {
         ) : (
             <Home />
         )
-    console.log(selectedHistory)
+
     return (
         <div className="editor">
             <Tabs
