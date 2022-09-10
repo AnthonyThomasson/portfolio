@@ -1,29 +1,29 @@
 .login-content {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .login-content input {
-  background-color: #1b1e23;
-  color: #d8d8d8;
-  padding: 5px;
-  flex: 1;
-  margin-left: 20px;
-  margin-right: 20px;
-  margin-bottom: 10px;
+    background-color: #1b1e23;
+    color: #d8d8d8;
+    padding: 5px;
+    flex: 1;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 10px;
 }
 
 .login-content button {
-  background-color: #5285dd;
-  color: #d8d8d8;
-  padding: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  margin-left: 20px;
-  margin-right: 20px;
-  cursor: pointer;
+    background-color: #5285dd;
+    color: #d8d8d8;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    cursor: pointer;
 }
 
 .login-content button:hover {
-  background-color: #8ba9de;
+    background-color: #8ba9de;
 }

@@ -5,7 +5,7 @@ export async function seedNodes(client: PrismaClient) {
         data: {
             name: 'me',
             icon: 'folder-icon',
-            type: NodeType.FILE,
+            type: NodeType.FOLDER,
             content: '',
             children: {
                 createMany: {
@@ -13,7 +13,7 @@ export async function seedNodes(client: PrismaClient) {
                         {
                             name: 'about.md',
                             icon: 'react-file-icon',
-                            type: NodeType.FILE,
+                            type: NodeType.FOLDER,
                             content: '# Example Content',
                         },
                     ],
@@ -32,7 +32,7 @@ export async function seedNodes(client: PrismaClient) {
                     {
                         name: 'portfolio',
                         icon: 'folder-icon',
-                        type: NodeType.FILE,
+                        type: NodeType.FOLDER,
                         content: '',
                         children: {
                             createMany: {

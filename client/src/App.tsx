@@ -6,18 +6,18 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Main from './components/Main'
 
 function App() {
-  return (
-    <Router>
-      <div className="app">
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/file/:fileId" element={<Main />} />
-          <Route path="*" element={<Main unknownPath />} />
-        </Routes>
-        <Footer />
-      </div>
-    </Router>
-  )
+    return (
+        <Router>
+            <div className="app">
+                <Routes>
+                    <Route path="/" element={<Main />} />
+                    <Route path="/file/:fileId" element={<Main />} />
+                    <Route path="*" element={<Main unknownPath />} />
+                </Routes>
+                <Footer />
+            </div>
+        </Router>
+    )
 }
 
 export default App
