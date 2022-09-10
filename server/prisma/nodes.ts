@@ -12,8 +12,8 @@ export async function seedNodes(client: PrismaClient) {
                     data: [
                         {
                             name: 'about.md',
-                            icon: 'react-file-icon',
-                            type: NodeType.FOLDER,
+                            icon: 'file-react-icon',
+                            type: NodeType.FILE,
                             content: '# Example Content',
                         },
                     ],
@@ -39,13 +39,13 @@ export async function seedNodes(client: PrismaClient) {
                                 data: [
                                     {
                                         name: 'main.md',
-                                        icon: 'react-file-icon',
+                                        icon: 'file-react-icon',
                                         type: NodeType.FILE,
                                         content: '# main content',
                                     },
                                     {
                                         name: 'technologies.md',
-                                        icon: 'react-file-icon',
+                                        icon: 'file-react-icon',
                                         type: NodeType.FILE,
                                         content: '# technologies content',
                                     },

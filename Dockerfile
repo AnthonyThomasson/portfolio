@@ -1,8 +1,8 @@
 FROM node:latest as server-build
-COPY server/tsconfig.json build/
-COPY server/package.json server/yarn.lock server/.yarnrc.yml server/.yarnrc build/
-COPY server/.yarn build/.yarn
+COPY server/tsconfig.json server/package.json server/yarn.lock server/.yarnrc.yml server/.yarnrc build/
 COPY server/src build/src
+COPY server/.yarn build/.yarn
+COPY server/prisma build/prisma
 WORKDIR /build
 RUN yarn && yarn build
 
@@ -14,15 +14,15 @@ RUN yarn && yarn build
 
 FROM node:alpine
 
-COPY --from=server-build ./build/dist/src/* ./app/
-COPY --from=server-build ./build/node_modules ./app/node_modules
-COPY --from=client-build ./build/dist  ./app/public
+COPY --from=server-build build/  app/
+COPY --from=client-build build/dist  app/dist/src/public
+COPY --from=client-build build/dist  app/dist/src/public
 
 RUN apk --update add postgresql-client
-COPY ./db/postgres-setup.sh ./app/db/postgres-setup.sh
-COPY ./db/seeds ./app/db/seeds
-RUN chmod +x ./app/db/postgres-setup.sh
+COPY deployments/wait-for-postgres.sh app
+RUN chmod +x app/wait-for-postgres.sh
 
 EXPOSE $PORT
 
-ENTRYPOINT ["./app/db/postgres-setup.sh", "node","./app/index.js" ]
+WORKDIR /app
+ENTRYPOINT ["./wait-for-postgres.sh", "yarn", "start" ]
