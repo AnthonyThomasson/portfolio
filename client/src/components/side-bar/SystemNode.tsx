@@ -6,14 +6,14 @@ import {
 } from '../../utilities/files/api'
 import FileTree from './FileTree'
 
-type Props = {
+interface Props {
     node: ISystemNode
     depth: number
     onFolderSelected: OnFolderSelected
     onFileSelected: OnFileSelected
 }
 
-function file(props: Props) {
+function file(props: Props): JSX.Element {
     const node = props.node as IFileNode
 
     const filePadding = props.depth * 17 + 20
@@ -22,7 +22,7 @@ function file(props: Props) {
         <div className="system-node">
             <div
                 className={`system-node-name ${
-                    node.selected === true ? 'system-node-name-selected' : ''
+                    node.selected ? 'system-node-name-selected' : ''
                 }`}
                 style={{
                     paddingLeft: `${filePadding}px`,
@@ -36,7 +36,7 @@ function file(props: Props) {
     )
 }
 
-function folder(props: Props) {
+function folder(props: Props): JSX.Element {
     const node = props.node as IFolderNode
 
     const folderPadding = props.depth * 9 + 20
@@ -44,8 +44,8 @@ function folder(props: Props) {
 
     const hasSelectedChild: boolean = node.children.some((child) => {
         if (child.type === NodeType.File) {
-            let file = child as IFileNode
-            if (file.selected === true) {
+            const file = child as IFileNode
+            if (file.selected) {
                 return true
             }
         }
@@ -56,12 +56,10 @@ function folder(props: Props) {
         <div className="system-node">
             <div
                 className={`folder-guide ${
-                    hasSelectedChild === true
-                        ? 'folder-guide-contains-selected'
-                        : ''
+                    hasSelectedChild ? 'folder-guide-contains-selected' : ''
                 }`}
                 style={
-                    node.open === false
+                    !node.open
                         ? { display: 'none ' }
                         : {
                               left: `${folderGuideLeftPosition}px`,
@@ -83,12 +81,12 @@ function folder(props: Props) {
                     ></span>
                     <span
                         className={`${node.icon}${
-                            node.open === true ? '-open' : '-closed'
+                            node.open ? '-open' : '-closed'
                         }`}
                     ></span>
                     <span className="folder-name">{node.name}</span>
                 </div>
-                {node.open === true ? (
+                {node.open ? (
                     <FileTree
                         structure={node.children}
                         depth={props.depth + 1}
@@ -108,7 +106,7 @@ function SystemNode(props: {
     depth: number
     onFolderSelected: OnFolderSelected
     onFileSelected: OnFileSelected
-}) {
+}): JSX.Element {
     if (props.node.type === NodeType.Folder) {
         return folder(props)
     }

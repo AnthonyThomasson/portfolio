@@ -5,12 +5,12 @@ function Tabs(props: {
     onTabSelected: OnTabSelected
     selectedFileId?: number
     tabs?: { [id: number]: IFileNode }
-}) {
+}): JSX.Element {
     const selectedFileId = props.selectedFileId ?? 0
     const tabs = props.tabs ?? []
 
     const tabsHTML = Object.entries(tabs).map((tab) => {
-        let file = tab[1] as IFileNode
+        const file = tab[1]
 
         return (
             <li

@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 
 export enum NodeType {
     Folder = 'FOLDER',
@@ -20,10 +20,10 @@ export interface IFileNode extends ISystemNode {
     content: string
 }
 
-export function fetchSystemNodes() {
-    return axios.get('api/files')
+export async function fetchSystemNodes(): Promise<AxiosResponse> {
+    return await axios.get('api/files')
 }
 
-export function fetchSystemNode(fileId: number) {
-    return axios.get(`api/files/${fileId}`)
+export async function fetchSystemNode(fileId: number): Promise<AxiosResponse> {
+    return await axios.get(`api/files/${fileId}`)
 }

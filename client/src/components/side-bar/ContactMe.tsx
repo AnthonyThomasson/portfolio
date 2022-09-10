@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import './../../styles/ContactMe.css'
 
-function ContactMe() {
+function ContactMe(): JSX.Element {
     const emailInput = useRef(null)
     const messageInput = useRef(null)
 

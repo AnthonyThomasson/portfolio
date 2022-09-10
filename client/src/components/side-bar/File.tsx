@@ -1,4 +1,4 @@
-function File() {
+function File(): JSX.Element {
     return (
         <div className="file">
             <span className="file-icon"></span>

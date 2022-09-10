@@ -13,7 +13,7 @@ import './../../styles/FileExplorer.css'
 import './../../styles/SystemNodeIcons.css'
 import FileTree from './FileTree'
 
-function FileExplorer() {
+function FileExplorer(): JSX.Element {
     const navigate = useNavigate()
     const params = useParams()
 
@@ -27,14 +27,14 @@ function FileExplorer() {
 
     useEffect(() => {
         if (params.fileId !== undefined && +params.fileId > 0) {
-            let newSystemNodes = findAndSelect(
+            const newSystemNodes = findAndSelect(
                 systemNodes,
                 structure,
                 +params.fileId
             )
             setSystemNodes(newSystemNodes)
         } else {
-            let [newNodes] = removeSelection(systemNodes, structure)
+            const [newNodes] = removeSelection(systemNodes, structure)
             setSystemNodes(newNodes)
         }
     }, [params.fileId])
@@ -44,7 +44,7 @@ function FileExplorer() {
             .then((systemNodes: any) => {
                 if (params.fileId !== undefined && +params.fileId > 0) {
                     const structure = getFileStructures(systemNodes)
-                    let newSystemNodes = findAndSelect(
+                    const newSystemNodes = findAndSelect(
                         systemNodes,
                         structure,
                         +params.fileId
@@ -59,23 +59,23 @@ function FileExplorer() {
             })
     }
 
-    const onFolderSelected = (folderId: number) => {
-        let newSystemNodes = systemNodes.slice()
-        let selectedNode = newSystemNodes[folderId] as IFolderNode
+    const onFolderSelected = (folderId: number): void => {
+        const newSystemNodes = systemNodes.slice()
+        const selectedNode = newSystemNodes[folderId] as IFolderNode
         selectedNode.open = !selectedNode.open
         setSystemNodes(newSystemNodes)
     }
 
-    const onFileSelected = (fileId: number) => {
+    const onFileSelected = (fileId: number): void => {
         navigate(`/file/${fileId}`)
     }
 
-    const onExpandAll = () => {
+    const onExpandAll = (): void => {
         const [expandedNodes] = expandFolders(systemNodes, structure)
         setSystemNodes(expandedNodes)
     }
 
-    const onCollapseAll = () => {
+    const onCollapseAll = (): void => {
         const [collapsedFolders] = collapseFolders(systemNodes, structure)
         setSystemNodes(collapsedFolders)
     }
@@ -90,9 +90,7 @@ function FileExplorer() {
                     >
                         <span
                             className={`chevron fa-solid ${
-                                isOpen === true
-                                    ? 'fa-chevron-down'
-                                    : 'fa-chevron-right'
+                                isOpen ? 'fa-chevron-down' : 'fa-chevron-right'
                             }`}
                         ></span>
                         PORTFOLIO
@@ -121,7 +119,7 @@ function FileExplorer() {
                 </div>
                 <div
                     className={`file-explorer-content ${
-                        isOpen === true ? 'file-explorer-content-active' : ''
+                        isOpen ? 'file-explorer-content-active' : ''
                     }`}
                 >
                     <FileTree

@@ -3,7 +3,7 @@ import { Technology } from '../../utilities/technologies/api'
 import { getTechnologies } from '../../utilities/technologies/utilities'
 import './../../styles/Technologies.css'
 
-function Technologies() {
+function Technologies(): JSX.Element {
     const searchInput = useRef(null)
     const [technologies, setTechnologies] = useState<Technology[]>([])
     const [technologyResults, setTechnologyResults] =
@@ -20,7 +20,7 @@ function Technologies() {
             })
     }
 
-    const onSearch = (searchTerm: string) => {
+    const onSearch = (searchTerm: string): void => {
         if (searchTerm === '') {
             setTechnologyResults(technologies)
         } else {

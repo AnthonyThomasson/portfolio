@@ -4,7 +4,7 @@ import { IFileNode, NodeType } from '../../utilities/files/api'
 import { getSystemNodes } from '../../utilities/files/utilities'
 import './../../styles/Search.css'
 
-function Search() {
+function Search(): JSX.Element {
     const navigate = useNavigate()
     const [systemNodes, setSystemNodes] = useState<IFileNode[]>([])
     const [searchResults, setSearchResults] = useState<IFileNode[]>([])
@@ -21,7 +21,7 @@ function Search() {
             })
     }
 
-    const onSearch = (searchTerm: string) => {
+    const onSearch = (searchTerm: string): void => {
         if (searchTerm === '') {
             setSearchResults([])
         } else {
@@ -36,11 +36,11 @@ function Search() {
         }
     }
 
-    const onSelection = (id: number) => {
+    const onSelection = (id: number): void => {
         if (searchBarContent.current === null) {
             return
         }
-        let searchInput = searchBarContent.current as HTMLInputElement
+        const searchInput = searchBarContent.current as HTMLInputElement
         searchInput.value = ''
         onSearch('')
         navigate(`/file/${id}`)

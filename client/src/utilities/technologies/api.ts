@@ -1,11 +1,11 @@
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 
-export type Technology = {
+export interface Technology {
     name: string
     icon: string
     experience: string
 }
 
-export function fetchTechnologies() {
-    return axios.get('/api/technologies')
+export async function fetchTechnologies(): Promise<AxiosResponse> {
+    return await axios.get('/api/technologies')
 }

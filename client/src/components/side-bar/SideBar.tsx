@@ -6,7 +6,7 @@ import Modules, { SIDEBAR_PAGE } from './Modules'
 import Search from './Search'
 import Technologies from './Technologies'
 
-function Explorer() {
+function Explorer(): JSX.Element {
     const [activeContent, setActiveContent] = useState(
         SIDEBAR_PAGE.FILE_EXPLORER
     )

@@ -1,6 +1,6 @@
-import { fetchTechnologies } from './api'
+import { fetchTechnologies, Technology } from './api'
 
-export async function getTechnologies() {
+export async function getTechnologies(): Promise<Technology[]> {
     const response = await fetchTechnologies()
-    return response.data
+    return response.data as Technology[]
 }

@@ -1,4 +1,4 @@
-function FourOhFour() {
+function FourOhFour(): JSX.Element {
     return (
         <div className="404">
             <h1>This is the 404 page content</h1>

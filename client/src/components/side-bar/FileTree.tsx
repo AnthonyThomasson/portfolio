@@ -6,7 +6,7 @@ function FileTree(props: {
     onFolderSelected: OnFolderSelected
     onFileSelected: OnFileSelected
     depth?: number
-}) {
+}): JSX.Element {
     const rootNodeItems = props.structure.map((node: ISystemNode) => (
         <li key={node.id}>
             <SystemNode

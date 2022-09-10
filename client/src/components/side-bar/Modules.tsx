@@ -10,7 +10,7 @@ export enum SIDEBAR_PAGE {
 function Modules(props: {
     activeButton: string
     onModuleClick: (moduleName: SIDEBAR_PAGE) => void
-}) {
+}): JSX.Element {
     return (
         <div className="modules">
             <div className="top-modules">

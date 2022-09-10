@@ -22,7 +22,7 @@ function Editor(props: { unknownPath?: boolean }): JSX.Element {
                 getSystemNode(fileId)
                     .then((node: ISystemNode) => {
                         if (node.type === NodeType.File) {
-                            let file = node as IFileNode
+                            const file = node as IFileNode
                             setTabs({ ...tabs, [file.id]: file })
                         }
                     })
@@ -56,15 +56,16 @@ function Editor(props: { unknownPath?: boolean }): JSX.Element {
                 tabs={tabs}
                 selectedFileId={fileId}
                 onTabRemove={(id: number) => {
-                    let newTabs = { ...tabs }
+                    const newTabs = { ...tabs }
+                    // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
                     delete newTabs[id]
                     setTabs(newTabs)
                     if (id === fileId && selectedHistory.length > 0) {
-                        let newHistory = selectedHistory.slice()
+                        const newHistory = selectedHistory.slice()
                         const lastFileId = newHistory.pop()
                         setSelectedHistory(newHistory)
                         setSelectedTabId(0)
-                        navigator(`/file/${lastFileId}`)
+                        navigator(`/file/${lastFileId ?? ''}`)
                     } else {
                         navigator(`/`)
                     }

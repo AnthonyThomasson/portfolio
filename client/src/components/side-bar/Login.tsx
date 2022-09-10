@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import './../../styles/Login.css'
 
-function Search() {
+function Search(): JSX.Element {
     const usernameInput = useRef(null)
     const passwordInput = useRef(null)
 
