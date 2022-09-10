@@ -7,9 +7,9 @@ import Home from './Home'
 import SelectedFile from './SelectedFile'
 import Tabs from './Tabs'
 
-function Editor(props: { unknownPath?: boolean }) {
-    let navigator = useNavigate()
-    let params = useParams()
+function Editor(props: { unknownPath?: boolean }): JSX.Element {
+    const navigator = useNavigate()
+    const params = useParams()
     const fileId = params.fileId !== undefined ? +params.fileId : 0
 
     const [tabs, setTabs] = useState<{ [id: number]: IFileNode }>({})
@@ -19,12 +19,16 @@ function Editor(props: { unknownPath?: boolean }) {
     useEffect(() => {
         if (fileId > 0) {
             if (tabs[fileId] === undefined) {
-                getSystemNode(fileId).then((node: ISystemNode) => {
-                    if (node.type === NodeType.File) {
-                        let file = node as IFileNode
-                        setTabs({ ...tabs, [file.id]: file })
-                    }
-                })
+                getSystemNode(fileId)
+                    .then((node: ISystemNode) => {
+                        if (node.type === NodeType.File) {
+                            let file = node as IFileNode
+                            setTabs({ ...tabs, [file.id]: file })
+                        }
+                    })
+                    .catch((e) => {
+                        console.error(e)
+                    })
             }
         }
         if (selectedTabId > 0) {

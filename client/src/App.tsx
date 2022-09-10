@@ -1,11 +1,10 @@
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Footer from './components/footer/Footer'
+import Main from './components/Main'
 import './styles/App.css'
 import './styles/ModuleIcons.css'
 
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Main from './components/Main'
-
-function App() {
+function App(): JSX.Element {
     return (
         <Router>
             <div className="app">
