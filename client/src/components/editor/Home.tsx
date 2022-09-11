@@ -18,7 +18,9 @@ function Home(): JSX.Element {
                     </li>
                     <li>
                         <span className="fa-solid fa-envelope" />
-                        athomasson.93@gmail.com
+                        <a href="mailto:athomasson.93@gmail.com">
+                            athomasson.93@gmail.com
+                        </a>
                     </li>
                     <li>
                         <span className="fa-brands fa-linkedin" />
