@@ -22,7 +22,7 @@ function Home(): JSX.Element {
                     </li>
                     <li>
                         <span className="fa-brands fa-linkedin" />
-                        <a href="https://linkedin.com/in/anthony-thomasson">
+                        <a href="https://linkedin.com/in/anthony-thomasson-a461606a">
                             LinkedIn
                         </a>
                     </li>
