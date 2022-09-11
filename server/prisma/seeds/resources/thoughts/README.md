@@ -1,0 +1,3 @@
+# Thoughts
+
+Blog style content

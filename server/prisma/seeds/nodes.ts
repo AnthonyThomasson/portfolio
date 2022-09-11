@@ -15,16 +15,37 @@ export async function seedNodes(client: PrismaClient) {
                 createMany: {
                     data: [
                         {
-                            name: 'about.md',
+                            name: 'README.md',
                             icon: 'file-react-icon',
                             type: NodeType.FILE,
                             content: readFileSync(
-                                resourcesPath + 'about.md',
+                                resourcesPath + 'me/README.md',
                                 'utf8'
                             ),
                         },
                     ],
                 },
+            },
+        },
+    })
+    await client.systemNode.create({
+        data: {
+            name: 'thoughts',
+            icon: 'folder-icon',
+            type: NodeType.FOLDER,
+            content: '',
+            children: {
+                create: [
+                    {
+                        name: 'README.md',
+                        icon: 'file-react-icon',
+                        type: NodeType.FILE,
+                        content: readFileSync(
+                            resourcesPath + 'thoughts/README.md',
+                            'utf8'
+                        ),
+                    },
+                ],
             },
         },
     })
@@ -45,11 +66,12 @@ export async function seedNodes(client: PrismaClient) {
                             createMany: {
                                 data: [
                                     {
-                                        name: 'main.md',
+                                        name: 'README.md',
                                         icon: 'file-react-icon',
                                         type: NodeType.FILE,
                                         content: readFileSync(
-                                            resourcesPath + 'main.md',
+                                            resourcesPath +
+                                                'projects/portfolio/README.md',
                                             'utf8'
                                         ),
                                     },
@@ -58,7 +80,18 @@ export async function seedNodes(client: PrismaClient) {
                                         icon: 'file-react-icon',
                                         type: NodeType.FILE,
                                         content: readFileSync(
-                                            resourcesPath + 'technologies.md',
+                                            resourcesPath +
+                                                'projects/portfolio/technologies.md',
+                                            'utf8'
+                                        ),
+                                    },
+                                    {
+                                        name: 'future.md',
+                                        icon: 'file-react-icon',
+                                        type: NodeType.FILE,
+                                        content: readFileSync(
+                                            resourcesPath +
+                                                'projects/portfolio/future.md',
                                             'utf8'
                                         ),
                                     },
