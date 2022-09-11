@@ -5,7 +5,7 @@ import { seedTechnologies } from './technologies'
 const prisma = new PrismaClient()
 
 async function main() {
-    console.log('Seeding technologies...')
+    console.log('Seeding technologies..')
     await seedTechnologies(prisma)
     console.log('Seeding nodes...')
     await seedNodes(prisma)

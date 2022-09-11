@@ -58,9 +58,9 @@ const technologies = [
     },
 ]
 
-export function seedTechnologies(client: PrismaClient) {
-    client.technology.deleteMany()
-    return client.technology.createMany({
+export async function seedTechnologies(client: PrismaClient) {
+    await client.technology.deleteMany()
+    return await client.technology.createMany({
         data: technologies,
     })
 }

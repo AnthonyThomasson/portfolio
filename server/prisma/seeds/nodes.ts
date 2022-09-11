@@ -1,6 +1,10 @@
 import { NodeType, PrismaClient } from '@prisma/client'
+import { readFileSync } from 'fs'
+
+const resourcesPath = __dirname + '/../../../prisma/seeds/resources/'
+
 export async function seedNodes(client: PrismaClient) {
-    client.systemNode.deleteMany()
+    await client.systemNode.deleteMany()
     await client.systemNode.create({
         data: {
             name: 'me',
@@ -14,7 +18,10 @@ export async function seedNodes(client: PrismaClient) {
                             name: 'about.md',
                             icon: 'file-react-icon',
                             type: NodeType.FILE,
-                            content: '# Example Content',
+                            content: readFileSync(
+                                resourcesPath + 'about.md',
+                                'utf8'
+                            ),
                         },
                     ],
                 },
@@ -41,13 +48,19 @@ export async function seedNodes(client: PrismaClient) {
                                         name: 'main.md',
                                         icon: 'file-react-icon',
                                         type: NodeType.FILE,
-                                        content: '# main content',
+                                        content: readFileSync(
+                                            resourcesPath + 'main.md',
+                                            'utf8'
+                                        ),
                                     },
                                     {
                                         name: 'technologies.md',
                                         icon: 'file-react-icon',
                                         type: NodeType.FILE,
-                                        content: '# technologies content',
+                                        content: readFileSync(
+                                            resourcesPath + 'technologies.md',
+                                            'utf8'
+                                        ),
                                     },
                                 ],
                             },

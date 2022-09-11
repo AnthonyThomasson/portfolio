@@ -4,7 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "build": "yarn tsc && yarn prisma generate",
+        "build": "rm -rf dist && yarn tsc && yarn prisma generate",
         "reset-db": "yarn prisma migrate reset --force",
         "start": "yarn reset-db && node dist/src/index.js",
         "dev": "yarn reset-db && concurrently \"yarn tsc --watch\" \"nodemon -q dist/src/index.js\"",
@@ -13,7 +13,7 @@
         "format": "prettier --write . '!./.yarn/**/*' '!./db/**/*' '!./dist/**/*'"
     },
     "prisma": {
-        "seed": "node dist/prisma/seed.js"
+        "seed": "node dist/prisma/seeds/seed.js"
     },
     "author": "Anthony Thomasson",
     "license": "ISC",

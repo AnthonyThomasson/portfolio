@@ -16,6 +16,7 @@ services:
       ENVIRONMENT: "development"
     volumes:
       - $PWD/server/src:/app/src
+      - $PWD/server/prisma:/app/prisma
       - $PWD/client/dist:/app/dist/src/public
   db:
     image: "postgres"
