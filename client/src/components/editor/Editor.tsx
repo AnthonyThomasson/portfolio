@@ -60,15 +60,6 @@ function Editor(props: { unknownPath?: boolean }): JSX.Element {
                     // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
                     delete newTabs[id]
                     setTabs(newTabs)
-                    if (id === fileId && selectedHistory.length > 0) {
-                        const newHistory = selectedHistory.slice()
-                        const lastFileId = newHistory.pop()
-                        setSelectedHistory(newHistory)
-                        setSelectedTabId(0)
-                        navigator(`/file/${lastFileId ?? ''}`)
-                    } else {
-                        navigator(`/`)
-                    }
                 }}
                 onTabSelected={(id: number) => {
                     navigator(`/file/${id}`)
