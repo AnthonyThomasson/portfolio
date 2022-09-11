@@ -4,7 +4,6 @@ import FileExplorer from './FileExplorer'
 import Login from './Login'
 import Modules, { SIDEBAR_PAGE } from './Modules'
 import Search from './Search'
-import Technologies from './Technologies'
 
 function Explorer(): JSX.Element {
     const [activeContent, setActiveContent] = useState(
@@ -55,8 +54,8 @@ function Explorer(): JSX.Element {
                             : ``
                     }`}
                 >
-                    <div className="side-bar-heading">TECHNOLOGIES</div>
-                    <Technologies />
+                    <div className="side-bar-heading">CONTACT ME</div>
+                    <ContactMe />
                 </li>
                 <li
                     className={`side-bar-item ${
