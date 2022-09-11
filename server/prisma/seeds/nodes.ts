@@ -28,27 +28,27 @@ export async function seedNodes(client: PrismaClient) {
             },
         },
     })
-    await client.systemNode.create({
-        data: {
-            name: 'thoughts',
-            icon: 'folder-icon',
-            type: NodeType.FOLDER,
-            content: '',
-            children: {
-                create: [
-                    {
-                        name: 'README.md',
-                        icon: 'file-react-icon',
-                        type: NodeType.FILE,
-                        content: readFileSync(
-                            resourcesPath + 'thoughts/README.md',
-                            'utf8'
-                        ),
-                    },
-                ],
-            },
-        },
-    })
+    // await client.systemNode.create({
+    //     data: {
+    //         name: 'thoughts',
+    //         icon: 'folder-icon',
+    //         type: NodeType.FOLDER,
+    //         content: '',
+    //         children: {
+    //             create: [
+    //                 {
+    //                     name: 'README.md',
+    //                     icon: 'file-react-icon',
+    //                     type: NodeType.FILE,
+    //                     content: readFileSync(
+    //                         resourcesPath + 'thoughts/README.md',
+    //                         'utf8'
+    //                     ),
+    //                 },
+    //             ],
+    //         },
+    //     },
+    // })
     await client.systemNode.create({
         data: {
             name: 'projects',

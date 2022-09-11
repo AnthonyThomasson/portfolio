@@ -1,3 +1,5 @@
+[HOME](/)
+
 # The Future
 
 ## Features

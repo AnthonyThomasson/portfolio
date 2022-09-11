@@ -1,0 +1,147 @@
+.home {
+    display: flex;
+    flex-direction: column;
+}
+
+.home h3 {
+    font-size: 1em;
+}
+
+.home h4 {
+    font-size: 0.8em;
+    margin-bottom: 10px;
+}
+
+.home h3,
+.home h4 {
+    margin-top: 0;
+    letter-spacing: 0.3em;
+    color: #cccccc;
+}
+
+.name-section {
+    padding: 50px 50px 0 50px;
+}
+
+.name-section .first-name {
+    font-size: 2.5em;
+    font-weight: normal;
+    letter-spacing: 0.3em;
+    color: #0a83cfec;
+}
+
+.name-section .last-name {
+    padding-left: 8px;
+    font-size: 1em;
+    font-weight: light;
+    letter-spacing: 0.5em;
+    color: #cccccc;
+}
+
+.title-section {
+    padding: 0px 0px 10px 50px;
+    margin-right: 50px;
+    text-align: right;
+    border-bottom: 3px solid #21252a;
+}
+
+.summary-section {
+    display: flex;
+    margin: 50px 50px 0 50px;
+    padding-bottom: 50px;
+    border-bottom: 3px solid #21252a;
+}
+
+.summary {
+    border-left: 3px solid #21252a;
+    padding-left: 50px;
+}
+
+.links {
+    font-size: small;
+    width: 360px;
+    padding: 10px 0px;
+}
+
+.links li {
+    margin-bottom: 10px;
+}
+
+.links span {
+    font-size: large;
+    margin-right: 10px;
+}
+
+.main-section {
+    display: flex;
+    margin: 50px 50px 50px 50px;
+    font-size: medium;
+}
+.left-content {
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+    border-right: 3px solid #21252a;
+}
+.education .degree {
+    margin-top: 30px;
+}
+
+.education .degree,
+.experience-heading {
+    font-weight: bold;
+}
+.education .school,
+.education .location,
+.education .year {
+    padding-left: 5px;
+}
+
+.skills,
+.technologies {
+    margin-top: 40px;
+}
+
+.skills ul,
+.technologies ul {
+    margin-left: 10px;
+}
+
+.technologies ul {
+    margin-bottom: 30px;
+}
+
+.skills li,
+.technologies li {
+    font-size: small;
+}
+
+.right-content {
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+}
+
+.experience-heading {
+    margin-top: 30px;
+}
+
+.experience-company {
+    font-weight: bold;
+}
+.experience-body {
+    padding-left: 5px;
+}
+.experience-summary {
+    padding: 5px 0px;
+    font-size: small;
+}
+
+.experience-notes {
+    margin-left: 40px;
+    font-size: small;
+}
+
+.experience-notes li {
+    list-style-type: circle;
+}
