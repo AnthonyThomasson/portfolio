@@ -107,14 +107,15 @@ function Home(): JSX.Element {
                                     </span>
                                     <div className="experience-summary">
                                         Led a team to build a secure and easy to
-                                        use authentication system used by all of
-                                        Helcim&apos;s internal products.
+                                        use authentication and authorization
+                                        service used by all of the platforms
+                                        microservices.
                                     </div>
                                     <ul className="experience-notes">
                                         <li>
                                             Introduced CI/CD pipelines to
                                             automate the development and
-                                            deployment of the service.
+                                            deployment operations.
                                         </li>
                                         <li>
                                             Introduced high risk changes without
@@ -172,16 +173,16 @@ function Home(): JSX.Element {
                                     <ul className="experience-notes">
                                         <li>
                                             Rebuilt the payments platform from
-                                            the ground up into small testable
-                                            microservices.
+                                            the ground up into a series of small
+                                            testable microservices.
                                         </li>
                                         <li>
                                             Mentored and trained a team of
                                             predominantly junior developers.
                                         </li>
                                         <li>
-                                            Worked in a fast paced agile
-                                            environment.
+                                            Worked against fast paced agile
+                                            product requirements.
                                         </li>
                                     </ul>
                                 </div>
@@ -199,7 +200,7 @@ function Home(): JSX.Element {
                                         2016 - 2018
                                     </span>
                                     <div className="experience-summary">
-                                        Worked as a general software developer
+                                        Worked as a general software developer.
                                     </div>
                                     <ul className="experience-notes">
                                         <li>
@@ -213,7 +214,7 @@ function Home(): JSX.Element {
                                         <li>
                                             Built an iOS mobile POS system with
                                             integrations with a variety of
-                                            payment devices.
+                                            different payments devices.
                                         </li>
                                     </ul>
                                 </div>
