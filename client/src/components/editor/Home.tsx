@@ -206,10 +206,6 @@ function Home(): JSX.Element {
                                     </div>
                                     <ul className="experience-notes">
                                         <li>
-                                            Built the companies original
-                                            payments platform.
-                                        </li>
-                                        <li>
                                             Worked with banks to integrate with
                                             multiple payment gateways.
                                         </li>
