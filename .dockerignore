@@ -1,0 +1,11 @@
+heroku.yml
+Makefile
+README.md
+Dockerfile
+
+/server/node_modules/
+/server/dist/
+/client/node_modules/
+/client/dist/
+
+/deployments/build/

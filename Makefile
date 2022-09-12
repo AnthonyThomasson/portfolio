@@ -2,11 +2,11 @@
 .PHONY: server
 
 default:
-	docker compose -f deployments/portfolio-dev/docker-compose.yml up $(args)
-prod:
-	docker compose -f deployments/portfolio-prod/docker-compose.yml up $(args)
-server:
-	docker compose -f deployments/portfolio-dev/docker-compose.yml up $(args)
-client:
+	docker compose -f deployments/compose/portfolio-prod/docker-compose.yml up $(args) 
+dev:
+	docker compose -f deployments/compose/portfolio-dev/docker-compose.yml up $(args)
+client-build:
+	cd client && yarn build
+client-server:
 	cd client && yarn dev
 

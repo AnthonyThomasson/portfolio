@@ -7,9 +7,9 @@
         "dev": "vite",
         "build": "tsc && vite build",
         "build:dev": "tsc && vite build --mode development",
-        "lint": "eslint .",
-        "lint:fix": "eslint --fix .",
-        "format": "prettier --write './src/**/*.{js,jsx,ts,tsx,css,md,json}' './server/**/*.{js,jsx,ts,tsx,css,md,json}' --config .prettierrc"
+        "lint": "yarn eslint .",
+        "lint:fix": "yarn eslint --fix .",
+        "format": "yarn prettier --write './src/**/*.{js,jsx,ts,tsx,css,md,json}' './server/**/*.{js,jsx,ts,tsx,css,md,json}' --config .prettierrc"
     },
     "dependencies": {
         "axios": "^0.27.2",

@@ -1,9 +1,10 @@
 version: "3.9"
 services:
   app:
+    image: potfolio
     build:
       context: $PWD
-      dockerfile: $PWD/deployments/portfolio-dev/Dockerfile
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
     depends_on:
@@ -18,6 +19,8 @@ services:
       - $PWD/server/src:/app/src
       - $PWD/server/prisma:/app/prisma
       - $PWD/client/dist:/app/dist/src/public
+    command: yarn dev
+
   db:
     image: "postgres"
     restart: "always"
@@ -26,7 +29,7 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: portfolio
     volumes:
-      - $PWD/deployments/data:/var/lib/postgresql/data
+      - $PWD/deployments/build/db:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     command: postgres -c stats_temp_directory=/tmp
