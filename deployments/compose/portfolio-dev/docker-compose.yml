@@ -30,7 +30,7 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: portfolio
     volumes:
-      - $PWD/deployments/build/db:/var/lib/postgresql/data
+      - $PWD/deployments/db:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     command: postgres -c stats_temp_directory=/tmp
