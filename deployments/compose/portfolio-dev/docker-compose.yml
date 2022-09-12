@@ -1,7 +1,8 @@
 version: "3.9"
 services:
   app:
-    image: potfolio
+    container_name: portfolio-app
+    image: "portfolio"
     build:
       context: $PWD
       dockerfile: Dockerfile
