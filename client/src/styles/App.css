@@ -26,6 +26,12 @@ a {
     text-decoration: none;
 }
 
+@media only screen and (max-width: 930px) {
+    .side-bar {
+        display: none !important;
+    }
+}
+
 a:hover {
     text-decoration: underline;
 }

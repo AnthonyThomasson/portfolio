@@ -3,6 +3,9 @@ import './../../styles/Home.css'
 function Home(): JSX.Element {
     return (
         <div className="home">
+            <div className="mobile-warning">
+                Hey! This website looks way cooler on desktop. Check it out!
+            </div>
             <div className="download-btn">
                 <span className="fa-solid fa-download" />
                 <a target="_blank" href="files/Anthony-Thomasson-Resume.pdf">
