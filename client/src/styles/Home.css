@@ -159,7 +159,7 @@
 .download-btn {
     display: block;
     text-align: right;
-    position: absolute;
+    position: relative;
     right: 50px;
     top: 90px;
 }
