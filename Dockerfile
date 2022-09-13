@@ -12,6 +12,7 @@ FROM node:alpine
 COPY --from=server build/  app/
 COPY --from=client build/dist  app/dist/src/public
 
+RUN apk --update add postgresql-client
 COPY deployments/scripts/wait-for-postgres.sh app
 RUN chmod +x app/wait-for-postgres.sh
 
