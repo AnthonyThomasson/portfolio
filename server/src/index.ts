@@ -29,6 +29,9 @@ app.get('/api/technologies', async (req: Request, res: Response) => {
 })
 
 app.use(express.static(path.join(__dirname, 'public')))
+app.get('/files/*/:file', function (req, res) {
+    res.sendFile(path.join(__dirname, 'public', 'files', req.params.file))
+})
 app.get('/*', function (req, res) {
     res.sendFile(path.join(__dirname, 'public', 'index.html'))
 })

@@ -3,6 +3,10 @@ import './../../styles/Home.css'
 function Home(): JSX.Element {
     return (
         <div className="home">
+            <div className="download-btn">
+                <span className="fa-solid fa-download" />
+                <a href="files/Anthony-Thomasson-Resume.pdf"> DOWNLOAD</a>
+            </div>
             <div className="name-section">
                 <div className="first-name">ANTHONY</div>
                 <div className="last-name">THOMASSON</div>

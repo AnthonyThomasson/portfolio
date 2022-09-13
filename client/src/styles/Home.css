@@ -155,3 +155,11 @@
 .experience-notes li {
     list-style-type: circle;
 }
+
+.download-btn {
+    display: block;
+    text-align: right;
+    position: absolute;
+    right: 50px;
+    top: 90px;
+}
