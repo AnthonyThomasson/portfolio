@@ -5,7 +5,10 @@ function Home(): JSX.Element {
         <div className="home">
             <div className="download-btn">
                 <span className="fa-solid fa-download" />
-                <a href="files/Anthony-Thomasson-Resume.pdf"> DOWNLOAD</a>
+                <a target="_blank" href="files/Anthony-Thomasson-Resume.pdf">
+                    {' '}
+                    DOWNLOAD
+                </a>
             </div>
             <div className="name-section">
                 <div className="first-name">ANTHONY</div>
