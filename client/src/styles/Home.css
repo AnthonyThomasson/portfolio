@@ -36,14 +36,14 @@
     padding: 50px 50px 0 50px;
 }
 
-.name-section .first-name {
+.name-section .last-name {
     font-size: 2.5em;
     font-weight: normal;
     letter-spacing: 0.3em;
     color: #0a83cfec;
 }
 
-.name-section .last-name {
+.name-section .first-name {
     padding-left: 8px;
     font-size: 1em;
     font-weight: light;

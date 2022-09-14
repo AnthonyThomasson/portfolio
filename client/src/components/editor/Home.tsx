@@ -14,8 +14,8 @@ function Home(): JSX.Element {
                 </a>
             </div>
             <div className="name-section">
-                <div className="first-name">ANTHONY</div>
                 <div className="last-name">THOMASSON</div>
+                <div className="first-name">ANTHONY</div>
             </div>
             <div className="title-section">
                 <h3>FULL STACK DEVELOPER</h3>
@@ -118,10 +118,10 @@ function Home(): JSX.Element {
                                         2021 - Present
                                     </span>
                                     <div className="experience-summary">
-                                        Led a team to build a secure and easy to
-                                        use authentication and authorization
-                                        service used by all of the platforms
-                                        microservices.
+                                        Leading a team to build and maintain a
+                                        secure and easy to use authentication
+                                        and authorization service used by
+                                        microservices across the company.
                                     </div>
                                     <ul className="experience-notes">
                                         <li>
@@ -155,9 +155,16 @@ function Home(): JSX.Element {
                                     </div>
                                     <ul className="experience-notes">
                                         <li>
-                                            Worked with leads helping them to
-                                            develop well contained modular
-                                            services.
+                                            Performed regular meetings with each
+                                            development team discussing
+                                            solutions to architectural concerns
+                                            they were facing.
+                                        </li>
+                                        <li>
+                                            Built producer/consumer libraries
+                                            for Kafka, and worked with teams to
+                                            help them integrate event based
+                                            architecture within their services.
                                         </li>
                                         <li>
                                             Built and maintained a web framework
@@ -179,8 +186,8 @@ function Home(): JSX.Element {
                                         2018 - 2019
                                     </span>
                                     <div className="experience-summary">
-                                        Led a team to build and support payment
-                                        related services.
+                                        Led a team of 5 developers to build and
+                                        support payment related services.
                                     </div>
                                     <ul className="experience-notes">
                                         <li>
