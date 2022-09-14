@@ -66,10 +66,11 @@ function Home(): JSX.Element {
                     <div className="skills">
                         <h3>SKILLS</h3>
                         <ul>
-                            <li>System Architecture</li>
-                            <li>Leadership</li>
-                            <li>Mentorship</li>
+                            <li>Microservice Architecture</li>
+                            <li>Leadership/Mentorship</li>
                             <li>Project Management</li>
+                            <li>Domain Driven Development</li>
+                            <li>DevOps and CI/CD</li>
                         </ul>
                     </div>
                     <div className="technologies">
@@ -96,7 +97,8 @@ function Home(): JSX.Element {
                             <h4>DATA</h4>
                             <ul>
                                 <li>Kafka</li>
-                                <li>MySql/Postgres</li>
+                                <li>MySql</li>
+                                <li>Postgres</li>
                             </ul>
                         </div>
                     </div>
