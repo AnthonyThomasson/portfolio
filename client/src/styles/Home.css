@@ -191,7 +191,7 @@
         padding: 20px 20px 0 20px !important;
     }
     .right-content {
-        margin-left: 20px !important;
+        margin-left: 0px !important;
     }
     .technologies {
         margin-top: 10px !important;
@@ -225,7 +225,7 @@
     }
     .summary {
         border-left: none !important;
-        padding-left: 20px !important;
+        padding-left: 0px !important;
     }
     .links {
         padding-left: 20px !important;
