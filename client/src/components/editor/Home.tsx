@@ -94,9 +94,11 @@ function Home(): JSX.Element {
                             </ul>
                         </div>
                         <div className="db">
-                            <h4>DATA</h4>
+                            <h4>INFRASTRUCTURE</h4>
                             <ul>
                                 <li>Kafka</li>
+                                <li>GCP</li>
+                                <li>Docker</li>
                                 <li>MySql</li>
                                 <li>Postgres</li>
                             </ul>
