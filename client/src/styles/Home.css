@@ -171,6 +171,22 @@
     .home {
         font-size: x-small;
     }
+
+    .home h3 {
+        font-size: large !important;
+    }
+
+    .home h4 {
+        font-size: small !important;
+        margin-bottom: 10px;
+    }
+
+    .home h3,
+    .home h4 {
+        margin-top: 0;
+        letter-spacing: 0.3em;
+        color: #cccccc;
+    }
     .name-section {
         padding: 20px 20px 0 20px !important;
     }
