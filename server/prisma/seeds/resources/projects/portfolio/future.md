@@ -4,10 +4,6 @@
 
 ## Features
 
-### Mobile
-
-I want to make this site mobile friendly. The vscode theme right now does not look great on mobile, but I think if I design the markdown system properly I should be able to make it fully functional on mobile.
-
 ### File References
 
 I want to save all files with a unique reference, so that I can build links between the files within the content of the markdown.
