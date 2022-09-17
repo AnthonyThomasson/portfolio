@@ -212,7 +212,7 @@ function Home(): JSX.Element {
                             </li>
                             <li>
                                 <div className="experience-heading">
-                                    Software Developer
+                                    Full Stack Software Developer
                                 </div>
                                 <div className="experience-body">
                                     <span className="experience-company">
@@ -223,7 +223,9 @@ function Home(): JSX.Element {
                                         2016 - 2018
                                     </span>
                                     <div className="experience-summary">
-                                        Worked as a general software developer.
+                                        Worked as a full stack software
+                                        developer on a variety of software
+                                        projects.
                                     </div>
                                     <ul className="experience-notes">
                                         <li>
