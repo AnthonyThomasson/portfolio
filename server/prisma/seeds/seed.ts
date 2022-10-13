@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client'
 import { seedNodes } from './nodes'
 import { seedTechnologies } from './technologies'
 
-const prisma = new PrismaClient()
+const prisma: PrismaClient = new PrismaClient()
 
 async function main() {
     console.log('Seeding technologies..')
@@ -13,7 +13,7 @@ async function main() {
 }
 
 main()
-    .catch((e) => {
+    .catch((e: Error) => {
         console.log(e)
         process.exit(1)
     })

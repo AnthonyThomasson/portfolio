@@ -1,7 +1,7 @@
 import { NodeType, PrismaClient } from '@prisma/client'
 import { readFileSync } from 'fs'
 
-const resourcesPath = __dirname + '/../../../prisma/seeds/resources/'
+const resourcesPath: string = __dirname + '/../../../prisma/seeds/resources/'
 
 export async function seedNodes(client: PrismaClient) {
     await client.systemNode.deleteMany()

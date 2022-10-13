@@ -1,6 +1,12 @@
 import { PrismaClient } from '@prisma/client'
 
-const technologies = [
+type Technology = {
+    name: string
+    icon: string
+    experience: string
+}
+
+const technologies: Technology[] = [
     {
         name: 'Golang',
         icon: 'golang.png',
