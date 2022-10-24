@@ -1,4 +1,4 @@
-# portfolio
+# Portfolio
 
 [https://athomasson.com](https://athomasson.com)
 
