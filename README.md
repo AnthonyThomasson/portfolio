@@ -2,6 +2,4 @@
 
 [https://athomasson.com](https://athomasson.com)
 
-A portfolio cataloging various side projects I'm working on.
-
-
+A portfolio cataloging various side projects that I'm working on.
