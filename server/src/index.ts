@@ -11,22 +11,34 @@ const port = process.env.PORT ?? 3000
 const prisma = new PrismaClient()
 
 app.get('/api/files', async (req: Request, res: Response) => {
-    const files = await prisma.systemNode.findMany()
-    res.send(files)
+    try {
+        const files = await prisma.systemNode.findMany()
+        res.send(files)
+    } catch (e) {
+        res.status(500)
+    }
 })
 
 app.get('/api/files/:id', async (req: Request, res: Response) => {
-    const file = await prisma.systemNode.findUnique({
-        where: {
-            id: Number(req.params.id),
-        },
-    })
-    res.send(file)
+    try {
+        const file = await prisma.systemNode.findUnique({
+            where: {
+                id: Number(req.params.id),
+            },
+        })
+        res.send(file)
+    } catch (e) {
+        res.status(500)
+    }
 })
 
 app.get('/api/technologies', async (req: Request, res: Response) => {
-    const technologies = await prisma.technology.findMany()
-    res.send(technologies)
+    try {
+        const technologies = await prisma.technology.findMany()
+        res.send(technologies)
+    } catch (e) {
+        res.status(500)
+    }
 })
 
 app.use(express.static(path.join(__dirname, 'public')))
