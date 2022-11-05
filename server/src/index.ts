@@ -10,23 +10,23 @@ const port = process.env.PORT ?? 3000
 
 const prisma = new PrismaClient()
 
-app.get('/api/files', async (req: Request, res: Response) => {
+app.get('/api/system-nodes', async (req: Request, res: Response) => {
     try {
-        const files = await prisma.systemNode.findMany()
-        res.send(files)
+        const nodes = await prisma.systemNode.findMany()
+        res.send(nodes)
     } catch (e) {
         res.status(500)
     }
 })
 
-app.get('/api/files/:id', async (req: Request, res: Response) => {
+app.get('/api/system-nodes/:id', async (req: Request, res: Response) => {
     try {
-        const file = await prisma.systemNode.findUnique({
+        const node = await prisma.systemNode.findUnique({
             where: {
                 id: Number(req.params.id),
             },
         })
-        res.send(file)
+        res.send(node)
     } catch (e) {
         res.status(500)
     }

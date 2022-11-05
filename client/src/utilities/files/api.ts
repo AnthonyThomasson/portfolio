@@ -21,9 +21,9 @@ export interface IFileNode extends ISystemNode {
 }
 
 export async function fetchSystemNodes(): Promise<AxiosResponse> {
-    return await axios.get('/api/files')
+    return await axios.get('/api/system-nodes')
 }
 
 export async function fetchSystemNode(fileId: number): Promise<AxiosResponse> {
-    return await axios.get(`/api/files/${fileId}`)
+    return await axios.get(`/api/system-nodes/${fileId}`)
 }
