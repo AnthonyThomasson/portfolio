@@ -1,0 +1,60 @@
+{
+    "system-nodes": [
+        {
+            "id": 1,
+            "icon": "folder-icon",
+            "name": "me",
+            "type": "FOLDER",
+            "parentId": null,
+            "content": ""
+        },
+        {
+            "id": 2,
+            "icon": "file-react-icon",
+            "name": "README.md",
+            "type": "FILE",
+            "parentId": 1,
+            "content": "[HOME](/)\n\n# About Me\n\nI am born and raised in Calgary, currently living in the downtown area. I love watching movies and hanging around downtown drinking coffees. I'm really into all types of racquet sports especially badminton and squash.\n\n# Professional Background\n\nI graduated from Mount Royal University in 2016 with a Bachelors of Computer Information Systems. After graduating highschool I was sure I was going to pursue some kind of business degree, but decided last minute to enroll in the BCIS program which allowed me to take both computer science and business classes. I found my passion in software development very quickly. I did everything I could to get through my business classes as fast as possible so that I could focus on software development.\n"
+        },
+        {
+            "id": 3,
+            "icon": "folder-icon",
+            "name": "projects",
+            "type": "FOLDER",
+            "parentId": null,
+            "content": ""
+        },
+        {
+            "id": 4,
+            "icon": "folder-icon",
+            "name": "portfolio",
+            "type": "FOLDER",
+            "parentId": 3,
+            "content": ""
+        },
+        {
+            "id": 5,
+            "icon": "file-react-icon",
+            "name": "README.md",
+            "type": "FILE",
+            "parentId": 4,
+            "content": "[HOME](/)\n\n# VsCode Style Portfolio\n\n## Objective\n\nTo create a portfolio website done in a creative way. I want to show off my skills and experience in a way that is unique and fun. It can also serve as a place to experiment with new technologies and ideas. I also find myself reaching back on past projects to help mentor new developers, so I want to make sure that I have a good examples to point them to.\n\n## Requirements\n\n### Modular\n\nI wanted to build something that was modular in a way that I could easily add content and link to new projects that I work on in the future. I want this to be a platform for which I can easily add new content and features.\n\n### New Technologies\n\nI wanted to challenge myself to only use technologies that I have not previously had experience with. I want to continue this trend with new projects that I work on in the future.\n"
+        },
+        {
+            "id": 6,
+            "icon": "file-react-icon",
+            "name": "technologies.md",
+            "type": "FILE",
+            "parentId": 4,
+            "content": "[HOME](/)\n\n# Technologies\n\n#### React\n\nI have spent a number of years working with Vue now, but had not had much experience with React. I thought this would be a good opportunity to learn a new framework.\n\n#### Typescript\n\nFrom my experience working with Golang I really have began to appreciate the benefits of using a typed language. Coming from development mostly in PHP, I have really begun to enjoy the benefits of having a type system. Choosing Typescript for this project was an obvious choice, especially because of how prevalent JavaScript is across the web.\n\nI absolutely love the code completion that comes with properly defined types and interfaces, however I did find myself occasionally forgetting to type a return value or variable and losing out on the benefits of the type system. I miss the strictness found in Golang where an untyped variable will not compile, and all return values need to be explicitly stated. I was able to simulate this a little bit by using eslint to enforce the use of types.\n\n#### Yarn\n\nI have been using NPM for a long time, but I have been hearing a lot of good things about Yarn. I wanted to give it a try and see if it was worth switching over.\n\nI was especially interested in Yarn Berry, which is a new version of Yarn that works quite differently than the previous versions. I wanted to see if it was worth switching over to this new version. I found that it was not quite ready for production use, but I am excited to see where it goes in the future. I am hoping that it will eventually be able to replace NPM completely. I especially like the idea of removing the node_modules folder from the project, and creating offline caches of the dependencies.\n\n#### Vite\n\nI have experimented a little bit with Vite in the past while working with vue, but I have never used it with React. I wanted to see how well it works, and if it would be a good replacement for Webpack.\n\nI struggled a little bit to set up a development workflow that I was happy with. I first just set up a watcher that would recompile my client every time I made a change, and then move the compiled dist to my server so that it could be served. This worked, but it was a little bit slow. It also kind of defeated the purpose of using Vite, which is to have a fast development server that does not need to recompile the entire project every time you make a change.\n\nMy solution was to develop locally using the vite dev server, and use a proxy to forward requests to my running server. This works alright, but I am unable to test my severs ability to deliver static files. I am hoping that I can find a better solution in the future. I did include a deployment that would build everything together incase I wanted to test this logic before deploying.\n"
+        },
+        {
+            "id": 7,
+            "icon": "file-react-icon",
+            "name": "future.md",
+            "type": "FILE",
+            "parentId": 4,
+            "content": "[HOME](/)\n\n# The Future\n\n## Features\n\n### File References\n\nI want to save all files with a unique reference, so that I can build links between the files within the content of the markdown.\n\n### Admin Section\n\nRight now all content is populated on publish from a static directory. I want to build an admin section that will allow me to create and edit content from within the application. I might allow edits to the content of the markdown files but prevent saves. This way i can show off the feature without allowing users to edit the content.\n\n### Email\n\nI want to hook the website up to some emailing service so that I can get emails on \"git commit\".\n\n## Bugs\n\n### Same Named Tabs\n\nWhen you select a file with the same name as an active tab, there will be two tabs with the same name. I want to build a similar system to how VSCode handles this, where it will append the path to the file in the name.\n"
+        }
+    ]
+}
