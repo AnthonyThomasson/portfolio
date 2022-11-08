@@ -1,53 +1,46 @@
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook, waitFor } from '@testing-library/react'
+import { rest } from 'msw'
+import { setupServer } from 'msw/node'
 import { describe, expect, it } from 'vitest'
 import { useFetch } from './useFetch'
 
+const server = setupServer(
+    rest.get<ITestResponse>('/api/fetch-example', async (req, res, ctx) => {
+        return await res(
+            ctx.delay(100),
+            ctx.json({
+                id: 1,
+                name: 'Example Name',
+            })
+        )
+    })
+)
+beforeAll(() => server.listen())
+afterAll(() => server.close())
+afterEach(() => server.resetHandlers())
+
 interface ITestResponse {
-    userId: number
     id: number
-    title: string
-    completed: boolean
+    name: string
 }
 
 describe('useFetch hook', () => {
     it('should return data', async () => {
-        const { result, waitForNextUpdate } = renderHook(() =>
-            useFetch<ITestResponse | null>(
-                'https://jsonplaceholder.typicode.com/todos/1',
-                null
-            )
+        const { result } = renderHook(() =>
+            useFetch<ITestResponse | null>('/api/fetch-example', null)
         )
 
         const [dataBefore, loadingBefore] = result.current
         expect(loadingBefore).toBe(true)
         expect(dataBefore).toBe(null)
 
-        await waitForNextUpdate()
-
-        const [dataAfter, loadingAfter] = result.current
-        expect(loadingAfter).toBe(false)
-        expect(dataAfter).toEqual({
-            userId: 1,
-            id: 1,
-            title: 'delectus aut autem',
-            completed: false,
+        await waitFor(() => {
+            const [dataAfter, loadingAfter] = result.current
+            expect(loadingAfter).toBe(false)
+            expect(dataAfter).toEqual({
+                id: 1,
+                name: 'Example Name',
+            })
         })
-    })
-
-    it.todo('should not return data when unmounted', async () => {
-        const { result, unmount } = renderHook(() =>
-            useFetch<ITestResponse | null>(
-                'https://jsonplaceholder.typicode.com/todos/1',
-                null
-            )
-        )
-        unmount()
-        const [dataBefore, loadingBefore] = result.current
-        expect(loadingBefore).toBe(true)
-        expect(dataBefore).toBe(null)
-
-        const [dataAfter, loadingAfter] = result.current
-        expect(loadingAfter).toBe(true)
-        expect(dataAfter).toBe(null)
     })
 })

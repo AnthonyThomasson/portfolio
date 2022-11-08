@@ -20,7 +20,7 @@ export const useFetch = <T,>(url: string, initialState: T): [T, Boolean] => {
                 setLoading(false)
             })
         return () => {
-            isMounted = false
+            isMounted = true
         }
     }, [url])
     return [data, loading]
