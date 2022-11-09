@@ -23,7 +23,7 @@ interface ITestResponse {
     name: string
 }
 
-describe('useFetch hook', () => {
+describe.concurrent('useFetch hook', () => {
     it('should return data', async () => {
         const { result } = renderHook(() =>
             useFetch<ITestResponse | null>('/api/fetch-example', null)
@@ -32,7 +32,6 @@ describe('useFetch hook', () => {
         const [dataBefore, loadingBefore] = result.current
         expect(loadingBefore).toBe(true)
         expect(dataBefore).toBe(null)
-
         await waitFor(() => {
             const [dataAfter, loadingAfter] = result.current
             expect(loadingAfter).toBe(false)
