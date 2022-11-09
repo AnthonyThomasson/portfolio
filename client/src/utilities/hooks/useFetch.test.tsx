@@ -7,7 +7,6 @@ import { useFetch } from './useFetch'
 const server = setupServer(
     rest.get<ITestResponse>('/api/fetch-example', async (req, res, ctx) => {
         return await res(
-            ctx.delay(100),
             ctx.json({
                 id: 1,
                 name: 'Example Name',
