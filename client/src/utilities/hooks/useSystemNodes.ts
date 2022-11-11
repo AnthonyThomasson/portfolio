@@ -31,50 +31,55 @@ interface UseDependencies {
 export const useSystemNodes = (): UseDependencies => {
     const [nodes, loading, error] = useFetch('/api/systemNodes', [])
     const indexedNodes = useMemo(() => {
-        const indexedNodes: { [key: number]: ISystemNode } = {}
-        nodes.forEach((node: ISystemNode) => {
-            if (node.type === NodeType.Folder) {
-                const folder = node as IFolderNode
-                folder.open = false
-                folder.children = []
-            } else if (node.type === NodeType.File) {
-                const file = node as IFileNode
-                file.selected = false
-            }
-            indexedNodes[node.id] = node
-        })
-        return indexedNodes
+        return getIndexedNodeList(nodes)
     }, [nodes])
 
     const getNode = useCallback(
         (id: number): ISystemNode => {
-            return indexedNodes[id]
+            return indexedNodes.get(id) as ISystemNode
         },
         [indexedNodes]
     )
 
     const getNodes = useCallback((): ISystemNode[] => {
-        const refList: ISystemNode[] = []
-        nodes.forEach((node: ISystemNode) => {
-            const nodeCopy = { ...node }
-            refList[node.id] = nodeCopy
-            if (node.type === NodeType.Folder) {
-                const folder = nodeCopy as IFolderNode
-                folder.children = []
-            }
-        })
-
-        const structure: ISystemNode[] = []
-        refList.forEach((node) => {
-            if (node.parentId === 0 || node.parentId === null) {
-                structure.push(node)
-            } else {
-                const parentFolder = refList[node.parentId] as IFolderNode
-                parentFolder.children.push(node)
-            }
-        })
-        return structure
+        return getNodeStructure(indexedNodes)
     }, [nodes])
 
     return { loading, error, getNode, getNodes }
+}
+
+const getNodeStructure = (
+    indexedNodes: Map<number, ISystemNode>
+): ISystemNode[] => {
+    const structure: ISystemNode[] = []
+
+    indexedNodes.forEach((node: ISystemNode) => {
+        if (node.parentId === 0 || node.parentId === null) {
+            structure.push(node)
+        } else {
+            const parentFolder = indexedNodes.get(node.parentId) as IFolderNode
+            parentFolder.children.push(node)
+        }
+    })
+    return structure
+}
+
+const getIndexedNodeList = (nodes: ISystemNode[]): Map<number, ISystemNode> => {
+    const dictionary = new Map<number, ISystemNode>()
+    nodes.forEach((node: ISystemNode) => {
+        setNodeDefaults(node)
+        dictionary.set(node.id, node)
+    })
+    return dictionary
+}
+
+const setNodeDefaults = (node: ISystemNode): void => {
+    if (node.type === NodeType.Folder) {
+        const folder = node as IFolderNode
+        folder.open = false
+        folder.children = []
+    } else if (node.type === NodeType.File) {
+        const file = node as IFileNode
+        file.selected = false
+    }
 }
