@@ -1,3 +1,5 @@
+import { Either, fromNullable } from 'fp-ts/lib/Either'
+import { pipe } from 'fp-ts/lib/function'
 import { useCallback, useMemo } from 'react'
 import { useFetch } from './useFetch'
 
@@ -24,7 +26,7 @@ export interface IFileNode extends ISystemNode {
 interface UseDependencies {
     loading: Boolean
     error: Error | null
-    getNode: (nodeId: number) => ISystemNode
+    getNode: (nodeId: number) => Either<Error, ISystemNode>
     getNodes: () => ISystemNode[]
 }
 
@@ -35,9 +37,11 @@ export const useSystemNodes = (): UseDependencies => {
     }, [nodes])
 
     const getNode = useCallback(
-        (id: number): ISystemNode => {
-            return indexedNodes.get(id) as ISystemNode
-        },
+        (id: number): Either<Error, ISystemNode> =>
+            pipe(
+                indexedNodes.get(id),
+                fromNullable(new Error(`Node with ID '${id}' not found`))
+            ),
         [indexedNodes]
     )
 
