@@ -1,3 +1,4 @@
+import * as E from 'fp-ts/lib/Either'
 import { Either, fromNullable } from 'fp-ts/lib/Either'
 import { pipe } from 'fp-ts/lib/function'
 import { useCallback, useMemo } from 'react'
@@ -25,16 +26,23 @@ export interface IFileNode extends ISystemNode {
 
 interface UseDependencies {
     loading: Boolean
-    error: Error | null
     getNode: (nodeId: number) => Either<Error, ISystemNode>
     getNodes: () => ISystemNode[]
 }
 
 export const useSystemNodes = (): UseDependencies => {
-    const [nodes, loading, error] = useFetch('/api/systemNodes', [])
-    const indexedNodes = useMemo(() => {
-        return getIndexedNodeList(nodes)
-    }, [nodes])
+    const [nodes, loading] = useFetch('/api/systemNodes', [])
+    const indexedNodes = useMemo(
+        () =>
+            pipe(
+                nodes,
+                E.fold(
+                    () => new Map<number, ISystemNode>(),
+                    (nodes: ISystemNode[]) => getIndexedNodeList(nodes)
+                )
+            ),
+        [nodes]
+    )
 
     const getNode = useCallback(
         (id: number): Either<Error, ISystemNode> =>
@@ -45,11 +53,12 @@ export const useSystemNodes = (): UseDependencies => {
         [indexedNodes]
     )
 
-    const getNodes = useCallback((): ISystemNode[] => {
-        return getNodeStructure(indexedNodes)
-    }, [nodes])
+    const getNodes = useCallback(
+        (): ISystemNode[] => getNodeStructure(indexedNodes),
+        [indexedNodes]
+    )
 
-    return { loading, error, getNode, getNodes }
+    return { loading, getNode, getNodes }
 }
 
 const getNodeStructure = (

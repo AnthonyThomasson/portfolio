@@ -1,4 +1,5 @@
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
+import E from 'fp-ts/lib/Either'
 import { pipe } from 'fp-ts/lib/function'
 import TE from 'fp-ts/lib/TaskEither'
 import { useEffect, useState } from 'react'
@@ -6,28 +7,27 @@ import { useEffect, useState } from 'react'
 export const useFetch = <T,>(
     url: string,
     initialState: T
-): [T, Boolean, Error | null] => {
-    const [data, setData] = useState<T>(initialState)
+): [E.Either<Error, T>, Boolean] => {
+    const [data, setData] = useState<E.Either<Error, T>>(E.of(initialState))
     const [loading, setLoading] = useState<boolean>(true)
-    const [error, setError] = useState<Error | null>(null)
     useEffect(() => {
-        axios
-            .get(url)
-            .then((response: AxiosResponse) => {
-                setData(response.data)
+        setLoading(true)
+        const fetchData = async (): Promise<E.Either<Error, T>> => {
+            return await fetchEither<T>(url)()
+        }
+        fetchData()
+            .then((response) => {
+                setData(response)
             })
-            .catch((err: Error) => {
-                console.log(err)
-                setError(err)
+            .catch((error) => {
+                setData(E.left(error))
             })
-            .finally(() => {
-                setLoading(false)
-            })
+            .finally(() => setLoading(false))
     }, [url])
-    return [data, loading, error]
+    return [data, loading]
 }
 
-export const fetchEither = <ResponseData,>(
+const fetchEither = <ResponseData,>(
     url: string
 ): TE.TaskEither<Error, ResponseData> =>
     pipe(
