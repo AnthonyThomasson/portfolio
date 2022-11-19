@@ -1,6 +1,6 @@
 import * as E from 'fp-ts/lib/Either'
-import { Either, fromNullable } from 'fp-ts/lib/Either'
 import { pipe } from 'fp-ts/lib/function'
+import * as O from 'fp-ts/lib/Option'
 import { useCallback, useMemo } from 'react'
 import { useFetch } from './useFetch'
 
@@ -26,7 +26,7 @@ export interface IFileNode extends ISystemNode {
 
 interface UseDependencies {
     loading: Boolean
-    getNode: (nodeId: number) => Either<Error, ISystemNode>
+    getNode: (nodeId: number) => E.Either<Error, ISystemNode>
     getNodes: () => ISystemNode[]
 }
 
@@ -45,10 +45,10 @@ export const useSystemNodes = (): UseDependencies => {
     )
 
     const getNode = useCallback(
-        (id: number): Either<Error, ISystemNode> =>
+        (id: number): E.Either<Error, ISystemNode> =>
             pipe(
                 indexedNodes.get(id),
-                fromNullable(new Error(`Node with ID '${id}' not found`))
+                E.fromNullable(new Error(`Node with ID '${id}' not found`))
             ),
         [indexedNodes]
     )
@@ -63,19 +63,34 @@ export const useSystemNodes = (): UseDependencies => {
 
 const getNodeStructure = (
     indexedNodes: Map<number, ISystemNode>
-): ISystemNode[] => {
-    const structure: ISystemNode[] = []
-
-    indexedNodes.forEach((node: ISystemNode) => {
-        if (node.parentId === 0 || node.parentId === null) {
-            structure.push(node)
-        } else {
-            const parentFolder = indexedNodes.get(node.parentId) as IFolderNode
-            parentFolder.children.push(node)
-        }
-    })
-    return structure
-}
+): ISystemNode[] =>
+    pipe(
+        E.of([] as ISystemNode[]),
+        E.chain((structure) => {
+            indexedNodes.forEach((node: ISystemNode) =>
+                pipe(
+                    node.parentId,
+                    O.fromNullable,
+                    O.fold(
+                        () => {
+                            structure.push(node)
+                        },
+                        () => {
+                            const parentFolder = indexedNodes.get(
+                                node.parentId
+                            ) as IFolderNode
+                            parentFolder.children.push(node)
+                        }
+                    )
+                )
+            )
+            return E.of(structure)
+        }),
+        E.match(
+            () => [],
+            (structure) => structure
+        )
+    )
 
 const getIndexedNodeList = (nodes: ISystemNode[]): Map<number, ISystemNode> => {
     const dictionary = new Map<number, ISystemNode>()
@@ -86,7 +101,7 @@ const getIndexedNodeList = (nodes: ISystemNode[]): Map<number, ISystemNode> => {
     return dictionary
 }
 
-const setNodeDefaults = (node: ISystemNode): void => {
+const setNodeDefaults = (node: ISystemNode): ISystemNode => {
     if (node.type === NodeType.Folder) {
         const folder = node as IFolderNode
         folder.open = false
@@ -95,4 +110,5 @@ const setNodeDefaults = (node: ISystemNode): void => {
         const file = node as IFileNode
         file.selected = false
     }
+    return node
 }
