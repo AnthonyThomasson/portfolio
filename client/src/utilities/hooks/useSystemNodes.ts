@@ -28,6 +28,9 @@ interface UseDependencies {
     loading: Boolean
     getNode: (nodeId: number) => E.Either<Error, ISystemNode>
     getNodes: () => ISystemNode[]
+    select: (id: number) => E.Either<Error, ISystemNode>
+    expandAll: () => ISystemNode[]
+    collapseAll: () => ISystemNode[]
 }
 
 export const useSystemNodes = (): UseDependencies => {
@@ -58,7 +61,66 @@ export const useSystemNodes = (): UseDependencies => {
         [indexedNodes]
     )
 
-    return { loading, getNode, getNodes }
+    const select = useCallback(
+        (id: number): E.Either<Error, ISystemNode> =>
+            selectNode(id, indexedNodes),
+        [indexedNodes]
+    )
+    const expandAll = useCallback(
+        (): ISystemNode[] => expandNodes(indexedNodes),
+        [indexedNodes]
+    )
+    const collapseAll = useCallback(
+        (): ISystemNode[] => collapseNodes(indexedNodes),
+        [indexedNodes]
+    )
+
+    return { loading, getNode, getNodes, select, expandAll, collapseAll }
+}
+
+const selectNode = (
+    id: number,
+    indexedNodes: Map<number, ISystemNode>
+): E.Either<Error, ISystemNode> =>
+    pipe(
+        indexedNodes.get(id),
+        E.fromNullable(new Error(`Node with ID '${id}' not found`)),
+        E.chain((node: ISystemNode) => {
+            if (node.type === NodeType.File) {
+                const file = node as IFileNode
+                file.selected = !file.selected
+            } else if (node.type === NodeType.Folder) {
+                const folder = node as IFolderNode
+                folder.open = !folder.open
+            } else {
+                return E.left(
+                    new Error(`Node with ID '${id}' is not a file or folder`)
+                )
+            }
+            return E.of(node)
+        })
+    )
+
+const expandNodes = (indexedNodes: Map<number, ISystemNode>): ISystemNode[] => {
+    indexedNodes.forEach((node: ISystemNode) => {
+        if (node.type === NodeType.Folder) {
+            const folder = node as IFolderNode
+            folder.open = true
+        }
+    })
+    return getNodeStructure(indexedNodes)
+}
+
+const collapseNodes = (
+    indexedNodes: Map<number, ISystemNode>
+): ISystemNode[] => {
+    indexedNodes.forEach((node: ISystemNode) => {
+        if (node.type === NodeType.Folder) {
+            const folder = node as IFolderNode
+            folder.open = false
+        }
+    })
+    return getNodeStructure(indexedNodes)
 }
 
 const getNodeStructure = (
@@ -67,6 +129,13 @@ const getNodeStructure = (
     pipe(
         E.of([] as ISystemNode[]),
         E.chain((structure) => {
+            // unset all children from previous call
+            indexedNodes.forEach((node: ISystemNode) => {
+                if (node.type === NodeType.Folder) {
+                    const folder = node as IFolderNode
+                    folder.children = []
+                }
+            })
             indexedNodes.forEach((node: ISystemNode) =>
                 pipe(
                     node.parentId,
