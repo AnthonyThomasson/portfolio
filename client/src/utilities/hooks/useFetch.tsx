@@ -1,7 +1,7 @@
 import axios from 'axios'
-import E from 'fp-ts/lib/Either'
+import * as E from 'fp-ts/lib/Either'
 import { pipe } from 'fp-ts/lib/function'
-import TE from 'fp-ts/lib/TaskEither'
+import * as TE from 'fp-ts/lib/TaskEither'
 import { useEffect, useState } from 'react'
 
 export const useFetch = <T,>(

@@ -9,7 +9,7 @@ import { useSystemNodes } from './useSystemNodes'
 
 const server = setupServer(
     rest.get<ISystemNode[]>(
-        '/api/systemNodes',
+        '/api/system-nodes',
         async (req, res, ctx) =>
             await res(
                 ctx.json([
@@ -78,14 +78,16 @@ afterAll(() => server.close())
 afterEach(() => server.resetHandlers())
 
 describe('useSystemNodes hook', async () => {
-    describe.concurrent('getNodes', async () => {
-        it('should return a multidimensional structure of nodes fetched from the server', async () => {
+    describe.concurrent('structure', async () => {
+        it('should populate a multidimensional structure of nodes fetched from the server', async () => {
             const { result } = renderHook(() => useSystemNodes())
             await waitFor(() => {
-                const { getNodes } = result.current
-                const nodes = getNodes()
-                expect(nodes.length).toBeGreaterThan(0)
-                expect(nodes).toEqual([
+                const structure = pipe(
+                    result.current.structure,
+                    E.getOrElse(() => [] as ISystemNode[])
+                )
+                expect(structure.length).toBeGreaterThan(0)
+                expect(structure).toEqual([
                     {
                         id: 1,
                         icon: 'folder-icon',
@@ -161,11 +163,12 @@ describe('useSystemNodes hook', async () => {
         it('called multiple times', async () => {
             const { result } = renderHook(() => useSystemNodes())
             await waitFor(() => {
-                const { getNodes } = result.current
-                getNodes()
-                const nodes = getNodes()
-                expect(nodes.length).toBeGreaterThan(0)
-                expect(nodes).toEqual([
+                const structure = pipe(
+                    result.current.structure,
+                    E.getOrElse(() => [] as ISystemNode[])
+                )
+                expect(structure.length).toBeGreaterThan(0)
+                expect(structure).toEqual([
                     {
                         id: 1,
                         icon: 'folder-icon',
@@ -243,6 +246,7 @@ describe('useSystemNodes hook', async () => {
         it('if we pass a valid file ID, we should return a file', async () => {
             const { result } = renderHook(() => useSystemNodes())
             await waitFor(() => {
+                expect(result.current.loading).toBeFalsy()
                 pipe(
                     result.current.getNode(2),
                     E.fold(
@@ -264,6 +268,7 @@ describe('useSystemNodes hook', async () => {
         it('if we pass a valid folder ID, we should return a folder', async () => {
             const { result } = renderHook(() => useSystemNodes())
             await waitFor(() => {
+                expect(result.current.loading).toBeFalsy()
                 pipe(
                     result.current.getNode(4),
                     E.fold(
@@ -275,7 +280,35 @@ describe('useSystemNodes hook', async () => {
                                 name: 'portfolio',
                                 content: 'Content 4',
                                 parentId: 3,
-                                children: [],
+                                children: [
+                                    {
+                                        id: 5,
+                                        icon: 'file-react-icon',
+                                        name: 'README.md',
+                                        type: 'FILE',
+                                        parentId: 4,
+                                        content: 'Content 5',
+                                        selected: false,
+                                    },
+                                    {
+                                        id: 6,
+                                        icon: 'file-react-icon',
+                                        name: 'technologies.md',
+                                        type: 'FILE',
+                                        parentId: 4,
+                                        content: 'Content 6',
+                                        selected: false,
+                                    },
+                                    {
+                                        id: 7,
+                                        icon: 'file-react-icon',
+                                        name: 'future.md',
+                                        type: 'FILE',
+                                        parentId: 4,
+                                        content: 'Content 7',
+                                        selected: false,
+                                    },
+                                ],
                                 open: false,
                                 type: 'FOLDER',
                             })
@@ -353,7 +386,35 @@ describe('useSystemNodes hook', async () => {
                                 name: 'portfolio',
                                 content: 'Content 4',
                                 parentId: 3,
-                                children: [],
+                                children: [
+                                    {
+                                        id: 5,
+                                        icon: 'file-react-icon',
+                                        name: 'README.md',
+                                        type: 'FILE',
+                                        parentId: 4,
+                                        content: 'Content 5',
+                                        selected: false,
+                                    },
+                                    {
+                                        id: 6,
+                                        icon: 'file-react-icon',
+                                        name: 'technologies.md',
+                                        type: 'FILE',
+                                        parentId: 4,
+                                        content: 'Content 6',
+                                        selected: false,
+                                    },
+                                    {
+                                        id: 7,
+                                        icon: 'file-react-icon',
+                                        name: 'future.md',
+                                        type: 'FILE',
+                                        parentId: 4,
+                                        content: 'Content 7',
+                                        selected: false,
+                                    },
+                                ],
                                 open: true,
                                 type: 'FOLDER',
                             })
@@ -370,7 +431,35 @@ describe('useSystemNodes hook', async () => {
                                 name: 'portfolio',
                                 content: 'Content 4',
                                 parentId: 3,
-                                children: [],
+                                children: [
+                                    {
+                                        id: 5,
+                                        icon: 'file-react-icon',
+                                        name: 'README.md',
+                                        type: 'FILE',
+                                        parentId: 4,
+                                        content: 'Content 5',
+                                        selected: false,
+                                    },
+                                    {
+                                        id: 6,
+                                        icon: 'file-react-icon',
+                                        name: 'technologies.md',
+                                        type: 'FILE',
+                                        parentId: 4,
+                                        content: 'Content 6',
+                                        selected: false,
+                                    },
+                                    {
+                                        id: 7,
+                                        icon: 'file-react-icon',
+                                        name: 'future.md',
+                                        type: 'FILE',
+                                        parentId: 4,
+                                        content: 'Content 7',
+                                        selected: false,
+                                    },
+                                ],
                                 open: false,
                                 type: 'FOLDER',
                             })
@@ -398,7 +487,7 @@ describe('useSystemNodes hook', async () => {
         it('if we pass a node ID, and the node has an unrecognizable type', async () => {
             server.resetHandlers(
                 rest.get<ISystemNode[]>(
-                    '/api/systemNodes',
+                    '/api/system-nodes',
                     async (req, res, ctx) =>
                         await res(
                             ctx.json([
@@ -436,79 +525,81 @@ describe('useSystemNodes hook', async () => {
             const { result } = renderHook(() => useSystemNodes())
             await waitFor(() => {
                 expect(result.current.loading).toEqual(false)
-                pipe(result.current.expandAll(), (structure) => {
-                    expect(structure).toEqual([
-                        {
-                            id: 1,
-                            icon: 'folder-icon',
-                            name: 'me',
-                            type: 'FOLDER',
-                            parentId: null,
-                            content: 'Content 1',
-                            open: true,
-                            children: [
-                                {
-                                    id: 2,
-                                    icon: 'file-react-icon',
-                                    name: 'README.md',
-                                    type: 'FILE',
-                                    parentId: 1,
-                                    content: 'Content 2',
-                                    selected: false,
-                                },
-                            ],
-                        },
-                        {
-                            id: 3,
-                            icon: 'folder-icon',
-                            name: 'projects',
-                            type: 'FOLDER',
-                            parentId: null,
-                            content: 'Content 3',
-                            open: true,
-                            children: [
-                                {
-                                    id: 4,
-                                    icon: 'folder-icon',
-                                    name: 'portfolio',
-                                    type: 'FOLDER',
-                                    parentId: 3,
-                                    content: 'Content 4',
-                                    open: true,
-                                    children: [
-                                        {
-                                            id: 5,
-                                            icon: 'file-react-icon',
-                                            name: 'README.md',
-                                            type: 'FILE',
-                                            parentId: 4,
-                                            content: 'Content 5',
-                                            selected: false,
-                                        },
-                                        {
-                                            id: 6,
-                                            icon: 'file-react-icon',
-                                            name: 'technologies.md',
-                                            type: 'FILE',
-                                            parentId: 4,
-                                            content: 'Content 6',
-                                            selected: false,
-                                        },
-                                        {
-                                            id: 7,
-                                            icon: 'file-react-icon',
-                                            name: 'future.md',
-                                            type: 'FILE',
-                                            parentId: 4,
-                                            content: 'Content 7',
-                                            selected: false,
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                    ])
-                })
+                const structure = pipe(
+                    result.current.structure,
+                    E.getOrElse(() => [] as ISystemNode[])
+                )
+                expect(structure).toEqual([
+                    {
+                        id: 1,
+                        icon: 'folder-icon',
+                        name: 'me',
+                        type: 'FOLDER',
+                        parentId: null,
+                        content: 'Content 1',
+                        open: true,
+                        children: [
+                            {
+                                id: 2,
+                                icon: 'file-react-icon',
+                                name: 'README.md',
+                                type: 'FILE',
+                                parentId: 1,
+                                content: 'Content 2',
+                                selected: false,
+                            },
+                        ],
+                    },
+                    {
+                        id: 3,
+                        icon: 'folder-icon',
+                        name: 'projects',
+                        type: 'FOLDER',
+                        parentId: null,
+                        content: 'Content 3',
+                        open: true,
+                        children: [
+                            {
+                                id: 4,
+                                icon: 'folder-icon',
+                                name: 'portfolio',
+                                type: 'FOLDER',
+                                parentId: 3,
+                                content: 'Content 4',
+                                open: true,
+                                children: [
+                                    {
+                                        id: 5,
+                                        icon: 'file-react-icon',
+                                        name: 'README.md',
+                                        type: 'FILE',
+                                        parentId: 4,
+                                        content: 'Content 5',
+                                        selected: false,
+                                    },
+                                    {
+                                        id: 6,
+                                        icon: 'file-react-icon',
+                                        name: 'technologies.md',
+                                        type: 'FILE',
+                                        parentId: 4,
+                                        content: 'Content 6',
+                                        selected: false,
+                                    },
+                                    {
+                                        id: 7,
+                                        icon: 'file-react-icon',
+                                        name: 'future.md',
+                                        type: 'FILE',
+                                        parentId: 4,
+                                        content: 'Content 7',
+                                        selected: false,
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                ])
             })
         })
     })
@@ -518,79 +609,82 @@ describe('useSystemNodes hook', async () => {
             await waitFor(() => {
                 expect(result.current.loading).toEqual(false)
                 result.current.expandAll()
-                pipe(result.current.collapseAll(), (structure) => {
-                    expect(structure).toEqual([
-                        {
-                            id: 1,
-                            icon: 'folder-icon',
-                            name: 'me',
-                            type: 'FOLDER',
-                            parentId: null,
-                            content: 'Content 1',
-                            open: false,
-                            children: [
-                                {
-                                    id: 2,
-                                    icon: 'file-react-icon',
-                                    name: 'README.md',
-                                    type: 'FILE',
-                                    parentId: 1,
-                                    content: 'Content 2',
-                                    selected: false,
-                                },
-                            ],
-                        },
-                        {
-                            id: 3,
-                            icon: 'folder-icon',
-                            name: 'projects',
-                            type: 'FOLDER',
-                            parentId: null,
-                            content: 'Content 3',
-                            open: false,
-                            children: [
-                                {
-                                    id: 4,
-                                    icon: 'folder-icon',
-                                    name: 'portfolio',
-                                    type: 'FOLDER',
-                                    parentId: 3,
-                                    content: 'Content 4',
-                                    open: false,
-                                    children: [
-                                        {
-                                            id: 5,
-                                            icon: 'file-react-icon',
-                                            name: 'README.md',
-                                            type: 'FILE',
-                                            parentId: 4,
-                                            content: 'Content 5',
-                                            selected: false,
-                                        },
-                                        {
-                                            id: 6,
-                                            icon: 'file-react-icon',
-                                            name: 'technologies.md',
-                                            type: 'FILE',
-                                            parentId: 4,
-                                            content: 'Content 6',
-                                            selected: false,
-                                        },
-                                        {
-                                            id: 7,
-                                            icon: 'file-react-icon',
-                                            name: 'future.md',
-                                            type: 'FILE',
-                                            parentId: 4,
-                                            content: 'Content 7',
-                                            selected: false,
-                                        },
-                                    ],
-                                },
-                            ],
-                        },
-                    ])
-                })
+                result.current.collapseAll()
+                const structure = pipe(
+                    result.current.structure,
+                    E.getOrElse(() => [] as ISystemNode[])
+                )
+                expect(structure).toEqual([
+                    {
+                        id: 1,
+                        icon: 'folder-icon',
+                        name: 'me',
+                        type: 'FOLDER',
+                        parentId: null,
+                        content: 'Content 1',
+                        open: false,
+                        children: [
+                            {
+                                id: 2,
+                                icon: 'file-react-icon',
+                                name: 'README.md',
+                                type: 'FILE',
+                                parentId: 1,
+                                content: 'Content 2',
+                                selected: false,
+                            },
+                        ],
+                    },
+                    {
+                        id: 3,
+                        icon: 'folder-icon',
+                        name: 'projects',
+                        type: 'FOLDER',
+                        parentId: null,
+                        content: 'Content 3',
+                        open: false,
+                        children: [
+                            {
+                                id: 4,
+                                icon: 'folder-icon',
+                                name: 'portfolio',
+                                type: 'FOLDER',
+                                parentId: 3,
+                                content: 'Content 4',
+                                open: false,
+                                children: [
+                                    {
+                                        id: 5,
+                                        icon: 'file-react-icon',
+                                        name: 'README.md',
+                                        type: 'FILE',
+                                        parentId: 4,
+                                        content: 'Content 5',
+                                        selected: false,
+                                    },
+                                    {
+                                        id: 6,
+                                        icon: 'file-react-icon',
+                                        name: 'technologies.md',
+                                        type: 'FILE',
+                                        parentId: 4,
+                                        content: 'Content 6',
+                                        selected: false,
+                                    },
+                                    {
+                                        id: 7,
+                                        icon: 'file-react-icon',
+                                        name: 'future.md',
+                                        type: 'FILE',
+                                        parentId: 4,
+                                        content: 'Content 7',
+                                        selected: false,
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                ])
             })
         })
     })

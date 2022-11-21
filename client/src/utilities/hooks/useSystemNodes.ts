@@ -1,7 +1,7 @@
 import * as E from 'fp-ts/lib/Either'
 import { pipe } from 'fp-ts/lib/function'
 import * as O from 'fp-ts/lib/Option'
-import { useCallback, useMemo } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useFetch } from './useFetch'
 
 export enum NodeType {
@@ -25,26 +25,37 @@ export interface IFileNode extends ISystemNode {
 }
 
 interface UseDependencies {
+    structure: E.Either<Error, ISystemNode[]>
     loading: Boolean
     getNode: (nodeId: number) => E.Either<Error, ISystemNode>
-    getNodes: () => ISystemNode[]
     select: (id: number) => E.Either<Error, ISystemNode>
     expandAll: () => ISystemNode[]
     collapseAll: () => ISystemNode[]
 }
 
 export const useSystemNodes = (): UseDependencies => {
-    const [nodes, loading] = useFetch('/api/systemNodes', [])
-    const indexedNodes = useMemo(
+    const [nodes, loading] = useFetch<ISystemNode[]>('/api/system-nodes', [])
+    const [structure, setStructure] = useState<E.Either<Error, ISystemNode[]>>(
+        E.of([])
+    )
+    const [indexedNodes, setIndexedNodes] = useState<Map<number, ISystemNode>>(
+        new Map()
+    )
+    useEffect(
         () =>
-            pipe(
-                nodes,
-                E.fold(
-                    () => new Map<number, ISystemNode>(),
-                    (nodes: ISystemNode[]) => getIndexedNodeList(nodes)
+            setIndexedNodes(
+                pipe(
+                    nodes,
+                    E.map((nodes: ISystemNode[]) => getIndexedNodeList(nodes)),
+                    E.getOrElse(() => new Map())
                 )
             ),
         [nodes]
+    )
+
+    useEffect(
+        () => pipe(indexedNodes, getNodeStructure, E.of, setStructure),
+        [indexedNodes]
     )
 
     const getNode = useCallback(
@@ -56,26 +67,28 @@ export const useSystemNodes = (): UseDependencies => {
         [indexedNodes]
     )
 
-    const getNodes = useCallback(
-        (): ISystemNode[] => getNodeStructure(indexedNodes),
-        [indexedNodes]
-    )
-
     const select = useCallback(
         (id: number): E.Either<Error, ISystemNode> =>
             selectNode(id, indexedNodes),
         [indexedNodes]
     )
     const expandAll = useCallback(
-        (): ISystemNode[] => expandNodes(indexedNodes),
+        (): ISystemNode[] => pipe(indexedNodes, expandNodes),
         [indexedNodes]
     )
     const collapseAll = useCallback(
-        (): ISystemNode[] => collapseNodes(indexedNodes),
+        (): ISystemNode[] => pipe(indexedNodes, collapseNodes),
         [indexedNodes]
     )
 
-    return { loading, getNode, getNodes, select, expandAll, collapseAll }
+    return {
+        structure,
+        loading,
+        getNode,
+        select,
+        expandAll,
+        collapseAll,
+    }
 }
 
 const selectNode = (
