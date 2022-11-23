@@ -1,7 +1,7 @@
 import * as E from 'fp-ts/lib/Either'
 import { pipe } from 'fp-ts/lib/function'
 import * as O from 'fp-ts/lib/Option'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useFetch } from './useFetch'
 
 export enum NodeType {
@@ -29,8 +29,8 @@ interface UseDependencies {
     loading: Boolean
     getNode: (nodeId: number) => E.Either<Error, ISystemNode>
     select: (id: number) => E.Either<Error, ISystemNode>
-    expandAll: () => ISystemNode[]
-    collapseAll: () => ISystemNode[]
+    expandAll: () => void
+    collapseAll: () => void
 }
 
 export const useSystemNodes = (): UseDependencies => {
@@ -38,25 +38,20 @@ export const useSystemNodes = (): UseDependencies => {
     const [structure, setStructure] = useState<E.Either<Error, ISystemNode[]>>(
         E.of([])
     )
-    const [indexedNodes, setIndexedNodes] = useState<Map<number, ISystemNode>>(
-        new Map()
-    )
-    useEffect(
+
+    const indexedNodes = useMemo(
         () =>
-            setIndexedNodes(
-                pipe(
-                    nodes,
-                    E.map((nodes: ISystemNode[]) => getIndexedNodeList(nodes)),
-                    E.getOrElse(() => new Map())
-                )
+            pipe(
+                nodes,
+                E.map((nodes: ISystemNode[]) => getIndexedNodeList(nodes)),
+                E.getOrElse(() => new Map())
             ),
         [nodes]
     )
 
-    useEffect(
-        () => pipe(indexedNodes, getNodeStructure, E.of, setStructure),
-        [indexedNodes]
-    )
+    useEffect(() => {
+        setStructure(E.of([...pipe(indexedNodes, getNodeStructure)]))
+    }, [indexedNodes])
 
     const getNode = useCallback(
         (id: number): E.Either<Error, ISystemNode> =>
@@ -72,12 +67,11 @@ export const useSystemNodes = (): UseDependencies => {
             selectNode(id, indexedNodes),
         [indexedNodes]
     )
-    const expandAll = useCallback(
-        (): ISystemNode[] => pipe(indexedNodes, expandNodes),
-        [indexedNodes]
-    )
+    const expandAll = useCallback((): void => {
+        setStructure(E.of([...pipe(indexedNodes, expandNodes)]))
+    }, [indexedNodes])
     const collapseAll = useCallback(
-        (): ISystemNode[] => pipe(indexedNodes, collapseNodes),
+        (): void => setStructure(E.of([...pipe(indexedNodes, collapseNodes)])),
         [indexedNodes]
     )
 
@@ -121,6 +115,19 @@ const expandNodes = (indexedNodes: Map<number, ISystemNode>): ISystemNode[] => {
             folder.open = true
         }
     })
+
+    if (indexedNodes.has(9999)) {
+        indexedNodes.delete(9999)
+    } else {
+        indexedNodes.set(9999, {
+            id: 99999,
+            icon: 'file-react-icon',
+            name: 'future.md',
+            type: 'FILE',
+            parentId: 4,
+        })
+    }
+
     return getNodeStructure(indexedNodes)
 }
 

@@ -525,6 +525,7 @@ describe('useSystemNodes hook', async () => {
             const { result } = renderHook(() => useSystemNodes())
             await waitFor(() => {
                 expect(result.current.loading).toEqual(false)
+                result.current.expandAll()
                 const structure = pipe(
                     result.current.structure,
                     E.getOrElse(() => [] as ISystemNode[])
