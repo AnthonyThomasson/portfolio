@@ -42,9 +42,6 @@ function FileExplorer(): JSX.Element {
             params.fileId !== undefined &&
             +params.fileId > 0
         ) {
-            console.log('loading', loading)
-            console.log('selecting', params.fileId)
-            console.log('structure', structure)
             select(+params.fileId)
         }
     }, [loading, params.fileId])
