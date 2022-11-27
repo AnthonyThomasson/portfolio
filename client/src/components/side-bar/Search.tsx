@@ -1,25 +1,32 @@
-import { useRef, useState } from 'react'
+import * as E from 'fp-ts/lib/Either'
+import { pipe } from 'fp-ts/lib/function'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { IFileNode, NodeType } from '../../utilities/files/api'
-import { getSystemNodes } from '../../utilities/files/utilities'
+import {
+    IFileNode,
+    ISystemNode,
+    NodeType,
+    useSystemNodes,
+} from '../../utilities/hooks/useSystemNodes'
 import './../../styles/Search.css'
 
 function Search(): JSX.Element {
     const navigate = useNavigate()
+    const { nodes } = useSystemNodes()
     const [systemNodes, setSystemNodes] = useState<IFileNode[]>([])
     const [searchResults, setSearchResults] = useState<IFileNode[]>([])
 
     const searchBarContent = useRef(null)
-
-    if (systemNodes.length === 0) {
-        getSystemNodes()
-            .then((systemNodes: any) => {
-                setSystemNodes(systemNodes)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }
+    useEffect(() => {
+        setSystemNodes(
+            pipe(
+                nodes,
+                E.getOrElseW(() => [])
+            ).filter(
+                (node: ISystemNode) => node.type === NodeType.File
+            ) as IFileNode[]
+        )
+    }, [nodes])
 
     const onSearch = (searchTerm: string): void => {
         if (searchTerm === '') {

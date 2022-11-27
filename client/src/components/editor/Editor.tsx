@@ -1,7 +1,8 @@
+import * as E from 'fp-ts/lib/Either'
+import { pipe } from 'fp-ts/lib/function'
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router'
-import { IFileNode, ISystemNode, NodeType } from '../../utilities/files/api'
-import { getSystemNode } from '../../utilities/files/utilities'
+import { IFileNode, useSystemNodes } from '../../utilities/hooks/useSystemNodes'
 import './../../styles/Editor.css'
 import Home from './Home'
 import SelectedFile from './SelectedFile'
@@ -16,19 +17,20 @@ function Editor(props: { unknownPath?: boolean }): JSX.Element {
     const [selectedTabId, setSelectedTabId] = useState<number>(0)
     const [selectedHistory, setSelectedHistory] = useState<number[]>([])
 
+    const { nodes } = useSystemNodes()
+
     useEffect(() => {
         if (fileId > 0) {
             if (tabs[fileId] === undefined) {
-                getSystemNode(fileId)
-                    .then((node: ISystemNode) => {
-                        if (node.type === NodeType.File) {
-                            const file = node as IFileNode
-                            setTabs({ ...tabs, [file.id]: file })
-                        }
-                    })
-                    .catch((e) => {
-                        console.error(e)
-                    })
+                const fileNodes = pipe(
+                    nodes,
+                    E.getOrElseW(() => [])
+                ).filter((node) => node.id === fileId) as IFileNode[]
+
+                if (fileNodes.length > 0) {
+                    const fileNode = fileNodes[0]
+                    setTabs({ ...tabs, [fileNode.id]: fileNode })
+                }
             }
         }
         if (selectedTabId > 0) {

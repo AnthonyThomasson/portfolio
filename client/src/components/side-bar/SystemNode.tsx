@@ -3,7 +3,7 @@ import {
     IFolderNode,
     ISystemNode,
     NodeType,
-} from '../../utilities/files/api'
+} from '../../utilities/hooks/useSystemNodes'
 import FileTree from './FileTree'
 
 interface Props {

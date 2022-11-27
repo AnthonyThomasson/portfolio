@@ -1,84 +1,53 @@
-import { useEffect, useMemo, useState } from 'react'
-import { useNavigate, useParams } from 'react-router'
-import { IFolderNode, ISystemNode } from '../../utilities/files/api'
+import * as E from 'fp-ts/lib/Either'
+import { pipe } from 'fp-ts/lib/function'
+import { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import {
-    collapseFolders,
-    expandFolders,
-    findAndSelect,
-    getFileStructures,
-    getSystemNodes,
-    removeSelection,
-} from '../../utilities/files/utilities'
+    ISystemNode,
+    useSystemNodes,
+} from '../../utilities/hooks/useSystemNodes'
 import './../../styles/FileExplorer.css'
 import './../../styles/SystemNodeIcons.css'
 import FileTree from './FileTree'
 
 function FileExplorer(): JSX.Element {
-    const navigate = useNavigate()
     const params = useParams()
+    const navigate = useNavigate()
+    const [isExplorerOpen, setExplorerIsOpen] = useState(true)
+    const { structure, expandAll, collapseAll, select, loading } =
+        useSystemNodes()
 
-    const [isOpen, setIsOpen] = useState(true)
-    const [systemNodes, setSystemNodes] = useState<ISystemNode[]>([])
-
-    const structure = useMemo(() => {
-        const structure = getFileStructures(systemNodes)
-        return structure
-    }, [systemNodes])
+    if (
+        loading === false &&
+        pipe(
+            structure,
+            E.getOrElseW(() => [] as ISystemNode[])
+        ).length === 0
+    ) {
+        console.log('why is this happening?')
+    }
 
     useEffect(() => {
-        if (params.fileId !== undefined && +params.fileId > 0) {
-            const newSystemNodes = findAndSelect(
-                systemNodes,
-                structure,
-                +params.fileId
+        pipe(
+            structure,
+            E.mapLeft((err) =>
+                console.log(`Structure failed to load: ${err.message}`)
             )
-            setSystemNodes(newSystemNodes)
-        } else {
-            const [newNodes] = removeSelection(systemNodes, structure)
-            setSystemNodes(newNodes)
+        )
+    }, [structure])
+
+    useEffect(() => {
+        if (
+            loading === false &&
+            params.fileId !== undefined &&
+            +params.fileId > 0
+        ) {
+            console.log('loading', loading)
+            console.log('selecting', params.fileId)
+            console.log('structure', structure)
+            select(+params.fileId)
         }
-    }, [params.fileId])
-
-    if (systemNodes.length === 0) {
-        getSystemNodes()
-            .then((systemNodes: any) => {
-                if (params.fileId !== undefined && +params.fileId > 0) {
-                    const structure = getFileStructures(systemNodes)
-                    const newSystemNodes = findAndSelect(
-                        systemNodes,
-                        structure,
-                        +params.fileId
-                    )
-                    setSystemNodes(newSystemNodes)
-                } else {
-                    setSystemNodes(systemNodes)
-                }
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }
-
-    const onFolderSelected = (folderId: number): void => {
-        const newSystemNodes = systemNodes.slice()
-        const selectedNode = newSystemNodes[folderId] as IFolderNode
-        selectedNode.open = !selectedNode.open
-        setSystemNodes(newSystemNodes)
-    }
-
-    const onFileSelected = (fileId: number): void => {
-        navigate(`/file/${fileId}`)
-    }
-
-    const onExpandAll = (): void => {
-        const [expandedNodes] = expandFolders(systemNodes, structure)
-        setSystemNodes(expandedNodes)
-    }
-
-    const onCollapseAll = (): void => {
-        const [collapsedFolders] = collapseFolders(systemNodes, structure)
-        setSystemNodes(collapsedFolders)
-    }
+    }, [loading, params.fileId])
 
     return (
         <div className="file-explorer">
@@ -86,11 +55,13 @@ function FileExplorer(): JSX.Element {
                 <div className="file-explorer-heading">
                     <div
                         className="file-explorer-title"
-                        onClick={() => setIsOpen(!isOpen)}
+                        onClick={() => setExplorerIsOpen(!isExplorerOpen)}
                     >
                         <span
                             className={`chevron fa-solid ${
-                                isOpen ? 'fa-chevron-down' : 'fa-chevron-right'
+                                isExplorerOpen
+                                    ? 'fa-chevron-down'
+                                    : 'fa-chevron-right'
                             }`}
                         ></span>
                         PORTFOLIO
@@ -99,7 +70,7 @@ function FileExplorer(): JSX.Element {
                         <li>
                             <button
                                 className="file-explorer-button"
-                                onClick={onExpandAll}
+                                onClick={() => expandAll()}
                             >
                                 +
                             </button>
@@ -107,7 +78,7 @@ function FileExplorer(): JSX.Element {
                         <li>
                             <button
                                 className="file-explorer-button"
-                                onClick={onCollapseAll}
+                                onClick={() => collapseAll()}
                             >
                                 -
                             </button>
@@ -119,13 +90,20 @@ function FileExplorer(): JSX.Element {
                 </div>
                 <div
                     className={`file-explorer-content ${
-                        isOpen ? 'file-explorer-content-active' : ''
+                        isExplorerOpen ? 'file-explorer-content-active' : ''
                     }`}
                 >
                     <FileTree
-                        structure={structure}
-                        onFolderSelected={onFolderSelected}
-                        onFileSelected={onFileSelected}
+                        structure={pipe(
+                            structure,
+                            E.getOrElse(() => [] as ISystemNode[])
+                        )}
+                        onFolderSelected={(folderId: number): void => {
+                            select(folderId)
+                        }}
+                        onFileSelected={(fileId: number): void => {
+                            navigate(`/file/${fileId}`)
+                        }}
                     />
                 </div>
             </div>

@@ -25,6 +25,7 @@ export interface IFileNode extends ISystemNode {
 }
 
 interface UseDependencies {
+    nodes: E.Either<Error, ISystemNode[]>
     structure: E.Either<Error, ISystemNode[]>
     loading: Boolean
     unselect: () => void
@@ -102,6 +103,7 @@ export const useSystemNodes = (): UseDependencies => {
     )
 
     return {
+        nodes,
         structure,
         loading,
         select,
