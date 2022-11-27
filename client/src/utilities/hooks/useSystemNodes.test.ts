@@ -89,6 +89,7 @@ describe('useSystemNodes hook', async () => {
         it('should populate a multidimensional structure of nodes fetched from the server', async () => {
             const { result } = renderHook(() => useSystemNodes())
             await waitFor(() => {
+                expect(result.current.loading).toBe(false)
                 const structure = pipe(
                     result.current.structure,
                     E.getOrElse(() => [] as ISystemNode[])
@@ -176,28 +177,6 @@ describe('useSystemNodes hook', async () => {
                 ])
             })
         })
-        it('Check for some weird shit', async () => {
-            const { result } = renderHook(() => useSystemNodes())
-            const { structure, loading } = result.current
-            expect(loading).toBe(true)
-            expect(
-                pipe(
-                    structure,
-                    E.getOrElseW(() => [] as ISystemNode[])
-                )
-            ).toEqual([])
-            await waitFor(() => {
-                if (
-                    loading === false &&
-                    pipe(
-                        structure,
-                        E.getOrElseW(() => [] as ISystemNode[])
-                    ).length === 0
-                ) {
-                    expect(true).toBe(false)
-                }
-            })
-        })
     })
     describe('select', async () => {
         it('select a file, then the status is toggled to be "selected"', async () => {
@@ -218,6 +197,7 @@ describe('useSystemNodes hook', async () => {
                                 parentId: null,
                                 selected: true,
                                 type: 'FILE',
+                                breadcrumbs: [],
                             })
                     )
                 )
@@ -302,8 +282,9 @@ describe('useSystemNodes hook', async () => {
                         id: 8,
                         name: 'root.md',
                         parentId: null,
-                        selected: false,
+                        selected: true,
                         type: 'FILE',
+                        breadcrumbs: [],
                     },
                 ])
             })
@@ -326,6 +307,7 @@ describe('useSystemNodes hook', async () => {
                                 name: 'root.md',
                                 parentId: null,
                                 selected: true,
+                                breadcrumbs: [],
                                 type: 'FILE',
                             })
                     )
@@ -411,7 +393,8 @@ describe('useSystemNodes hook', async () => {
                         id: 8,
                         name: 'root.md',
                         parentId: null,
-                        selected: false,
+                        selected: true,
+                        breadcrumbs: [],
                         type: 'FILE',
                     },
                 ])
@@ -435,6 +418,7 @@ describe('useSystemNodes hook', async () => {
                                 parentId: 1,
                                 content: 'Content 2',
                                 selected: true,
+                                breadcrumbs: ['me'],
                             })
                     )
                 )
@@ -461,6 +445,7 @@ describe('useSystemNodes hook', async () => {
                                 parentId: 1,
                                 content: 'Content 2',
                                 selected: true,
+                                breadcrumbs: ['me'],
                             },
                         ],
                     },
@@ -544,6 +529,7 @@ describe('useSystemNodes hook', async () => {
                                 parentId: 1,
                                 content: 'Content 2',
                                 selected: true,
+                                breadcrumbs: ['me'],
                             })
                     )
                 )
@@ -570,6 +556,7 @@ describe('useSystemNodes hook', async () => {
                                 parentId: 1,
                                 content: 'Content 2',
                                 selected: true,
+                                breadcrumbs: ['me'],
                             },
                         ],
                     },

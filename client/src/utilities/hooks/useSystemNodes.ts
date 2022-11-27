@@ -22,6 +22,7 @@ export interface IFolderNode extends ISystemNode {
 export interface IFileNode extends ISystemNode {
     selected: boolean
     content: string
+    breadcrumbs: string[]
 }
 
 interface UseDependencies {
@@ -216,16 +217,20 @@ export function findAndSelect(
     const recurseAndSelect = (
         newStructure: ISystemNode[],
         foundSelection: boolean,
-        isRoot: boolean
+        isRoot: boolean,
+
+        breadcrumbs: string[] = []
     ): [ISystemNode[], boolean] => {
         newStructure.forEach((node) => {
             if (node.type === NodeType.Folder) {
                 const folder = node as IFolderNode
+                breadcrumbs.push(folder.name)
                 if (folder.children.length > 0) {
                     ;[folder.children, foundSelection] = recurseAndSelect(
                         folder.children,
                         foundSelection,
-                        false
+                        false,
+                        breadcrumbs
                     ) as [ISystemNode[], boolean]
                 }
                 if (foundSelection) {
@@ -240,10 +245,12 @@ export function findAndSelect(
                 if (file.id === selectedFileId) {
                     const listNode = indexedNodes.get(file.id) as IFileNode
                     listNode.selected = true
+                    listNode.breadcrumbs = [...breadcrumbs]
                     foundSelection = true
                 }
             }
         })
+        breadcrumbs.pop()
         return [newStructure, foundSelection]
     }
 
