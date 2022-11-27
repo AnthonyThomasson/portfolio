@@ -62,6 +62,9 @@ function Search(): JSX.Element {
                 >
                     <span className={node.icon}></span>
                     <span className="folder-name">{node.name}</span>
+                    <span className="folder-path">
+                        {'./' + node.breadcrumbs.join('/')}
+                    </span>
                 </div>
             </li>
         )

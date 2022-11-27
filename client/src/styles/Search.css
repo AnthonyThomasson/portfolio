@@ -19,6 +19,12 @@
     margin-top: 20px;
 }
 
+.search-results .folder-path {
+    padding-left: 5px;
+    font-weight: lighter;
+    font-size: small;
+}
+
 .search-results .system-node-name {
     display: flex;
     padding: 5px 10px;
