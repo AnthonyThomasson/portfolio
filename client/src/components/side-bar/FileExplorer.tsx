@@ -17,16 +17,6 @@ function FileExplorer(): JSX.Element {
     const { structure, expandAll, collapseAll, select, loading } =
         useSystemNodes()
 
-    if (
-        loading === false &&
-        pipe(
-            structure,
-            E.getOrElseW(() => [] as ISystemNode[])
-        ).length === 0
-    ) {
-        console.log('why is this happening?')
-    }
-
     useEffect(() => {
         pipe(
             structure,
