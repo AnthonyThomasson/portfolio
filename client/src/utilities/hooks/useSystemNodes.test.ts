@@ -4,8 +4,7 @@ import { pipe } from 'fp-ts/lib/function'
 import { rest } from 'msw'
 import { setupServer } from 'msw/node'
 import { describe, expect, it } from 'vitest'
-import { ISystemNode } from './../files/api'
-import { useSystemNodes } from './useSystemNodes'
+import { ISystemNode, useSystemNodes } from './useSystemNodes'
 
 const server = setupServer(
     rest.get<ISystemNode[]>(

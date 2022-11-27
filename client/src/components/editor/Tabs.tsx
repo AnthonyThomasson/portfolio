@@ -1,4 +1,4 @@
-import { IFileNode } from '../../utilities/files/api'
+import { IFileNode } from '../../utilities/hooks/useSystemNodes'
 
 function Tabs(props: {
     onTabRemove: OnTabRemove

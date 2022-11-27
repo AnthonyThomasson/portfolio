@@ -1,4 +1,4 @@
-import { ISystemNode } from '../../utilities/files/api'
+import { ISystemNode } from '../../utilities/hooks/useSystemNodes'
 import SystemNode, { OnFileSelected, OnFolderSelected } from './SystemNode'
 
 function FileTree(props: {
