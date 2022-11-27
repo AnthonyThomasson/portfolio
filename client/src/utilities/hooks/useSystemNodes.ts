@@ -14,6 +14,7 @@ export interface ISystemNode {
     name: string
     parentId: number
     type: string
+    breadcrumbs: string[]
 }
 export interface IFolderNode extends ISystemNode {
     children: ISystemNode[]
@@ -22,7 +23,6 @@ export interface IFolderNode extends ISystemNode {
 export interface IFileNode extends ISystemNode {
     selected: boolean
     content: string
-    breadcrumbs: string[]
 }
 
 interface UseDependencies {
@@ -162,6 +162,7 @@ const getNodeStructure = (
                     const folder = node as IFolderNode
                     folder.children = []
                 }
+                node.breadcrumbs = []
             })
             indexedNodes.forEach((node: ISystemNode) =>
                 pipe(
@@ -175,6 +176,10 @@ const getNodeStructure = (
                             const parentFolder = indexedNodes.get(
                                 node.parentId
                             ) as IFolderNode
+                            node.breadcrumbs = [
+                                ...parentFolder.breadcrumbs,
+                                parentFolder.name,
+                            ]
                             parentFolder.children.push(node)
                         }
                     )
@@ -217,20 +222,16 @@ export function findAndSelect(
     const recurseAndSelect = (
         newStructure: ISystemNode[],
         foundSelection: boolean,
-        isRoot: boolean,
-
-        breadcrumbs: string[] = []
+        isRoot: boolean
     ): [ISystemNode[], boolean] => {
         newStructure.forEach((node) => {
             if (node.type === NodeType.Folder) {
                 const folder = node as IFolderNode
-                breadcrumbs.push(folder.name)
                 if (folder.children.length > 0) {
                     ;[folder.children, foundSelection] = recurseAndSelect(
                         folder.children,
                         foundSelection,
-                        false,
-                        breadcrumbs
+                        false
                     ) as [ISystemNode[], boolean]
                 }
                 if (foundSelection) {
@@ -245,12 +246,10 @@ export function findAndSelect(
                 if (file.id === selectedFileId) {
                     const listNode = indexedNodes.get(file.id) as IFileNode
                     listNode.selected = true
-                    listNode.breadcrumbs = [...breadcrumbs]
                     foundSelection = true
                 }
             }
         })
-        breadcrumbs.pop()
         return [newStructure, foundSelection]
     }
 

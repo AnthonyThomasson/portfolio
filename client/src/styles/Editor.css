@@ -57,10 +57,21 @@ table tbody tr.active-row {
     background-color: #383e4a;
 }
 
+.tab-path,
 .tab-name,
 .tab-close {
     display: flex;
     align-items: center;
+}
+
+.tab-name {
+    font-weight: bold;
+}
+
+.tab-path {
+    padding-left: 5px;
+    font-weight: lighter;
+    font-size: 0.8em;
 }
 
 .tab-close {

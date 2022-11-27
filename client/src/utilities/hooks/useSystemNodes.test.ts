@@ -104,6 +104,7 @@ describe('useSystemNodes hook', async () => {
                         parentId: null,
                         content: 'Content 1',
                         open: false,
+                        breadcrumbs: [],
                         children: [
                             {
                                 id: 2,
@@ -113,6 +114,7 @@ describe('useSystemNodes hook', async () => {
                                 parentId: 1,
                                 content: 'Content 2',
                                 selected: false,
+                                breadcrumbs: ['me'],
                             },
                         ],
                     },
@@ -124,6 +126,7 @@ describe('useSystemNodes hook', async () => {
                         parentId: null,
                         content: 'Content 3',
                         open: false,
+                        breadcrumbs: [],
                         children: [
                             {
                                 id: 4,
@@ -133,6 +136,7 @@ describe('useSystemNodes hook', async () => {
                                 parentId: 3,
                                 content: 'Content 4',
                                 open: false,
+                                breadcrumbs: ['projects'],
                                 children: [
                                     {
                                         id: 5,
@@ -142,6 +146,7 @@ describe('useSystemNodes hook', async () => {
                                         parentId: 4,
                                         content: 'Content 5',
                                         selected: false,
+                                        breadcrumbs: ['projects', 'portfolio'],
                                     },
                                     {
                                         id: 6,
@@ -151,6 +156,7 @@ describe('useSystemNodes hook', async () => {
                                         parentId: 4,
                                         content: 'Content 6',
                                         selected: false,
+                                        breadcrumbs: ['projects', 'portfolio'],
                                     },
                                     {
                                         id: 7,
@@ -160,6 +166,7 @@ describe('useSystemNodes hook', async () => {
                                         parentId: 4,
                                         content: 'Content 7',
                                         selected: false,
+                                        breadcrumbs: ['projects', 'portfolio'],
                                     },
                                 ],
                             },
@@ -173,6 +180,7 @@ describe('useSystemNodes hook', async () => {
                         parentId: null,
                         selected: false,
                         type: 'FILE',
+                        breadcrumbs: [],
                     },
                 ])
             })
@@ -215,6 +223,7 @@ describe('useSystemNodes hook', async () => {
                         parentId: null,
                         content: 'Content 1',
                         open: false,
+                        breadcrumbs: [],
                         children: [
                             {
                                 id: 2,
@@ -224,6 +233,7 @@ describe('useSystemNodes hook', async () => {
                                 parentId: 1,
                                 content: 'Content 2',
                                 selected: false,
+                                breadcrumbs: ['me'],
                             },
                         ],
                     },
@@ -235,6 +245,7 @@ describe('useSystemNodes hook', async () => {
                         parentId: null,
                         content: 'Content 3',
                         open: false,
+                        breadcrumbs: [],
                         children: [
                             {
                                 id: 4,
@@ -244,6 +255,7 @@ describe('useSystemNodes hook', async () => {
                                 parentId: 3,
                                 content: 'Content 4',
                                 open: false,
+                                breadcrumbs: ['projects'],
                                 children: [
                                     {
                                         id: 5,
@@ -253,6 +265,7 @@ describe('useSystemNodes hook', async () => {
                                         parentId: 4,
                                         content: 'Content 5',
                                         selected: false,
+                                        breadcrumbs: ['projects', 'portfolio'],
                                     },
                                     {
                                         id: 6,
@@ -262,6 +275,7 @@ describe('useSystemNodes hook', async () => {
                                         parentId: 4,
                                         content: 'Content 6',
                                         selected: false,
+                                        breadcrumbs: ['projects', 'portfolio'],
                                     },
                                     {
                                         id: 7,
@@ -271,6 +285,7 @@ describe('useSystemNodes hook', async () => {
                                         parentId: 4,
                                         content: 'Content 7',
                                         selected: false,
+                                        breadcrumbs: ['projects', 'portfolio'],
                                     },
                                 ],
                             },
@@ -326,6 +341,7 @@ describe('useSystemNodes hook', async () => {
                         parentId: null,
                         content: 'Content 1',
                         open: false,
+                        breadcrumbs: [],
                         children: [
                             {
                                 id: 2,
@@ -335,6 +351,7 @@ describe('useSystemNodes hook', async () => {
                                 parentId: 1,
                                 content: 'Content 2',
                                 selected: false,
+                                breadcrumbs: ['me'],
                             },
                         ],
                     },
@@ -346,6 +363,7 @@ describe('useSystemNodes hook', async () => {
                         parentId: null,
                         content: 'Content 3',
                         open: false,
+                        breadcrumbs: [],
                         children: [
                             {
                                 id: 4,
@@ -355,6 +373,7 @@ describe('useSystemNodes hook', async () => {
                                 parentId: 3,
                                 content: 'Content 4',
                                 open: false,
+                                breadcrumbs: ['projects'],
                                 children: [
                                     {
                                         id: 5,
@@ -364,6 +383,7 @@ describe('useSystemNodes hook', async () => {
                                         parentId: 4,
                                         content: 'Content 5',
                                         selected: false,
+                                        breadcrumbs: ['projects', 'portfolio'],
                                     },
                                     {
                                         id: 6,
@@ -373,6 +393,7 @@ describe('useSystemNodes hook', async () => {
                                         parentId: 4,
                                         content: 'Content 6',
                                         selected: false,
+                                        breadcrumbs: ['projects', 'portfolio'],
                                     },
                                     {
                                         id: 7,
@@ -382,6 +403,7 @@ describe('useSystemNodes hook', async () => {
                                         parentId: 4,
                                         content: 'Content 7',
                                         selected: false,
+                                        breadcrumbs: ['projects', 'portfolio'],
                                     },
                                 ],
                             },
@@ -394,8 +416,8 @@ describe('useSystemNodes hook', async () => {
                         name: 'root.md',
                         parentId: null,
                         selected: true,
-                        breadcrumbs: [],
                         type: 'FILE',
+                        breadcrumbs: [],
                     },
                 ])
             })
@@ -436,6 +458,7 @@ describe('useSystemNodes hook', async () => {
                         parentId: null,
                         content: 'Content 1',
                         open: true,
+                        breadcrumbs: [],
                         children: [
                             {
                                 id: 2,
@@ -457,6 +480,7 @@ describe('useSystemNodes hook', async () => {
                         parentId: null,
                         content: 'Content 3',
                         open: false,
+                        breadcrumbs: [],
                         children: [
                             {
                                 id: 4,
@@ -466,6 +490,7 @@ describe('useSystemNodes hook', async () => {
                                 parentId: 3,
                                 content: 'Content 4',
                                 open: false,
+                                breadcrumbs: ['projects'],
                                 children: [
                                     {
                                         id: 5,
@@ -475,6 +500,7 @@ describe('useSystemNodes hook', async () => {
                                         parentId: 4,
                                         content: 'Content 5',
                                         selected: false,
+                                        breadcrumbs: ['projects', 'portfolio'],
                                     },
                                     {
                                         id: 6,
@@ -484,6 +510,7 @@ describe('useSystemNodes hook', async () => {
                                         parentId: 4,
                                         content: 'Content 6',
                                         selected: false,
+                                        breadcrumbs: ['projects', 'portfolio'],
                                     },
                                     {
                                         id: 7,
@@ -493,6 +520,7 @@ describe('useSystemNodes hook', async () => {
                                         parentId: 4,
                                         content: 'Content 7',
                                         selected: false,
+                                        breadcrumbs: ['projects', 'portfolio'],
                                     },
                                 ],
                             },
@@ -506,6 +534,7 @@ describe('useSystemNodes hook', async () => {
                         parentId: null,
                         selected: false,
                         type: 'FILE',
+                        breadcrumbs: [],
                     },
                 ])
             })
@@ -547,6 +576,7 @@ describe('useSystemNodes hook', async () => {
                         parentId: null,
                         content: 'Content 1',
                         open: true,
+                        breadcrumbs: [],
                         children: [
                             {
                                 id: 2,
@@ -568,6 +598,7 @@ describe('useSystemNodes hook', async () => {
                         parentId: null,
                         content: 'Content 3',
                         open: false,
+                        breadcrumbs: [],
                         children: [
                             {
                                 id: 4,
@@ -577,6 +608,7 @@ describe('useSystemNodes hook', async () => {
                                 parentId: 3,
                                 content: 'Content 4',
                                 open: false,
+                                breadcrumbs: ['projects'],
                                 children: [
                                     {
                                         id: 5,
@@ -586,6 +618,7 @@ describe('useSystemNodes hook', async () => {
                                         parentId: 4,
                                         content: 'Content 5',
                                         selected: false,
+                                        breadcrumbs: ['projects', 'portfolio'],
                                     },
                                     {
                                         id: 6,
@@ -595,6 +628,7 @@ describe('useSystemNodes hook', async () => {
                                         parentId: 4,
                                         content: 'Content 6',
                                         selected: false,
+                                        breadcrumbs: ['projects', 'portfolio'],
                                     },
                                     {
                                         id: 7,
@@ -604,6 +638,7 @@ describe('useSystemNodes hook', async () => {
                                         parentId: 4,
                                         content: 'Content 7',
                                         selected: false,
+                                        breadcrumbs: ['projects', 'portfolio'],
                                     },
                                 ],
                             },
@@ -617,6 +652,7 @@ describe('useSystemNodes hook', async () => {
                         parentId: null,
                         selected: false,
                         type: 'FILE',
+                        breadcrumbs: [],
                     },
                 ])
             })
@@ -635,6 +671,7 @@ describe('useSystemNodes hook', async () => {
                                 name: 'portfolio',
                                 content: 'Content 4',
                                 parentId: 3,
+                                breadcrumbs: ['projects'],
                                 children: [
                                     {
                                         id: 5,
@@ -643,6 +680,7 @@ describe('useSystemNodes hook', async () => {
                                         type: 'FILE',
                                         parentId: 4,
                                         content: 'Content 5',
+                                        breadcrumbs: ['projects', 'portfolio'],
                                         selected: false,
                                     },
                                     {
@@ -652,6 +690,7 @@ describe('useSystemNodes hook', async () => {
                                         type: 'FILE',
                                         parentId: 4,
                                         content: 'Content 6',
+                                        breadcrumbs: ['projects', 'portfolio'],
                                         selected: false,
                                     },
                                     {
@@ -661,6 +700,7 @@ describe('useSystemNodes hook', async () => {
                                         type: 'FILE',
                                         parentId: 4,
                                         content: 'Content 7',
+                                        breadcrumbs: ['projects', 'portfolio'],
                                         selected: false,
                                     },
                                 ],
@@ -685,6 +725,7 @@ describe('useSystemNodes hook', async () => {
                                 icon: 'folder-icon',
                                 name: 'portfolio',
                                 content: 'Content 4',
+                                breadcrumbs: ['projects'],
                                 parentId: 3,
                                 children: [
                                     {
@@ -694,6 +735,7 @@ describe('useSystemNodes hook', async () => {
                                         type: 'FILE',
                                         parentId: 4,
                                         content: 'Content 5',
+                                        breadcrumbs: ['projects', 'portfolio'],
                                         selected: false,
                                     },
                                     {
@@ -703,6 +745,7 @@ describe('useSystemNodes hook', async () => {
                                         type: 'FILE',
                                         parentId: 4,
                                         content: 'Content 6',
+                                        breadcrumbs: ['projects', 'portfolio'],
                                         selected: false,
                                     },
                                     {
@@ -712,6 +755,7 @@ describe('useSystemNodes hook', async () => {
                                         type: 'FILE',
                                         parentId: 4,
                                         content: 'Content 7',
+                                        breadcrumbs: ['projects', 'portfolio'],
                                         selected: false,
                                     },
                                 ],
@@ -794,6 +838,7 @@ describe('useSystemNodes hook', async () => {
                         parentId: null,
                         content: 'Content 1',
                         open: true,
+                        breadcrumbs: [],
                         children: [
                             {
                                 id: 2,
@@ -803,6 +848,7 @@ describe('useSystemNodes hook', async () => {
                                 parentId: 1,
                                 content: 'Content 2',
                                 selected: false,
+                                breadcrumbs: ['me'],
                             },
                         ],
                     },
@@ -814,6 +860,7 @@ describe('useSystemNodes hook', async () => {
                         parentId: null,
                         content: 'Content 3',
                         open: true,
+                        breadcrumbs: [],
                         children: [
                             {
                                 id: 4,
@@ -823,6 +870,7 @@ describe('useSystemNodes hook', async () => {
                                 parentId: 3,
                                 content: 'Content 4',
                                 open: true,
+                                breadcrumbs: ['projects'],
                                 children: [
                                     {
                                         id: 5,
@@ -832,6 +880,7 @@ describe('useSystemNodes hook', async () => {
                                         parentId: 4,
                                         content: 'Content 5',
                                         selected: false,
+                                        breadcrumbs: ['projects', 'portfolio'],
                                     },
                                     {
                                         id: 6,
@@ -841,6 +890,7 @@ describe('useSystemNodes hook', async () => {
                                         parentId: 4,
                                         content: 'Content 6',
                                         selected: false,
+                                        breadcrumbs: ['projects', 'portfolio'],
                                     },
                                     {
                                         id: 7,
@@ -850,6 +900,7 @@ describe('useSystemNodes hook', async () => {
                                         parentId: 4,
                                         content: 'Content 7',
                                         selected: false,
+                                        breadcrumbs: ['projects', 'portfolio'],
                                     },
                                 ],
                             },
@@ -863,6 +914,7 @@ describe('useSystemNodes hook', async () => {
                         parentId: null,
                         content: 'Content 8',
                         selected: false,
+                        breadcrumbs: [],
                     },
                 ])
             })
@@ -888,6 +940,7 @@ describe('useSystemNodes hook', async () => {
                         parentId: null,
                         content: 'Content 1',
                         open: false,
+                        breadcrumbs: [],
                         children: [
                             {
                                 id: 2,
@@ -897,6 +950,7 @@ describe('useSystemNodes hook', async () => {
                                 parentId: 1,
                                 content: 'Content 2',
                                 selected: false,
+                                breadcrumbs: ['me'],
                             },
                         ],
                     },
@@ -908,6 +962,7 @@ describe('useSystemNodes hook', async () => {
                         parentId: null,
                         content: 'Content 3',
                         open: false,
+                        breadcrumbs: [],
                         children: [
                             {
                                 id: 4,
@@ -917,6 +972,7 @@ describe('useSystemNodes hook', async () => {
                                 parentId: 3,
                                 content: 'Content 4',
                                 open: false,
+                                breadcrumbs: ['projects'],
                                 children: [
                                     {
                                         id: 5,
@@ -926,6 +982,7 @@ describe('useSystemNodes hook', async () => {
                                         parentId: 4,
                                         content: 'Content 5',
                                         selected: false,
+                                        breadcrumbs: ['projects', 'portfolio'],
                                     },
                                     {
                                         id: 6,
@@ -935,6 +992,7 @@ describe('useSystemNodes hook', async () => {
                                         parentId: 4,
                                         content: 'Content 6',
                                         selected: false,
+                                        breadcrumbs: ['projects', 'portfolio'],
                                     },
                                     {
                                         id: 7,
@@ -944,6 +1002,7 @@ describe('useSystemNodes hook', async () => {
                                         parentId: 4,
                                         content: 'Content 7',
                                         selected: false,
+                                        breadcrumbs: ['projects', 'portfolio'],
                                     },
                                 ],
                             },
@@ -957,6 +1016,7 @@ describe('useSystemNodes hook', async () => {
                         parentId: null,
                         content: 'Content 8',
                         selected: false,
+                        breadcrumbs: [],
                     },
                 ])
             })
