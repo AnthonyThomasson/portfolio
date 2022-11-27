@@ -1,6 +1,7 @@
 import * as E from 'fp-ts/lib/Either'
 import { pipe } from 'fp-ts/lib/function'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import { ISystemNode } from '../../utilities/files/api'
 import { useSystemNodes } from '../../utilities/hooks/useSystemNodes'
 import './../../styles/FileExplorer.css'
@@ -8,10 +9,43 @@ import './../../styles/SystemNodeIcons.css'
 import FileTree from './FileTree'
 
 function FileExplorer(): JSX.Element {
-    // const params = useParams()
-    // const navigation = useNavigate()
+    const params = useParams()
+    const navigate = useNavigate()
     const [isExplorerOpen, setExplorerIsOpen] = useState(true)
-    const { structure, expandAll, collapseAll } = useSystemNodes()
+    const { structure, expandAll, collapseAll, select, loading } =
+        useSystemNodes()
+
+    if (
+        loading === false &&
+        pipe(
+            structure,
+            E.getOrElseW(() => [] as ISystemNode[])
+        ).length === 0
+    ) {
+        console.log('why is this happening?')
+    }
+
+    useEffect(() => {
+        pipe(
+            structure,
+            E.mapLeft((err) =>
+                console.log(`Structure failed to load: ${err.message}`)
+            )
+        )
+    }, [structure])
+
+    useEffect(() => {
+        if (
+            loading === false &&
+            params.fileId !== undefined &&
+            +params.fileId > 0
+        ) {
+            console.log('loading', loading)
+            console.log('selecting', params.fileId)
+            console.log('structure', structure)
+            select(+params.fileId)
+        }
+    }, [loading, params.fileId])
 
     return (
         <div className="file-explorer">
@@ -62,8 +96,12 @@ function FileExplorer(): JSX.Element {
                             structure,
                             E.getOrElse(() => [] as ISystemNode[])
                         )}
-                        onFolderSelected={() => {}}
-                        onFileSelected={() => {}}
+                        onFolderSelected={(folderId: number): void => {
+                            select(folderId)
+                        }}
+                        onFileSelected={(fileId: number): void => {
+                            navigate(`/file/${fileId}`)
+                        }}
                     />
                 </div>
             </div>

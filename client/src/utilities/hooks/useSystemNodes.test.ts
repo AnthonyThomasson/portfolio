@@ -69,6 +69,14 @@ const server = setupServer(
                         parentId: 4,
                         content: 'Content 7',
                     },
+                    {
+                        id: 8,
+                        icon: 'file-react-icon',
+                        name: 'root.md',
+                        type: 'FILE',
+                        parentId: null,
+                        content: 'Content 8',
+                    },
                 ])
             )
     )
@@ -157,18 +165,69 @@ describe('useSystemNodes hook', async () => {
                             },
                         ],
                     },
+                    {
+                        content: 'Content 8',
+                        icon: 'file-react-icon',
+                        id: 8,
+                        name: 'root.md',
+                        parentId: null,
+                        selected: false,
+                        type: 'FILE',
+                    },
                 ])
             })
         })
-        it('called multiple times', async () => {
+        it('Check for some weird shit', async () => {
             const { result } = renderHook(() => useSystemNodes())
-            await waitFor(() => {
-                const structure = pipe(
-                    result.current.structure,
-                    E.getOrElse(() => [] as ISystemNode[])
+            const { structure, loading } = result.current
+            expect(loading).toBe(true)
+            expect(
+                pipe(
+                    structure,
+                    E.getOrElseW(() => [] as ISystemNode[])
                 )
-                expect(structure.length).toBeGreaterThan(0)
-                expect(structure).toEqual([
+            ).toEqual([])
+            await waitFor(() => {
+                if (
+                    loading === false &&
+                    pipe(
+                        structure,
+                        E.getOrElseW(() => [] as ISystemNode[])
+                    ).length === 0
+                ) {
+                    expect(true).toBe(false)
+                }
+            })
+        })
+    })
+    describe('select', async () => {
+        it('select a file, then the status is toggled to be "selected"', async () => {
+            const { result } = renderHook(() => useSystemNodes())
+            await waitFor(async () => {
+                const { structure, loading, select } = result.current
+                expect(loading).toBe(false)
+                pipe(
+                    select(8),
+                    E.fold(
+                        (error) => expect(error).toBeNull(),
+                        (node) =>
+                            expect(node).toEqual({
+                                content: 'Content 8',
+                                icon: 'file-react-icon',
+                                id: 8,
+                                name: 'root.md',
+                                parentId: null,
+                                selected: true,
+                                type: 'FILE',
+                            })
+                    )
+                )
+                expect(
+                    pipe(
+                        structure,
+                        E.getOrElseW(() => [])
+                    )
+                ).toEqual([
                     {
                         id: 1,
                         icon: 'folder-icon',
@@ -238,21 +297,56 @@ describe('useSystemNodes hook', async () => {
                             },
                         ],
                     },
+                    {
+                        content: 'Content 8',
+                        icon: 'file-react-icon',
+                        id: 8,
+                        name: 'root.md',
+                        parentId: null,
+                        selected: false,
+                        type: 'FILE',
+                    },
                 ])
             })
         })
-    })
-    describe('getNode', async () => {
-        it('if we pass a valid file ID, we should return a file', async () => {
+        it('select a file twice, then the status stays "selected"', async () => {
             const { result } = renderHook(() => useSystemNodes())
-            await waitFor(() => {
-                expect(result.current.loading).toBeFalsy()
+            await waitFor(async () => {
+                const { structure, loading, select } = result.current
+                expect(loading).toBe(false)
+                select(8)
                 pipe(
-                    result.current.getNode(2),
+                    select(8),
                     E.fold(
                         (error) => expect(error).toBeNull(),
                         (node) =>
                             expect(node).toEqual({
+                                content: 'Content 8',
+                                icon: 'file-react-icon',
+                                id: 8,
+                                name: 'root.md',
+                                parentId: null,
+                                selected: true,
+                                type: 'FILE',
+                            })
+                    )
+                )
+                expect(
+                    pipe(
+                        structure,
+                        E.getOrElseW(() => [])
+                    )
+                ).toEqual([
+                    {
+                        id: 1,
+                        icon: 'folder-icon',
+                        name: 'me',
+                        type: 'FOLDER',
+                        parentId: null,
+                        content: 'Content 1',
+                        open: false,
+                        children: [
+                            {
                                 id: 2,
                                 icon: 'file-react-icon',
                                 name: 'README.md',
@@ -260,26 +354,26 @@ describe('useSystemNodes hook', async () => {
                                 parentId: 1,
                                 content: 'Content 2',
                                 selected: false,
-                            })
-                    )
-                )
-            })
-        })
-        it('if we pass a valid folder ID, we should return a folder', async () => {
-            const { result } = renderHook(() => useSystemNodes())
-            await waitFor(() => {
-                expect(result.current.loading).toBeFalsy()
-                pipe(
-                    result.current.getNode(4),
-                    E.fold(
-                        (error) => expect(error).toBeNull(),
-                        (node: ISystemNode) =>
-                            expect(node).toEqual({
+                            },
+                        ],
+                    },
+                    {
+                        id: 3,
+                        icon: 'folder-icon',
+                        name: 'projects',
+                        type: 'FOLDER',
+                        parentId: null,
+                        content: 'Content 3',
+                        open: false,
+                        children: [
+                            {
                                 id: 4,
                                 icon: 'folder-icon',
                                 name: 'portfolio',
-                                content: 'Content 4',
+                                type: 'FOLDER',
                                 parentId: 3,
+                                content: 'Content 4',
+                                open: false,
                                 children: [
                                     {
                                         id: 5,
@@ -309,37 +403,28 @@ describe('useSystemNodes hook', async () => {
                                         selected: false,
                                     },
                                 ],
-                                open: false,
-                                type: 'FOLDER',
-                            })
-                    )
-                )
+                            },
+                        ],
+                    },
+                    {
+                        content: 'Content 8',
+                        icon: 'file-react-icon',
+                        id: 8,
+                        name: 'root.md',
+                        parentId: null,
+                        selected: false,
+                        type: 'FILE',
+                    },
+                ])
             })
         })
-        it('if we pass a invalid node ID, we should return null and error', async () => {
-            const { result } = renderHook(() => useSystemNodes())
-            await waitFor(() => {
-                pipe(
-                    result.current.getNode(100),
-                    E.fold(
-                        (error) => {
-                            expect(error).toBeInstanceOf(Error)
-                            expect(error.message).toBe(
-                                "Node with ID '100' not found"
-                            )
-                        },
-                        (node) => expect(node).toBeNull()
-                    )
-                )
-            })
-        })
-    })
-    describe('select', async () => {
-        it("if we pass a valid file ID, we should return a files with 'selected' property toggled to true then false", async () => {
+        it('select a nested file, then the file is set to be "selected", and all enclosing folders are set to "open"', async () => {
             const { result } = renderHook(() => useSystemNodes())
             await waitFor(async () => {
+                const { structure, loading, select } = result.current
+                expect(loading).toBe(false)
                 pipe(
-                    result.current.select(2),
+                    select(2),
                     E.fold(
                         (error) => expect(error).toBeNull(),
                         (node) =>
@@ -354,8 +439,101 @@ describe('useSystemNodes hook', async () => {
                             })
                     )
                 )
+                expect(
+                    pipe(
+                        structure,
+                        E.getOrElseW(() => [])
+                    )
+                ).toEqual([
+                    {
+                        id: 1,
+                        icon: 'folder-icon',
+                        name: 'me',
+                        type: 'FOLDER',
+                        parentId: null,
+                        content: 'Content 1',
+                        open: true,
+                        children: [
+                            {
+                                id: 2,
+                                icon: 'file-react-icon',
+                                name: 'README.md',
+                                type: 'FILE',
+                                parentId: 1,
+                                content: 'Content 2',
+                                selected: true,
+                            },
+                        ],
+                    },
+                    {
+                        id: 3,
+                        icon: 'folder-icon',
+                        name: 'projects',
+                        type: 'FOLDER',
+                        parentId: null,
+                        content: 'Content 3',
+                        open: false,
+                        children: [
+                            {
+                                id: 4,
+                                icon: 'folder-icon',
+                                name: 'portfolio',
+                                type: 'FOLDER',
+                                parentId: 3,
+                                content: 'Content 4',
+                                open: false,
+                                children: [
+                                    {
+                                        id: 5,
+                                        icon: 'file-react-icon',
+                                        name: 'README.md',
+                                        type: 'FILE',
+                                        parentId: 4,
+                                        content: 'Content 5',
+                                        selected: false,
+                                    },
+                                    {
+                                        id: 6,
+                                        icon: 'file-react-icon',
+                                        name: 'technologies.md',
+                                        type: 'FILE',
+                                        parentId: 4,
+                                        content: 'Content 6',
+                                        selected: false,
+                                    },
+                                    {
+                                        id: 7,
+                                        icon: 'file-react-icon',
+                                        name: 'future.md',
+                                        type: 'FILE',
+                                        parentId: 4,
+                                        content: 'Content 7',
+                                        selected: false,
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        content: 'Content 8',
+                        icon: 'file-react-icon',
+                        id: 8,
+                        name: 'root.md',
+                        parentId: null,
+                        selected: false,
+                        type: 'FILE',
+                    },
+                ])
+            })
+        })
+        it('select a nested file twice, then the file is set to be "selected", and all enclosing folders are set to "open"', async () => {
+            const { result } = renderHook(() => useSystemNodes())
+            await waitFor(async () => {
+                const { structure, loading, select } = result.current
+                expect(loading).toBe(false)
+                select(2)
                 pipe(
-                    result.current.select(2),
+                    select(2),
                     E.fold(
                         (error) => expect(error).toBeNull(),
                         (node) =>
@@ -366,13 +544,98 @@ describe('useSystemNodes hook', async () => {
                                 type: 'FILE',
                                 parentId: 1,
                                 content: 'Content 2',
-                                selected: false,
+                                selected: true,
                             })
                     )
                 )
+                expect(
+                    pipe(
+                        structure,
+                        E.getOrElseW(() => [])
+                    )
+                ).toEqual([
+                    {
+                        id: 1,
+                        icon: 'folder-icon',
+                        name: 'me',
+                        type: 'FOLDER',
+                        parentId: null,
+                        content: 'Content 1',
+                        open: true,
+                        children: [
+                            {
+                                id: 2,
+                                icon: 'file-react-icon',
+                                name: 'README.md',
+                                type: 'FILE',
+                                parentId: 1,
+                                content: 'Content 2',
+                                selected: true,
+                            },
+                        ],
+                    },
+                    {
+                        id: 3,
+                        icon: 'folder-icon',
+                        name: 'projects',
+                        type: 'FOLDER',
+                        parentId: null,
+                        content: 'Content 3',
+                        open: false,
+                        children: [
+                            {
+                                id: 4,
+                                icon: 'folder-icon',
+                                name: 'portfolio',
+                                type: 'FOLDER',
+                                parentId: 3,
+                                content: 'Content 4',
+                                open: false,
+                                children: [
+                                    {
+                                        id: 5,
+                                        icon: 'file-react-icon',
+                                        name: 'README.md',
+                                        type: 'FILE',
+                                        parentId: 4,
+                                        content: 'Content 5',
+                                        selected: false,
+                                    },
+                                    {
+                                        id: 6,
+                                        icon: 'file-react-icon',
+                                        name: 'technologies.md',
+                                        type: 'FILE',
+                                        parentId: 4,
+                                        content: 'Content 6',
+                                        selected: false,
+                                    },
+                                    {
+                                        id: 7,
+                                        icon: 'file-react-icon',
+                                        name: 'future.md',
+                                        type: 'FILE',
+                                        parentId: 4,
+                                        content: 'Content 7',
+                                        selected: false,
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                    {
+                        content: 'Content 8',
+                        icon: 'file-react-icon',
+                        id: 8,
+                        name: 'root.md',
+                        parentId: null,
+                        selected: false,
+                        type: 'FILE',
+                    },
+                ])
             })
         })
-        it("if we pass a valid folder ID, we should return a files with 'open' property toggled to true then false", async () => {
+        it('select a folder, then it should be set to open', async () => {
             const { result } = renderHook(() => useSystemNodes())
             await waitFor(() => {
                 pipe(
@@ -420,6 +683,12 @@ describe('useSystemNodes hook', async () => {
                             })
                     )
                 )
+            })
+        })
+        it('select a folder twice, then it should be set to closed', async () => {
+            const { result } = renderHook(() => useSystemNodes())
+            await waitFor(() => {
+                result.current.select(4)
                 pipe(
                     result.current.select(4),
                     E.fold(
@@ -467,7 +736,7 @@ describe('useSystemNodes hook', async () => {
                 )
             })
         })
-        it('if we pass a invalid node ID, we should return null and error', async () => {
+        it('select a invalid node, then return null and error', async () => {
             const { result } = renderHook(() => useSystemNodes())
             await waitFor(() => {
                 pipe(
@@ -484,7 +753,7 @@ describe('useSystemNodes hook', async () => {
                 )
             })
         })
-        it('if we pass a node ID, and the node has an unrecognizable type', async () => {
+        it('select a node, that has an unrecognizable type', async () => {
             server.resetHandlers(
                 rest.get<ISystemNode[]>(
                     '/api/system-nodes',
@@ -600,6 +869,15 @@ describe('useSystemNodes hook', async () => {
                             },
                         ],
                     },
+                    {
+                        id: 8,
+                        icon: 'file-react-icon',
+                        name: 'root.md',
+                        type: 'FILE',
+                        parentId: null,
+                        content: 'Content 8',
+                        selected: false,
+                    },
                 ])
             })
         })
@@ -684,6 +962,15 @@ describe('useSystemNodes hook', async () => {
                                 ],
                             },
                         ],
+                    },
+                    {
+                        id: 8,
+                        icon: 'file-react-icon',
+                        name: 'root.md',
+                        type: 'FILE',
+                        parentId: null,
+                        content: 'Content 8',
+                        selected: false,
                     },
                 ])
             })

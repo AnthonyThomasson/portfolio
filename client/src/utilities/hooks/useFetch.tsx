@@ -17,12 +17,19 @@ export const useFetch = <T,>(
         }
         fetchData()
             .then((response) => {
-                setData(response)
+                if (loading) {
+                    setData(response)
+                }
             })
             .catch((error) => {
                 setData(E.left(error))
             })
-            .finally(() => setLoading(false))
+            .finally(() => {
+                setLoading(false)
+            })
+        return () => {
+            setLoading(false)
+        }
     }, [url])
     return [data, loading]
 }

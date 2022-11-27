@@ -27,8 +27,9 @@ export interface IFileNode extends ISystemNode {
 interface UseDependencies {
     structure: E.Either<Error, ISystemNode[]>
     loading: Boolean
-    getNode: (nodeId: number) => E.Either<Error, ISystemNode>
-    select: (id: number) => E.Either<Error, ISystemNode>
+    unselect: () => void
+    expand: (folderId: number) => void
+    select: (fileId: number) => E.Either<Error, ISystemNode>
     expandAll: () => void
     collapseAll: () => void
 }
@@ -38,7 +39,6 @@ export const useSystemNodes = (): UseDependencies => {
     const [structure, setStructure] = useState<E.Either<Error, ISystemNode[]>>(
         E.of([])
     )
-
     const indexedNodes = useMemo(
         () =>
             pipe(
@@ -51,25 +51,51 @@ export const useSystemNodes = (): UseDependencies => {
 
     useEffect(() => {
         setStructure(E.of([...pipe(indexedNodes, getNodeStructure)]))
-    }, [indexedNodes])
+    }, [nodes])
 
-    const getNode = useCallback(
+    const select = useCallback(
         (id: number): E.Either<Error, ISystemNode> =>
             pipe(
                 indexedNodes.get(id),
-                E.fromNullable(new Error(`Node with ID '${id}' not found`))
+                E.fromNullable(new Error(`Node with ID '${id}' not found`)),
+                E.chain((node: ISystemNode) => {
+                    if (node.type === NodeType.File) {
+                        findAndSelect(
+                            id,
+                            unselectNodes(indexedNodes),
+                            indexedNodes
+                        )
+                    } else if (node.type === NodeType.Folder) {
+                        const folder = indexedNodes.get(id) as IFolderNode
+                        folder.open = !folder.open
+                    } else {
+                        return E.left(
+                            new Error(
+                                `Node with ID '${id}' is not a file or folder`
+                            )
+                        )
+                    }
+
+                    setStructure(
+                        E.of([...pipe(indexedNodes, getNodeStructure)])
+                    )
+                    return E.of(node)
+                })
             ),
         [indexedNodes]
     )
 
-    const select = useCallback(
-        (id: number): E.Either<Error, ISystemNode> =>
-            selectNode(id, indexedNodes),
+    const unselect = useCallback(
+        (): void => setStructure(E.of([...pipe(indexedNodes, unselectNodes)])),
         [indexedNodes]
     )
+
+    const expand = useCallback((folderId: number): void => {}, [indexedNodes])
+
     const expandAll = useCallback((): void => {
         setStructure(E.of([...pipe(indexedNodes, expandNodes)]))
     }, [indexedNodes])
+
     const collapseAll = useCallback(
         (): void => setStructure(E.of([...pipe(indexedNodes, collapseNodes)])),
         [indexedNodes]
@@ -78,35 +104,13 @@ export const useSystemNodes = (): UseDependencies => {
     return {
         structure,
         loading,
-        getNode,
         select,
+        unselect,
+        expand,
         expandAll,
         collapseAll,
     }
 }
-
-const selectNode = (
-    id: number,
-    indexedNodes: Map<number, ISystemNode>
-): E.Either<Error, ISystemNode> =>
-    pipe(
-        indexedNodes.get(id),
-        E.fromNullable(new Error(`Node with ID '${id}' not found`)),
-        E.chain((node: ISystemNode) => {
-            if (node.type === NodeType.File) {
-                const file = node as IFileNode
-                file.selected = !file.selected
-            } else if (node.type === NodeType.Folder) {
-                const folder = node as IFolderNode
-                folder.open = !folder.open
-            } else {
-                return E.left(
-                    new Error(`Node with ID '${id}' is not a file or folder`)
-                )
-            }
-            return E.of(node)
-        })
-    )
 
 const expandNodes = (indexedNodes: Map<number, ISystemNode>): ISystemNode[] => {
     indexedNodes.forEach((node: ISystemNode) => {
@@ -115,18 +119,6 @@ const expandNodes = (indexedNodes: Map<number, ISystemNode>): ISystemNode[] => {
             folder.open = true
         }
     })
-
-    if (indexedNodes.has(9999)) {
-        indexedNodes.delete(9999)
-    } else {
-        indexedNodes.set(9999, {
-            id: 99999,
-            icon: 'file-react-icon',
-            name: 'future.md',
-            type: 'FILE',
-            parentId: 4,
-        })
-    }
 
     return getNodeStructure(indexedNodes)
 }
@@ -138,6 +130,18 @@ const collapseNodes = (
         if (node.type === NodeType.Folder) {
             const folder = node as IFolderNode
             folder.open = false
+        }
+    })
+    return getNodeStructure(indexedNodes)
+}
+
+const unselectNodes = (
+    indexedNodes: Map<number, ISystemNode>
+): ISystemNode[] => {
+    indexedNodes.forEach((node: ISystemNode) => {
+        if (node.type === NodeType.File) {
+            const file = node as IFileNode
+            file.selected = false
         }
     })
     return getNodeStructure(indexedNodes)
@@ -162,7 +166,7 @@ const getNodeStructure = (
                     O.fromNullable,
                     O.fold(
                         () => {
-                            structure.push(node)
+                            structure.push({ ...node })
                         },
                         () => {
                             const parentFolder = indexedNodes.get(
@@ -200,4 +204,50 @@ const setNodeDefaults = (node: ISystemNode): ISystemNode => {
         file.selected = false
     }
     return node
+}
+
+export function findAndSelect(
+    selectedFileId: number,
+    structure: ISystemNode[],
+    indexedNodes: Map<number, ISystemNode>
+): ISystemNode[] {
+    const recurseAndSelect = (
+        newStructure: ISystemNode[],
+        foundSelection: boolean,
+        isRoot: boolean
+    ): [ISystemNode[], boolean] => {
+        newStructure.forEach((node) => {
+            if (node.type === NodeType.Folder) {
+                const folder = node as IFolderNode
+                if (folder.children.length > 0) {
+                    ;[folder.children, foundSelection] = recurseAndSelect(
+                        folder.children,
+                        foundSelection,
+                        false
+                    ) as [ISystemNode[], boolean]
+                }
+                if (foundSelection) {
+                    const listNode = indexedNodes.get(folder.id) as IFolderNode
+                    listNode.open = true
+                    if (isRoot) {
+                        foundSelection = false
+                    }
+                }
+            } else if (node.type === NodeType.File) {
+                const file = node as IFileNode
+                if (file.id === selectedFileId) {
+                    const listNode = indexedNodes.get(file.id) as IFileNode
+                    listNode.selected = true
+                    foundSelection = true
+                }
+            }
+        })
+        return [newStructure, foundSelection]
+    }
+
+    ;[structure] = recurseAndSelect(structure, false, true) as [
+        ISystemNode[],
+        boolean
+    ]
+    return getNodeStructure(indexedNodes)
 }
