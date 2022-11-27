@@ -43,7 +43,7 @@ function Editor(props: { unknownPath?: boolean }): JSX.Element {
             setSelectedHistory(history)
         }
         setSelectedTabId(fileId)
-    }, [fileId])
+    }, [fileId, nodes])
 
     const contentHTML =
         tabs[fileId] !== undefined ? (
