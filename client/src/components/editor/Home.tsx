@@ -97,7 +97,7 @@ function Home(): JSX.Element {
                             <h4>INFRASTRUCTURE</h4>
                             <ul>
                                 <li>Kafka</li>
-                                <li>GCP</li>
+                                <li>Kubernetes</li>
                                 <li>Docker</li>
                                 <li>MySql</li>
                                 <li>Postgres</li>
@@ -111,7 +111,7 @@ function Home(): JSX.Element {
                         <ul>
                             <li>
                                 <div className="experience-heading">
-                                    Team Lead - Auth
+                                    Senior Software Developer
                                 </div>
                                 <div className="experience-body">
                                     <span className="experience-company">
@@ -122,21 +122,31 @@ function Home(): JSX.Element {
                                         2021 - Present
                                     </span>
                                     <div className="experience-summary">
-                                        Leading a team to build and maintain a
-                                        secure and easy to use authentication
-                                        and authorization service used by
-                                        microservices across the company.
+                                        Working on high level software
+                                        initiatives as well as mentoring
+                                        developers across the company.
                                     </div>
                                     <ul className="experience-notes">
                                         <li>
-                                            Introduced CI/CD pipelines to
-                                            automate the development and
-                                            deployment operations.
+                                            Writing and maintaining internal
+                                            articles teaching developers on a
+                                            wide variety of software concepts.
                                         </li>
                                         <li>
-                                            Introduced high risk changes without
-                                            incident using feature flags and
-                                            canary deployments.
+                                            Delivering presentations and
+                                            workshops on development tools and
+                                            methodologies.
+                                        </li>
+                                        <li>
+                                            Helping teams utilize micro frontend
+                                            development strategies utilizing
+                                            module federation as a means for
+                                            teams to share ui components.
+                                        </li>
+                                        <li>
+                                            Helping teams adopt continuous
+                                            delivery deployment strategies using
+                                            feature flags and canary releases.
                                         </li>
                                     </ul>
                                 </div>
