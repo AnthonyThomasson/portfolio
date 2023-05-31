@@ -8,7 +8,7 @@ function Home(): JSX.Element {
             </div>
             <div className="download-btn">
                 <span className="fa-solid fa-download" />
-                <a target="_blank" href="files/Anthony-Thomasson-Resume.pdf">
+                <a target="_blank" href="files/Resume_Anthony-Thomasson.pdf">
                     {' '}
                     DOWNLOAD
                 </a>
