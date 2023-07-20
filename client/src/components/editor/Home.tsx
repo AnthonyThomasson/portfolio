@@ -111,7 +111,7 @@ function Home(): JSX.Element {
                         <ul>
                             <li>
                                 <div className="experience-heading">
-                                    Senior Software Developer
+                                    Staff Developer
                                 </div>
                                 <div className="experience-body">
                                     <span className="experience-company">
