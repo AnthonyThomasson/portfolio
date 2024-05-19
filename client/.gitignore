@@ -1,4 +1,5 @@
 tsconfig.node.tsbuildinfo
+.env
 
 .yarn/*
 !.yarn/cache

@@ -1,0 +1,34 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
+{
+  "name": "Portfolio - Dev Container",
+  "service": "devcontainer",
+  "workspaceFolder": "/workspaces/portfolio",
+  "dockerComposeFile": "docker-compose.yml",
+  "initializeCommand": "sh ./.devcontainer/scripts/init.sh",
+  "postStartCommand": "sh ./.devcontainer/scripts/post-start.sh",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "prettier.requireConfig": true,
+        "vscode-postgres.defaultConnection": "postgres://postgres:postgres@db:5432/camera_4_rent",
+        "editor.formatOnPaste": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll": "explicit",
+          "source.organizeImports": "never"
+        }
+      },
+      "extensions": [
+        "ms-azuretools.vscode-docker",
+        "ckolkman.vscode-postgres",
+        "dbaeumer.vscode-eslint",
+        "Prisma.prisma",
+        "esbenp.prettier-vscode",
+        "streetsidesoftware.code-spell-checker",
+        "bierner.markdown-mermaid",
+        "eamodio.gitlens"
+      ]
+    }
+  },
+  "remoteUser": "root"
+}
