@@ -129,19 +129,15 @@ function Home(): JSX.Element {
                                     <ul className="experience-notes">
                                         <li>
                                             Writing and maintaining internal
-                                            articles teaching developers on a
-                                            wide variety of software concepts.
+                                            articles, delivering presentations
+                                            and workshops teaching developers a
+                                            wide variety of software concepts,
+                                            tools and methodologies.
                                         </li>
                                         <li>
-                                            Delivering presentations and
-                                            workshops on development tools and
-                                            methodologies.
-                                        </li>
-                                        <li>
-                                            Helping teams utilize micro frontend
-                                            development strategies utilizing
-                                            module federation as a means for
-                                            teams to share ui components.
+                                            Leads technical projects and
+                                            initiatives setting direction and
+                                            making key technical decisions.
                                         </li>
                                         <li>
                                             Helping teams adopt continuous
