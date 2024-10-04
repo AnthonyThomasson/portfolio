@@ -71,6 +71,9 @@ function Home(): JSX.Element {
                             <li>Project Management</li>
                             <li>Domain Driven Development</li>
                             <li>DevOps and CI/CD</li>
+                            <li>Credit Payments</li>
+                            <li>ACH/EFT Payments</li>
+                            <li>ISO20022 Message Formats</li>
                         </ul>
                     </div>
                     <div className="technologies">
