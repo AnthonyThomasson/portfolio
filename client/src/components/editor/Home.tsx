@@ -48,7 +48,7 @@ function Home(): JSX.Element {
                     <p>
                         Passionate developer with a love to learn and a desire
                         to help others. I am motivated to build products that I
-                        can be proud of.
+                        am proud of.
                     </p>
                 </div>
             </div>
@@ -137,26 +137,19 @@ function Home(): JSX.Element {
                                             by 70%.
                                         </li>
                                         <li>
-                                            Leveraged Kafka to introduce
-                                            choreographed workflows allowing
-                                            teams to deliver features more
-                                            autonomously on signup and dashboard
-                                            products.
-                                        </li>
-                                        <li>
                                             Improved speed of delivery by 80% on
                                             changes to the signup and dashboard
                                             platforms by leveraging
                                             choreographed workflows with Kafka.
                                         </li>
                                         <li>
-                                            Mentored junior and mid-level
+                                            Mentors junior and mid-level
                                             engineers, fostering skills in areas
                                             such as system design, clean coding
                                             practices, and testing strategies.
                                         </li>
                                         <li>
-                                            Led the migration of 100+ pages from
+                                            Led a migration of 100+ pages from
                                             Vue2 to Vue3 within 4 months,
                                             coordinating cross-team efforts,
                                             resolving compatibility challenges,
@@ -184,21 +177,22 @@ function Home(): JSX.Element {
                                     </div>
                                     <ul className="experience-notes">
                                         <li>
-                                            Worked in a paced development
-                                            lifecycle to develop and deliver a
+                                            Worked through a fast paced
+                                            development lifecycle to deliver a
                                             fully featured ecommerce platform in
                                             under 3 months during the height of
                                             the 2020 pandemic.
                                         </li>
                                         <li>
-                                            Enhanced query performance from 95%
-                                            to 98% by leveraging CDC techniques
-                                            to optimize data structures.
+                                            Improved queries performance ranging
+                                            from 95% to 98% percent improvement
+                                            by leveraging CDC techniques to
+                                            optimize data structures..
                                         </li>
                                         <li>
                                             Helped guide the team through
                                             successful PCI audits by mentoring
-                                            on secure coding practices, ensuring
+                                            secure coding practices, ensuring
                                             compliance, and addressing gaps with
                                             auditors.
                                         </li>
@@ -266,7 +260,7 @@ function Home(): JSX.Element {
                                         <li>
                                             Worked with banks integrating with
                                             multiple payment gateways, ensuring
-                                            compliance with certification
+                                            compliance through the certification
                                             processes.
                                         </li>
                                         <li>
