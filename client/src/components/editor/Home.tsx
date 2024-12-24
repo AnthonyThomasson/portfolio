@@ -131,21 +131,37 @@ function Home(): JSX.Element {
                                     </div>
                                     <ul className="experience-notes">
                                         <li>
-                                            Writing and maintaining internal
-                                            articles, delivering presentations
-                                            and workshops teaching developers a
-                                            wide variety of software concepts,
-                                            tools and methodologies.
+                                            Championed the adoption of canary
+                                            and blue green deployment strategies
+                                            reducing the amount of P1 incidents
+                                            by 70%.
                                         </li>
                                         <li>
-                                            Leads technical projects and
-                                            initiatives setting direction and
-                                            making key technical decisions.
+                                            Leveraged Kafka to introduce
+                                            choreographed workflows allowing
+                                            teams to deliver features more
+                                            autonomously on signup and dashboard
+                                            products.
                                         </li>
                                         <li>
-                                            Helping teams adopt continuous
-                                            delivery deployment strategies using
-                                            feature flags and canary releases.
+                                            Improved speed of delivery by 80% on
+                                            changes to the signup and dashboard
+                                            platforms by leveraging
+                                            choreographed workflows with Kafka.
+                                        </li>
+                                        <li>
+                                            Mentored junior and mid-level
+                                            engineers, fostering skills in areas
+                                            such as system design, clean coding
+                                            practices, and testing strategies.
+                                        </li>
+                                        <li>
+                                            Led the migration of 100+ pages from
+                                            Vue2 to Vue3 within 4 months,
+                                            coordinating cross-team efforts,
+                                            resolving compatibility challenges,
+                                            and ensuring a seamless transition
+                                            with minimal downtime.
                                         </li>
                                     </ul>
                                 </div>
@@ -168,20 +184,23 @@ function Home(): JSX.Element {
                                     </div>
                                     <ul className="experience-notes">
                                         <li>
-                                            Performed regular meetings with each
-                                            development team discussing
-                                            solutions to architectural concerns
-                                            they were facing.
+                                            Worked in a paced development
+                                            lifecycle to develop and deliver a
+                                            fully featured ecommerce platform in
+                                            under 3 months during the height of
+                                            the 2020 pandemic.
                                         </li>
                                         <li>
-                                            Built producer/consumer libraries
-                                            for Kafka, and worked with teams to
-                                            help them integrate event based
-                                            architecture within their services.
+                                            Enhanced query performance from 95%
+                                            to 98% by leveraging CDC techniques
+                                            to optimize data structures.
                                         </li>
                                         <li>
-                                            Built and maintained a web framework
-                                            inspired by express.js and laravel.
+                                            Helped guide the team through
+                                            successful PCI audits by mentoring
+                                            on secure coding practices, ensuring
+                                            compliance, and addressing gaps with
+                                            auditors.
                                         </li>
                                     </ul>
                                 </div>
@@ -204,17 +223,19 @@ function Home(): JSX.Element {
                                     </div>
                                     <ul className="experience-notes">
                                         <li>
-                                            Rebuilt the payments platform from
-                                            the ground up into a series of small
-                                            testable microservices.
+                                            Utilized the strangler pattern to
+                                            migrate the payments module from an
+                                            existing monolith into its own
+                                            microservice, resulting in a 60%
+                                            improvement to our team&apos;s lead
+                                            time to change.
                                         </li>
                                         <li>
                                             Mentored and trained a team of
-                                            predominantly junior developers.
-                                        </li>
-                                        <li>
-                                            Worked against fast paced agile
-                                            product requirements.
+                                            predominantly junior developers to
+                                            deliver a payment service supporting
+                                            over 100 million in gross payment
+                                            volume per month.
                                         </li>
                                     </ul>
                                 </div>
@@ -238,13 +259,21 @@ function Home(): JSX.Element {
                                     </div>
                                     <ul className="experience-notes">
                                         <li>
-                                            Worked with banks to integrate with
-                                            multiple payment gateways.
+                                            Built and maintained a custom web
+                                            framework inspired by express.js and
+                                            laravel.
+                                        </li>
+                                        <li>
+                                            Worked with banks integrating with
+                                            multiple payment gateways, ensuring
+                                            compliance with certification
+                                            processes.
                                         </li>
                                         <li>
                                             Built an iOS mobile POS system with
                                             integrations with a variety of
-                                            different payments devices.
+                                            different payments devices and
+                                            peripherals.
                                         </li>
                                     </ul>
                                 </div>
