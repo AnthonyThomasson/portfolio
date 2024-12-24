@@ -184,10 +184,11 @@ function Home(): JSX.Element {
                                             the 2020 pandemic.
                                         </li>
                                         <li>
-                                            Improved queries performance ranging
-                                            from 95% to 98% percent improvement
-                                            by leveraging CDC techniques to
-                                            optimize data structures..
+                                            Improved db query performance
+                                            ranging from 95% to 98% percent
+                                            improvements by leveraging CDC
+                                            techniques to optimize data
+                                            structures.
                                         </li>
                                         <li>
                                             Helped guide the team through
